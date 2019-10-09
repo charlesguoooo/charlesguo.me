@@ -237,9 +237,9 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 
 <p>我们可以进入web容器，使用<code class="highlighter-rouge">env</code>命令看看这个目标容器里面的环境变量</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> web env
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> web <span class="nb">env
 
-<span class="nv">DB_PORT</span><span class="o">=</span>tcp://172.17.0.2:5432
+</span><span class="nv">DB_PORT</span><span class="o">=</span>tcp://172.17.0.2:5432
 <span class="nv">DB_PORT_5432_TCP</span><span class="o">=</span>tcp://172.17.0.2:5432
 <span class="nv">DB_PORT_5432_TCP_ADDR</span><span class="o">=</span>172.17.0.2
 <span class="nv">DB_PORT_5432_TCP_PORT</span><span class="o">=</span>5432
@@ -280,9 +280,9 @@ PING webdb <span class="o">(</span>172.17.0.2<span class="o">)</span> 56<span cl
 172.17.0.3	80e0d81d8652
 </code></pre></div></div>
 <p>而我们来看看目标容器web的env，发现环境变量并没有更新</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> web env
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> web <span class="nb">env
 
-<span class="nv">DB_PORT</span><span class="o">=</span>tcp://172.17.0.2:5432
+</span><span class="nv">DB_PORT</span><span class="o">=</span>tcp://172.17.0.2:5432
 <span class="nv">DB_PORT_5432_TCP</span><span class="o">=</span>tcp://172.17.0.2:5432
 <span class="nv">DB_PORT_5432_TCP_ADDR</span><span class="o">=</span>172.17.0.2
 <span class="nv">DB_PORT_5432_TCP_PORT</span><span class="o">=</span>5432

@@ -230,7 +230,7 @@ kubernetes里所有资源的调度中心</p>
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">5</span>
   <span class="c1"># selector 如果不指定，默认和.spec.template.labels的值相同</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">myweb</span>
@@ -247,7 +247,7 @@ kubernetes里所有资源的调度中心</p>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">kubeguide/tomcat-app:v1</span>
         <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
         <span class="na">env</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_SERVICE_HOST</span>
           <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mysql-service'</span>
@@ -329,7 +329,7 @@ kubernetes里所有资源的调度中心</p>
   <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
 <span class="c1"># 定义pod期望数量</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">5</span>
   <span class="c1"># 用于筛选目标的selector 如果不指定，默认和.spec.template.labels的值相同</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">myweb</span>
@@ -347,7 +347,7 @@ kubernetes里所有资源的调度中心</p>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">kubeguide/tomcat-app:v1</span>
         <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
         <span class="na">env</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_SERVICE_HOST</span>
           <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mysql-service'</span>
@@ -408,7 +408,7 @@ kube-dns-1446441763-1w5gx   3/3       Running   0          6d
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">myweb-v2</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">5</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">version</span><span class="pi">:</span> <span class="s">v2</span>
     <span class="na">deployment</span><span class="pi">:</span> <span class="s">v2</span>
@@ -428,7 +428,7 @@ kube-dns-1446441763-1w5gx   3/3       Running   0          6d
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">kubeguide/tomcat-app:v2</span>
         <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
         <span class="na">env</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_SERVICE_HOST</span>
           <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mysql-service'</span>
@@ -518,7 +518,7 @@ myweb      4         4         4         6m        myweb          kubeguide/tomc
 <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
 <span class="c1"># 定义pod期望数量</span>
 <span class="na">spec</span><span class="pi">:</span>
-<span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
+<span class="na">replicas</span><span class="pi">:</span> <span class="m">5</span>
 <span class="c1"># 用于筛选目标的selector 如果不指定，默认和.spec.template.labels的值相同</span>
 <span class="na">selector</span><span class="pi">:</span>
   <span class="na">app</span><span class="pi">:</span> <span class="s">myweb</span>
@@ -538,7 +538,7 @@ myweb      4         4         4         6m        myweb          kubeguide/tomc
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
       <span class="na">image</span><span class="pi">:</span> <span class="s">kubeguide/tomcat-app:v1</span>
       <span class="na">ports</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">8080</span>
+      <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
       <span class="na">env</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_SERVICE_HOST</span>
         <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mysql-service'</span>
@@ -558,7 +558,7 @@ myweb      4         4         4         6m        myweb          kubeguide/tomc
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">myweb-v2</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">5</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">5</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">version</span><span class="pi">:</span> <span class="s">v2</span>
     <span class="na">deployment</span><span class="pi">:</span> <span class="s">v2</span>
@@ -578,7 +578,7 @@ myweb      4         4         4         6m        myweb          kubeguide/tomc
       <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">myweb</span>
         <span class="na">image</span><span class="pi">:</span> <span class="s">kubeguide/tomcat-app:v2</span>
         <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">8080</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">8080</span>
         <span class="na">env</span><span class="pi">:</span>
         <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">MYSQL_SERVICE_HOST</span>
           <span class="na">value</span><span class="pi">:</span> <span class="s1">'</span><span class="s">mysql-service'</span>
@@ -662,7 +662,7 @@ deployment <span class="s2">"php-apache"</span> autoscaled
   <span class="na">name</span><span class="pi">:</span> <span class="s">php-apache</span>
   <span class="na">namespace</span><span class="pi">:</span> <span class="s">default</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">matchLabels</span><span class="pi">:</span>
       <span class="na">k8s-quark</span><span class="pi">:</span> <span class="s">php-apache</span>
@@ -676,7 +676,7 @@ deployment <span class="s2">"php-apache"</span> autoscaled
         <span class="na">image</span><span class="pi">:</span> <span class="s">gcr.io/google_containers/hpa-example:latest</span>
         <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
         <span class="na">ports</span><span class="pi">:</span>
-        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+        <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
         <span class="na">resources</span><span class="pi">:</span>
           <span class="na">requests</span><span class="pi">:</span>
             <span class="na">cpu</span><span class="pi">:</span> <span class="s">200m</span>
@@ -689,7 +689,7 @@ deployment <span class="s2">"php-apache"</span> autoscaled
   <span class="na">name</span><span class="pi">:</span> <span class="s">php-apache</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">80</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">k8s-quark</span><span class="pi">:</span> <span class="s">php-apache</span>
 </code></pre></div></div>
@@ -760,10 +760,10 @@ php-apache   Deployment/php-apache   90% / 50%   1         10        8          
     <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">extensions/v1beta1</span>
     <span class="na">kind</span><span class="pi">:</span> <span class="s">Deployment</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">php-apache</span>
-  <span class="na">minReplicas</span><span class="pi">:</span> <span class="s">1</span>
-  <span class="na">maxReplicas</span><span class="pi">:</span> <span class="s">10</span>
+  <span class="na">minReplicas</span><span class="pi">:</span> <span class="m">1</span>
+  <span class="na">maxReplicas</span><span class="pi">:</span> <span class="m">10</span>
   <span class="c1"># 用户定义的CPU利用率</span>
-  <span class="na">targetCPUUtilizationPercentage</span><span class="pi">:</span> <span class="s">50</span>
+  <span class="na">targetCPUUtilizationPercentage</span><span class="pi">:</span> <span class="m">50</span>
 </code></pre></div></div>
 
 <p>至于其它的HPA metrica，改天再讲吧，毕竟现在还只是alpha版本，而且需要heapster目前也无法收集那么多metrics</p>
@@ -786,13 +786,13 @@ php-apache   Deployment/php-apache   90% / 50%   1         10        8          
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">ports</span><span class="pi">:</span>
     <span class="c1"># service提供服务的端口</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">8080</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">service-port</span>
   <span class="c1"># 后端容器提供服务暴露的端口，如果不指定，默认暴露service提供服务的端口</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="s">8080</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">8005</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8080</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8005</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">shutown-port</span>
-    <span class="na">targetPort</span><span class="pi">:</span> <span class="s">8005</span>
+    <span class="na">targetPort</span><span class="pi">:</span> <span class="m">8005</span>
   <span class="c1"># 指定label selector 确认该服务和后端那些pod关联起来</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">mysql</span>
@@ -840,8 +840,8 @@ etcd：大体实现方式，就是写脚本通过etcd的api注册服务，然后
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">type</span><span class="pi">:</span> <span class="s">NodePort</span>
   <span class="na">ports</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">8080</span>
-    <span class="na">nodePort</span><span class="pi">:</span> <span class="s">30001</span>
+  <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+    <span class="na">nodePort</span><span class="pi">:</span> <span class="m">30001</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">app</span><span class="pi">:</span> <span class="s">myweb</span>         
 </code></pre></div></div>
@@ -1346,7 +1346,7 @@ nfs       Bound     nfs       5Gi        RWO                          8m
 
 <span class="c"># 然后我们进入pod中新建一个文件recycle-file</span>
 <span class="nv">$ </span>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> test-pd /bin/bash
-<span class="nv">$ </span>touch recycle-file
+<span class="nv">$ </span><span class="nb">touch </span>recycle-file
 </code></pre></div></div>
 
 <p>我们发现nfs的回收策略是<code class="highlighter-rouge">Recycle</code>，当前状态是<code class="highlighter-rouge">Bound</code>，那么假如我现在将PVC删除掉呢，下面我们来操作试试看</p>

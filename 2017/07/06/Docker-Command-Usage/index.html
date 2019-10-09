@@ -161,11 +161,11 @@ docker restart <span class="o">[</span>OPTIONS] CONTAINER <span class="o">[</spa
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#删除容器</span>
-docker rm <span class="o">[</span>OPTIONS] CONTAINER <span class="o">[</span>CONTAINER...]
+docker <span class="nb">rm</span> <span class="o">[</span>OPTIONS] CONTAINER <span class="o">[</span>CONTAINER...]
   <span class="nt">-f</span> 强制删除一个正在运行的容器<span class="o">(</span>实际上是先停止容器，然后再删除容器<span class="o">)</span>
   <span class="nt">-v</span> 删除和容器关联的卷
 
-<span class="nv">$ </span>docker rm <span class="nt">-f</span> 215b04f73370
+<span class="nv">$ </span>docker <span class="nb">rm</span> <span class="nt">-f</span> 215b04f73370
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#列出容器清单</span>
@@ -297,7 +297,7 @@ COMMANDS:
   disconnect   将容器从网络断开
   inspect      显示网络的详细信息
   <span class="nb">ls           </span>列出网络
-  rm           删除一个或者更多网络
+  <span class="nb">rm           </span>删除一个或者更多网络
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#创建一个网络</span>
@@ -328,7 +328,7 @@ docker volume COMMAND
     create    创建卷组
     inspect   显示卷组详细信息
     <span class="nb">ls        </span>列出卷组
-    rm        删除卷组
+    <span class="nb">rm        </span>删除卷组
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#为容器挂载卷组</span>
@@ -382,12 +382,12 @@ docker volume COMMAND
 
 <h4 id="backuprestoremigrate-data-volumes">Backup，restore，migrate data volumes</h4>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#将卷组容器挂载到对应的容器之后，进行卷组数据备份</span>
-<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/backup ubuntu <span class="nb">tar </span>cvf /backup/backup.tar /dbdata
+<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/backup ubuntu <span class="nb">tar </span>cvf /backup/backup.tar /dbdata
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#数据恢复</span>
 <span class="nv">$ </span>docker run <span class="nt">-v</span> /dbdata <span class="nt">--name</span> dbstore2 ubuntu /bin/bash
-<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore2 <span class="nt">-v</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>:/backup ubuntu bash <span class="nt">-c</span> <span class="s2">"cd /dbdata &amp;&amp; tar xvf /backup/backup.tar --strip 1"</span>
+<span class="nv">$ </span>docker run <span class="nt">--rm</span> <span class="nt">--volumes-from</span> dbstore2 <span class="nt">-v</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>:/backup ubuntu bash <span class="nt">-c</span> <span class="s2">"cd /dbdata &amp;&amp; tar xvf /backup/backup.tar --strip 1"</span>
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#在使用--rm的时候，会删除匿名卷组，而不会删除定义好的命名卷组</span>

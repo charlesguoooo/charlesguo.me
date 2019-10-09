@@ -175,7 +175,7 @@ root      5484  5266  0 11:48 ?        00:00:00 docker-containerd-shim <span cla
 
 <p>配置containerd作为系统服务</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /etc/containerd
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /etc/containerd
 containerd config default <span class="o">&gt;</span> /etc/containerd/config.toml
 
 vi /usr/lib/systemd/system/containerd.service
@@ -188,8 +188,8 @@ vi /usr/lib/systemd/system/containerd.service
 <span class="o">[</span>Service]
 <span class="nv">ExecStartPre</span><span class="o">=</span>/sbin/modprobe overlay
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/bin/containerd
-<span class="nv">Delegate</span><span class="o">=</span>yes
-<span class="nv">KillMode</span><span class="o">=</span>process
+<span class="nv">Delegate</span><span class="o">=</span><span class="nb">yes
+</span><span class="nv">KillMode</span><span class="o">=</span>process
 <span class="nv">LimitNOFILE</span><span class="o">=</span>1048576
 <span class="c"># Having non-zero Limit*s causes performance problems due to accounting overhead</span>
 <span class="c"># in the kernel. We recommend using cgroups to do container-local accounting.</span>
@@ -241,19 +241,19 @@ mybusybox    16359    RUNNING
 
 <p>runc是golan的项目，因此在编译它之前，咱们先安装一下golan，这里我是在centos上，直接用命令安装</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install golan <span class="nt">-y</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nb">install </span>golan <span class="nt">-y</span>
 </code></pre></div></div>
 
 <p><a href="https://github.com/opencontainers/runc">参考官方文档</a></p>
 
 <p>安装必要的依赖包</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install libseccomp libseccomp-devel <span class="nt">-y</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum <span class="nb">install </span>libseccomp libseccomp-devel <span class="nt">-y</span>
 </code></pre></div></div>
 
 <p>在你的golan的src目录下，创建github.com/opencontainers，如果你也是用yum 安装的golan，那么目录如下</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> /usr/lib/golang/src/github.com/opencontainers
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /usr/lib/golang/src/github.com/opencontainers
 </code></pre></div></div>
 
 <p>获取runc的代码，并且编译安装</p>
@@ -261,7 +261,7 @@ mybusybox    16359    RUNNING
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/opencontainers/runc
 <span class="nb">cd </span>runc
 make
-make install
+make <span class="nb">install</span>
 
 <span class="o">[</span>root@kevinguo src]# runc <span class="nt">--version</span>
 runc version 1.0.0-rc5+dev
@@ -273,14 +273,14 @@ spec: 1.0.0
 
 <p>先准备一个工作目录，所有的操作都是在该目录下执行</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir mycontainer
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>mycontainer
 </code></pre></div></div>
 
 <p>接着，准备容器镜像的文件系统，我们从docker镜像中获取</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>mycontainer
-mkdir rootfs
-docker <span class="nb">export</span> <span class="k">$(</span>docker create busybox<span class="k">)</span> |tar <span class="nt">-C</span> rootfs <span class="nt">-xvf</span> -
+<span class="nb">mkdir </span>rootfs
+docker <span class="nb">export</span> <span class="si">$(</span>docker create busybox<span class="si">)</span> |tar <span class="nt">-C</span> rootfs <span class="nt">-xvf</span> -
 </code></pre></div></div>
 
 <p>有了rootfs之后，我们还需要一个符合OCI标准的配置文件config.json，我们可以使用docker-runc来生成</p>
@@ -304,10 +304,10 @@ root      8754  8745  0 15:39 pts/0    00:00:00 sh
 
 <p>我们还可以尝试着修改config.json，让容器后台运行</p>
 
-<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="s2">"terminal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="s2">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nl">"terminal"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="err">,</span><span class="w">
+</span><span class="nl">"args"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
         </span><span class="s2">"sleep"</span><span class="p">,</span><span class="s2">"20"</span><span class="w">
-</span><span class="p">],</span><span class="w">
+</span><span class="p">]</span><span class="err">,</span><span class="w">
 </span></code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@kevinguo mycontainer]# docker-runc create mybusybox

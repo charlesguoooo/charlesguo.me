@@ -149,7 +149,7 @@
 <p>检查docker.service</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>systemctl show docker | <span class="nb">grep </span>EnvironmentFile
 
-<span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker <span class="o">(</span><span class="nv">ignore_errors</span><span class="o">=</span>yes<span class="o">)</span>
+<span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker <span class="o">(</span><span class="nv">ignore_errors</span><span class="o">=</span><span class="nb">yes</span><span class="o">)</span>
 </code></pre></div></div>
 
 <p>找出service 文件的位置</p>
@@ -189,7 +189,7 @@
 <span class="c">#TasksMax=infinity</span>
 <span class="nv">TimeoutStartSec</span><span class="o">=</span>0
 <span class="c"># set delegate yes so that systemd does not reset the cgroups of docker containers</span>
-<span class="nv">Delegate</span><span class="o">=</span>yes
+<span class="nv">Delegate</span><span class="o">=</span><span class="nb">yes</span>
 <span class="c"># kill only the docker process, not all processes in the cgroup</span>
 <span class="nv">KillMode</span><span class="o">=</span>process
 
@@ -217,7 +217,7 @@
 <p>这个例子会覆盖默认的<code class="highlighter-rouge">docker.service</code>文件
 如果你在代理服务器后面，那么你需要将代理配置添加到docker systemd service文件中
 1.为docker服务创建一个systemd插件目录：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> /etc/systemd/system/docker.service.d
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/systemd/system/docker.service.d
 </code></pre></div></div>
 
 <p>2.创建一个<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>配置文件,并添加<code class="highlighter-rouge">HTTP_PROXY</code>环境变量</p>

@@ -167,7 +167,7 @@ swarm使<code class="highlighter-rouge">overlay</code>网络只有在swarm中的
 <p>当你创建这个虚拟机时，会自动在虚拟机中创建Docker Engine.相对于手动安装Consul，用这种方式可以直接从Docker Hub上拉去Consul镜像
 2.将<code class="highlighter-rouge">mh-keystore</code>机器的环境变量添加到本地</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 下面这条命令的意思将`docker-machine env mh-keystore`输出的结果作为命令在本地执行</span>
-<span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>docker-machine env mh-keystore<span class="k">)</span><span class="s2">"</span>
+<span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>docker-machine <span class="nb">env </span>mh-keystore<span class="si">)</span><span class="s2">"</span>
 </code></pre></div></div>
 <p>3.在<code class="highlighter-rouge">mh-keystore</code>虚拟机里面运行一个consul容器</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker run <span class="nt">-d</span> <span class="se">\</span>
@@ -187,8 +187,8 @@ c7075a337757        progrium/consul     <span class="s2">"/bin/start -server -"<
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine create <span class="se">\</span>
  <span class="nt">-d</span> virtualbox <span class="se">\</span>
  <span class="nt">--swarm</span> <span class="nt">--swarm-master</span> <span class="se">\</span>
- <span class="nt">--swarm-discovery</span><span class="o">=</span><span class="s2">"consul://</span><span class="k">$(</span>docker-machine ip mh-keystore<span class="k">)</span><span class="s2">:8500"</span> <span class="se">\</span>
- <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-store=consul://</span><span class="k">$(</span>docker-machine ip mh-keystore<span class="k">)</span><span class="s2">:8500"</span> <span class="se">\</span>
+ <span class="nt">--swarm-discovery</span><span class="o">=</span><span class="s2">"consul://</span><span class="si">$(</span>docker-machine ip mh-keystore<span class="si">)</span><span class="s2">:8500"</span> <span class="se">\</span>
+ <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-store=consul://</span><span class="si">$(</span>docker-machine ip mh-keystore<span class="si">)</span><span class="s2">:8500"</span> <span class="se">\</span>
  <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-advertise=eth1:2376"</span> <span class="se">\</span>
  mhs-demo0
 </code></pre></div></div>
@@ -203,8 +203,8 @@ c7075a337757        progrium/consul     <span class="s2">"/bin/start -server -"<
 <p>2.创建另外一台主机，并加入到swarm集群</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine create <span class="nt">-d</span> virtualbox <span class="se">\</span>
     <span class="nt">--swarm</span> <span class="se">\</span>
-    <span class="nt">--swarm-discovery</span><span class="o">=</span><span class="s2">"consul://</span><span class="k">$(</span>docker-machine ip mh-keystore<span class="k">)</span><span class="s2">:8500"</span> <span class="se">\</span>
-    <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-store=consul://</span><span class="k">$(</span>docker-machine ip mh-keystore<span class="k">)</span><span class="s2">:8500"</span> <span class="se">\</span>
+    <span class="nt">--swarm-discovery</span><span class="o">=</span><span class="s2">"consul://</span><span class="si">$(</span>docker-machine ip mh-keystore<span class="si">)</span><span class="s2">:8500"</span> <span class="se">\</span>
+    <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-store=consul://</span><span class="si">$(</span>docker-machine ip mh-keystore<span class="si">)</span><span class="s2">:8500"</span> <span class="se">\</span>
     <span class="nt">--engine-opt</span><span class="o">=</span><span class="s2">"cluster-advertise=eth1:2376"</span> <span class="se">\</span>
   mhs-demo1
 </code></pre></div></div>
@@ -219,7 +219,7 @@ mhs-demo1     -        virtualbox   Running   tcp://192.168.99.103:2376   mhs-de
 
 <h3 id="创建overlay网络">创建Overlay网络</h3>
 <p>1.将swarm master的环境变量添加到本地</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="k">$(</span>docker-machine env <span class="nt">--swarm</span> mhs-demo0<span class="k">)</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="si">$(</span>docker-machine <span class="nb">env</span> <span class="nt">--swarm</span> mhs-demo0<span class="si">)</span>
 </code></pre></div></div>
 <p>2.进入<code class="highlighter-rouge">mhs-demo0</code>，查看<code class="highlighter-rouge">docker info</code>信息</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-machine ssh mhs-demo0
@@ -311,7 +311,7 @@ docker@mhs-demo1:~<span class="nv">$ </span>docker network <span class="nb">ls
 Connecting to web <span class="o">(</span>10.0.9.2:80<span class="o">)</span>
 &lt;<span class="o">!</span>DOCTYPE html&gt;
 &lt;html&gt;
-&lt;head&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
 &lt;title&gt;Welcome to nginx!&lt;/title&gt;
 &lt;style&gt;
     body <span class="o">{</span>
@@ -344,23 +344,23 @@ Commercial support is available at
 <p>我们来查看nginx容器的网络接口信息</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec </span>web ip addr
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 13: eth0@if14: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1450 qdisc noqueue state UP group default
-    link/ether 02:42:0a:00:09:02 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 02:42:0a:00:09:02 brd ff:ff:ff:ff:ff:ff
     inet 10.0.9.2/24 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:aff:fe00:902/64 scope link
-       valid_lft forever preferred_lft forever
+    inet6 fe80::42:aff:fe00:902/64 scope <span class="nb">link
+       </span>valid_lft forever preferred_lft forever
 16: eth1@if17: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default
-    link/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 02:42:ac:12:00:02 brd ff:ff:ff:ff:ff:ff
     inet 172.18.0.2/16 scope global eth1
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:acff:fe12:2/64 scope link
-       valid_lft forever preferred_lft forever
+    inet6 fe80::42:acff:fe12:2/64 scope <span class="nb">link
+       </span>valid_lft forever preferred_lft forever
 </code></pre></div></div>
 <p>我们可以看到，<code class="highlighter-rouge">eth0</code>连接到<code class="highlighter-rouge">my-net</code>网络,<code class="highlighter-rouge">eth1</code>连接到<code class="highlighter-rouge">docker_gwbridge</code>网络</p>
 

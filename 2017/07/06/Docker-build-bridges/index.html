@@ -125,7 +125,7 @@
 <p>你可以在启动docker之前设定你自己的bridge网络，并使用<code class="highlighter-rouge">-b BRIDGE</code> or <code class="highlighter-rouge">--bridge=BRIDGE</code> 来告诉docker使用它。如果已经有偶docker启动并运行，并且使用的是docker0的默认配置，你可以直接创建自定义的bridge网络，并重启docker，或者停止服务之后删除接口</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 停止docker服务，并删除docker0接口</span>
 <span class="nv">$ </span><span class="nb">sudo </span>service docker stop
-<span class="nv">$ </span><span class="nb">sudo </span>ip link <span class="nb">set </span>dev docker0 down
+<span class="nv">$ </span><span class="nb">sudo </span>ip <span class="nb">link set </span>dev docker0 down
 <span class="nv">$ </span><span class="nb">sudo </span>brctl delbr docker0
 <span class="nv">$ </span><span class="nb">sudo </span>iptables <span class="nt">-t</span> nat <span class="nt">-F</span> POSTROUTING
 </code></pre></div></div>
@@ -134,14 +134,14 @@
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># create our own bridge</span>
 <span class="nv">$ </span>brctl addbr bridge0
 <span class="nv">$ </span>ip addr add 192.168.5.1/24 dev bridge0
-<span class="nv">$ </span>ip link <span class="nb">set </span>dev bridge0 up
+<span class="nv">$ </span>ip <span class="nb">link set </span>dev bridge0 up
 
 <span class="c"># 配置bridge up并且running</span>
 
 <span class="nv">$ </span>ip addr show bridge0
 
 4: bridge0: &lt;BROADCAST,MULTICAST&gt; mtu 1500 qdisc noop state UP group default
-    link/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 66:38:d0:0d:76:18 brd ff:ff:ff:ff:ff:ff
     inet 192.168.5.1/24 scope global bridge0
        valid_lft forever preferred_lft forever
 
@@ -169,7 +169,7 @@ MASQUERADE  all  <span class="nt">--</span>  192.168.5.0/24       0.0.0.0/0
 <p>我们发现，我们刚创建的bridge已经生效。
 我们可以使用<code class="highlighter-rouge">brctl</code>来对bridge进行查看，删除，添加等操作。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brctl show
-bridge name	bridge id		STP enabled	interfaces
+bridge name	bridge <span class="nb">id		</span>STP enabled	interfaces
 bridge0		8000.f600adbf94d5	no		veth79dcc4b
 </code></pre></div></div>
 

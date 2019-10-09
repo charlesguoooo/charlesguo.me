@@ -171,7 +171,7 @@
 <span class="nv">PermissionsStartOnly</span><span class="o">=</span><span class="nb">true
 </span><span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/etcd.env
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/local/bin/etcd
-<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker rm <span class="nt">-f</span> etcd1
+<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> etcd1
 <span class="nv">ExecStop</span><span class="o">=</span>/usr/bin/docker stop etcd1
 <span class="nv">Restart</span><span class="o">=</span>always
 <span class="nv">RestartSec</span><span class="o">=</span>15s
@@ -252,7 +252,7 @@ calico/ctl:v1.1.0 <span class="se">\</span>
 
 <span class="o">[</span>Service]
 <span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/calico/calico.env
-<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker rm <span class="nt">-f</span> calico-node
+<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> calico-node
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/docker run <span class="nt">--net</span><span class="o">=</span>host <span class="nt">--privileged</span> <span class="se">\</span>
  <span class="nt">--name</span><span class="o">=</span>calico-node <span class="se">\</span>
  <span class="nt">-e</span> <span class="nv">HOSTNAME</span><span class="o">=</span><span class="k">${</span><span class="nv">CALICO_HOSTNAME</span><span class="k">}</span> <span class="se">\</span>
@@ -394,7 +394,7 @@ calico/ctl:v1.1.0 <span class="se">\</span>
                 <span class="nv">$DOCKER_SOCKET</span> <span class="se">\</span>
                 <span class="nv">$KUBELET_NETWORK_PLUGIN</span> <span class="se">\</span>
                 <span class="nv">$KUBELET_CLOUDPROVIDER</span>
-<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker rm <span class="nt">-f</span> kubelet
+<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> kubelet
 <span class="nv">ExecReload</span><span class="o">=</span>/usr/bin/docker restart kubelet
 <span class="nv">Restart</span><span class="o">=</span>always
 <span class="nv">RestartSec</span><span class="o">=</span>10s
@@ -519,9 +519,9 @@ calico/ctl:v1.1.0 <span class="se">\</span>
       <span class="na">httpGet</span><span class="pi">:</span>
         <span class="na">host</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/healthz</span>
-        <span class="na">port</span><span class="pi">:</span> <span class="s">8080</span>
-      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="s">30</span>
-      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="s">10</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">8080</span>
+      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">30</span>
+      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">10</span>
     <span class="na">volumeMounts</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/etc/kubernetes</span>
       <span class="na">name</span><span class="pi">:</span> <span class="s">kubernetes-config</span>
@@ -586,9 +586,9 @@ calico/ctl:v1.1.0 <span class="se">\</span>
       <span class="na">httpGet</span><span class="pi">:</span>
         <span class="na">host</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/healthz</span>
-        <span class="na">port</span><span class="pi">:</span> <span class="s">10252</span>
-      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="s">30</span>
-      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="s">10</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">10252</span>
+      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">30</span>
+      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">10</span>
     <span class="na">volumeMounts</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/etc/kubernetes/ssl</span>
       <span class="na">name</span><span class="pi">:</span> <span class="s">ssl-certs-kubernetes</span>
@@ -637,9 +637,9 @@ calico/ctl:v1.1.0 <span class="se">\</span>
       <span class="na">httpGet</span><span class="pi">:</span>
         <span class="na">host</span><span class="pi">:</span> <span class="s">127.0.0.1</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/healthz</span>
-        <span class="na">port</span><span class="pi">:</span> <span class="s">10251</span>
-      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="s">30</span>
-      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="s">10</span>
+        <span class="na">port</span><span class="pi">:</span> <span class="m">10251</span>
+      <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">30</span>
+      <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">10</span>
 </code></pre></div></div>
 
 <h2 id="kube-proxymanifest">kube-proxy.manifest</h2>
@@ -723,8 +723,8 @@ calico/ctl:v1.1.0 <span class="se">\</span>
 <h3 id="生成证书-1">生成证书</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /usr/local/bin/etcd-scripts/
 <span class="nv">$ </span>./make-ssl-etcd.sh <span class="nt">-f</span> /etc/ssl/etcd/openssl.conf <span class="nt">-d</span> ~/certs/etcd/
-<span class="nv">$ </span>chown kube.root ~/certs/etcd/<span class="k">*</span>
-<span class="nv">$ </span>chmod 700 ~/certs/etcd/<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">chown </span>kube.root ~/certs/etcd/<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">chmod </span>700 ~/certs/etcd/<span class="k">*</span>
 </code></pre></div></div>
 
 <h2 id="生成kubernetes证书">生成kubernetes证书</h2>
@@ -744,8 +744,8 @@ calico/ctl:v1.1.0 <span class="se">\</span>
 <h3 id="生成证书-2">生成证书</h3>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> /usr/local/bin/kubernetes-scripts/
 <span class="nv">$ </span>./make-ssl.sh <span class="nt">-f</span> /etc/kubernetes/openssl.conf <span class="nt">-d</span> ~/certs/kubernetes/
-<span class="nv">$ </span>chown kube.kube-cert ~/certs/kubernetes/<span class="k">*</span>
-<span class="nv">$ </span>chmod 600 ~/certs/kubernetes/<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">chown </span>kube.kube-cert ~/certs/kubernetes/<span class="k">*</span>
+<span class="nv">$ </span><span class="nb">chmod </span>600 ~/certs/kubernetes/<span class="k">*</span>
 </code></pre></div></div>
 
 <h1 id="node节点上的主要文件">node节点上的主要文件</h1>

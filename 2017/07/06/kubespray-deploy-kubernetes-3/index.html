@@ -146,7 +146,7 @@
 
 <p>2.进入dashboard所在的目录，执行yml文件</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/kubernetes/cluster/addons/dashboard
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/kubernetes/cluster/addons/dashboard
 kubectl create <span class="nt">-f</span> <span class="nb">.</span>
 </code></pre></div></div>
 
@@ -195,7 +195,7 @@ k8s-registry   Ready     19h       v1.6.7+coreos.0
 
 <p>4.进入fluentd-elasticsearch所在的目录，执行yml文件</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/kubernetes/cluster/addons/fluentd-elasticsearch
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/kubernetes/cluster/addons/fluentd-elasticsearch
 kubectl create <span class="nt">-f</span> <span class="nb">.</span>
 </code></pre></div></div>
 
@@ -236,7 +236,7 @@ kubectl logs kibana-logging-3636197754-tnwjh <span class="nt">-n</span> kube-sys
 
 <p>2.进入heapster的deploy目录，执行kube.sh</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/heapster/deploy
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/heapster/deploy
 sh kube.sh start
 </code></pre></div></div>
 
@@ -306,7 +306,7 @@ kubectl label node k8s-node02 <span class="nv">role</span><span class="o">=</spa
 
 <p>执行创建</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="k">$(</span><span class="nb">pwd</span><span class="k">)</span>/ingress/examples/daemonset/nginx
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> <span class="si">$(</span><span class="nb">pwd</span><span class="si">)</span>/ingress/examples/daemonset/nginx
 
 kubectl create <span class="nt">-f</span> nginx-ingress-daemonset.yaml
 </code></pre></div></div>
@@ -339,7 +339,7 @@ kubectl logs nginx-ingress-lb-mfdh5 <span class="nt">-n</span> kube-system
       <span class="na">paths</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">backend</span><span class="pi">:</span>
           <span class="na">serviceName</span><span class="pi">:</span> <span class="s">kubernetes-dashboard</span>
-          <span class="na">servicePort</span><span class="pi">:</span> <span class="s">80</span>
+          <span class="na">servicePort</span><span class="pi">:</span> <span class="m">80</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
 </code></pre></div></div>
 
@@ -357,7 +357,7 @@ kubectl logs nginx-ingress-lb-mfdh5 <span class="nt">-n</span> kube-system
       <span class="na">paths</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">backend</span><span class="pi">:</span>
           <span class="na">serviceName</span><span class="pi">:</span> <span class="s">kibana-logging</span>
-          <span class="na">servicePort</span><span class="pi">:</span> <span class="s">5601</span>
+          <span class="na">servicePort</span><span class="pi">:</span> <span class="m">5601</span>
 </code></pre></div></div>
 
 <p>elasticsearch-ingress.yml</p>
@@ -374,7 +374,7 @@ kubectl logs nginx-ingress-lb-mfdh5 <span class="nt">-n</span> kube-system
       <span class="na">paths</span><span class="pi">:</span>
       <span class="pi">-</span> <span class="na">backend</span><span class="pi">:</span>
           <span class="na">serviceName</span><span class="pi">:</span> <span class="s">elasticsearch-logging</span>
-          <span class="na">servicePort</span><span class="pi">:</span> <span class="s">9200</span>
+          <span class="na">servicePort</span><span class="pi">:</span> <span class="m">9200</span>
         <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
 </code></pre></div></div>
 

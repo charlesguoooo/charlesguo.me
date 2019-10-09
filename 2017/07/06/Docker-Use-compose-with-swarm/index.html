@@ -129,7 +129,7 @@ docker compose和docker swarm旨在实现完全集成，这意味着你可以将
 </blockquote>
 
 <p>参考<a href="https://docs.docker.com/engine/userguide/networking/get-started-overlay/">Get started with multi-host networking</a>来查看如何使用<a href="https://docs.docker.com/machine/overview/">Docker Machine</a>和<a href="https://docs.docker.com/engine/userguide/networking/#an-overlay-network-with-docker-engine-swarm-mode">overlay driver</a>配置swarm 集群.运行后，部署app就变得非常简单：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>docker-machine env <span class="nt">--swarm</span> &lt;name of swarm master machine&gt;<span class="k">)</span><span class="s2">"</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">eval</span> <span class="s2">"</span><span class="si">$(</span>docker-machine <span class="nb">env</span> <span class="nt">--swarm</span> &lt;name of swarm master machine&gt;<span class="si">)</span><span class="s2">"</span>
 <span class="nv">$ </span>docker-compose up
 </code></pre></div></div>
 

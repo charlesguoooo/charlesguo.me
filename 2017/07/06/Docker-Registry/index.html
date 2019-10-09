@@ -156,7 +156,7 @@
 
 <h4 id="自签名证书的registry">自签名证书的Registry</h4>
 <h6 id="generate-a-certificate">Generate a certificate</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> certs
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> certs
 <span class="nv">$ </span>openssl req <span class="se">\</span>
     <span class="nt">-newkey</span> rsa:2048 <span class="nt">-nodes</span> <span class="nt">-keyout</span> certs/domain.key
     <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> certs/domain.crt
@@ -165,7 +165,7 @@
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ~/certs/domain.crt <span class="o">&gt;&gt;</span>/etc/pki/tls/certs/ca-bundle.crt
 <span class="nv">$ </span>systemctl restart docker
 </code></pre></div></div>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cp ~/certs/domain.crt /etc/docker/certs.d/www.oo3p.com:5000/ca.crt
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> ~/certs/domain.crt /etc/docker/certs.d/www.oo3p.com:5000/ca.crt
 <span class="nv">$ </span>systemctl restart docker
 </code></pre></div></div>
 
@@ -220,8 +220,8 @@ IMPORTANT NOTES:
 </code></pre></div></div>
 
 <h6 id="将从letsencrypt获取到的证书复制到registry-server上的certs目录下方便挂载到registry-容器里">将从letsencrypt获取到的证书，复制到Registry server上的/certs目录下，方便挂载到Registry 容器里</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cp /etc/letsencrypt/live/oo3p.com/fullchain.pem ~/certs/domain.crt
-cp /etc/letsencrypt/live/oo3p.com/privkey.pem   ~/certs/domain.key
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> /etc/letsencrypt/live/oo3p.com/fullchain.pem ~/certs/domain.crt
+<span class="nb">cp</span> /etc/letsencrypt/live/oo3p.com/privkey.pem   ~/certs/domain.key
 </code></pre></div></div>
 
 <h6 id="start-your-registry-with-tls-enabled-1">Start your Registry with TLS enabled</h6>
@@ -249,7 +249,7 @@ cp /etc/letsencrypt/live/oo3p.com/privkey.pem   ~/certs/domain.key
 
 <h6 id="本机基本访问认证">本机基本访问认证</h6>
 <p><strong>在这之前，你需要先配置了TLS认证</strong></p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir auth <span class="nt">-p</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>auth <span class="nt">-p</span>
 <span class="c"># 创建密码文件，替换用户名：testuser，密码：testpassword</span>
 <span class="nv">$ </span>docker run <span class="nt">--entrypoint</span> htpasswd registry:2 <span class="nt">-Bbn</span> testuser testpassword <span class="o">&gt;</span> auth/htpasswd
 <span class="c"># 停止registry，然后用下面的代码再次启动</span>
@@ -307,12 +307,12 @@ CMD <span class="o">[</span><span class="s2">"/etc/docker/registry/config.yml"</
 </code></pre></div></div>
 
 <h6 id="生成自签名证书">生成自签名证书</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> ~/distribution-library-image/registry/certs
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> ~/distribution-library-image/registry/certs
 <span class="nv">$ </span>openssl req <span class="nt">-newkey</span> rsa:2048 <span class="nt">-nodes</span> <span class="nt">-keyout</span> ~/distribution-library-image/registry/certs/docker_registry.key <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> ~/distribution-library-image/registry/certs/docker_registry.crt
 </code></pre></div></div>
 
 <h6 id="修改distribution-library-imageregistry-下的config-exampleyml">修改distribution-library-image/registry 下的config-example.yml</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cp <span class="nt">-a</span> config-example.yml config-example.yml.bak
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-a</span> config-example.yml config-example.yml.bak
 <span class="nv">$ </span>vi config-example.yml
 version: 0.1
 log:
@@ -391,7 +391,7 @@ storagedriver:
 <h6 id="如何使用">如何使用</h6>
 
 <p>在所有要访问docker registry的主机上执行如下操作</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com:5000
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com:5000
 </code></pre></div></div>
 
 <p>将registry主机上生成的证书<code class="highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>
@@ -422,12 +422,12 @@ e83e87cb73c3: Pushed
 </code></pre></div></div>
 
 <h6 id="生成自签名证书-1">生成自签名证书</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> ~/distribution-library-image/registry/certs
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> ~/distribution-library-image/registry/certs
 <span class="nv">$ </span>openssl req <span class="nt">-newkey</span> rsa:2048 <span class="nt">-nodes</span> <span class="nt">-keyout</span> ~/distribution-library-image/registry/certs/docker_registry.key <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> ~/distribution-library-image/registry/certs/docker_registry.crt
 </code></pre></div></div>
 
 <h6 id="修改distribution-library-imageregistry-下的config-exampleyml-1">修改distribution-library-image/registry 下的config-example.yml</h6>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>cp <span class="nt">-a</span> config-example.yml config-example.yml.bak
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cp</span> <span class="nt">-a</span> config-example.yml config-example.yml.bak
 <span class="nv">$ </span>vi config-example.yml
 version: 0.1
 log:
@@ -514,7 +514,7 @@ vi /etc/yum.repos.d/nginx.repo
 <span class="nv">enabled</span><span class="o">=</span>1
 
 <span class="c"># 安装nginx</span>
-<span class="nv">$ </span>yum install nginx <span class="nt">-y</span>         
+<span class="nv">$ </span>yum <span class="nb">install </span>nginx <span class="nt">-y</span>         
 </code></pre></div></div>
 
 <p>配置nginx的配置文件/etc/nginx/conf.d/(不同版本的nginx配置文件有所不同)</p>
@@ -565,7 +565,7 @@ upstream registry <span class="o">{</span>
 
 <p>生成认证文件.htpasswd</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum install httpd-tool <span class="nt">-y</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nb">install </span>httpd-tool <span class="nt">-y</span>
 
 <span class="nv">$ </span>htpasswd <span class="nt">-cb</span> /etc/nginx/conf.d/.htpasswd <span class="k">${</span><span class="nv">username</span><span class="k">}</span> <span class="k">${</span><span class="nv">password</span><span class="k">}</span>
 </code></pre></div></div>
@@ -578,7 +578,7 @@ upstream registry <span class="o">{</span>
 <h6 id="如何使用-1">如何使用</h6>
 
 <p>在所有要访问docker registry的主机上执行如下操作，目的是为了让其他主机信任registry主机签发的证书</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>mkdir <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com
 </code></pre></div></div>
 
 <p>将registry主机上生成的证书<code class="highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>

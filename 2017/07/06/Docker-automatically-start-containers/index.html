@@ -151,7 +151,7 @@
 ...
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/docker run <span class="nt">--env</span> <span class="nv">foo</span><span class="o">=</span>bar <span class="nt">--name</span> redis_server redis
 <span class="nv">ExecStop</span><span class="o">=</span>/usr/bin/docker stop <span class="nt">-t</span> 2 redis_server
-<span class="nv">ExecStopPost</span><span class="o">=</span>/usr/bin/docker rm <span class="nt">-f</span> redis_server
+<span class="nv">ExecStopPost</span><span class="o">=</span>/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> redis_server
 ...
 </code></pre></div></div>
 <p>应用该服务</p>

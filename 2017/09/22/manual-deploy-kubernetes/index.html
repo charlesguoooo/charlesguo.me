@@ -301,10 +301,10 @@ useradd kube  <span class="nt">-M</span> <span class="nt">-c</span> <span class=
 
 wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
 
-chmod +x cfssl_linux-amd64 cfssljson_linux-amd64
+<span class="nb">chmod</span> +x cfssl_linux-amd64 cfssljson_linux-amd64
 
-mv cfssl_linux-amd64 /usr/local/bin/cfssl
-mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
+<span class="nb">mv </span>cfssl_linux-amd64 /usr/local/bin/cfssl
+<span class="nb">mv </span>cfssljson_linux-amd64 /usr/local/bin/cfssljson
 </code></pre></div></div>
 
 <h5 id="22-创建ca证书配置生成ca证书和私钥">2.2 创建CA证书配置，生成CA证书和私钥</h5>
@@ -313,7 +313,7 @@ mv cfssljson_linux-amd64 /usr/local/bin/cfssljson
   <p>先用 <code class="highlighter-rouge">cfssl</code> 命令生成包含默认配置的 <code class="highlighter-rouge">config.json</code>和 <code class="highlighter-rouge">csr.json</code>文件</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /opt/ssl
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /opt/ssl
 <span class="nb">cd</span> /opt/ssl
 
 cfssl print-defaults config <span class="o">&gt;</span> config.json
@@ -327,19 +327,19 @@ cfssl print-defaults csr <span class="o">&gt;</span> csr.json
 <p><strong>config.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87600h"</span><span class="w">
+  </span><span class="nl">"signing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"default"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87600h"</span><span class="w">
     </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"kubernetes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"usages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="nl">"profiles"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"kubernetes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nl">"usages"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
             </span><span class="s2">"signing"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"key encipherment"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"server auth"</span><span class="p">,</span><span class="w">
             </span><span class="s2">"client auth"</span><span class="w">
         </span><span class="p">],</span><span class="w">
-        </span><span class="s2">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87600h"</span><span class="w">
+        </span><span class="nl">"expiry"</span><span class="p">:</span><span class="w"> </span><span class="s2">"87600h"</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
@@ -355,18 +355,18 @@ cfssl print-defaults csr <span class="o">&gt;</span> csr.json
 <p><strong>csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -404,24 +404,24 @@ cfssl gencert <span class="nt">-initca</span> csr.json | cfssljson <span class="
 <p><strong>etcd-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"etcd"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"etcd"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.3"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -452,8 +452,8 @@ etcd.csr  etcd-csr.json  etcd-key.pem  etcd.pem
 <p><strong>kube-apiserver-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kubernetes"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"127.0.0.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.2"</span><span class="p">,</span><span class="w">
@@ -466,17 +466,17 @@ etcd.csr  etcd-csr.json  etcd-key.pem  etcd.pem
     </span><span class="s2">"kubernetes.default.svc.cluster"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"kubernetes.default.svc.cluster.local"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"k8s"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -511,23 +511,23 @@ kube-apiserver.csr  kube-apiserver-csr.json  kube-apiserver-key.pem  kube-apiser
 <p><strong>kube-controller-manager-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-controller-manager"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-controller-manager"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"172.29.151.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.3"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-controller-manager"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-controller-manager"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -564,23 +564,23 @@ kube-controller-manager.csr  kube-controller-manager-csr.json  kube-controller-m
 <p><strong>kube-scheduler-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-scheduler"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-scheduler"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"172.29.151.1"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.2"</span><span class="p">,</span><span class="w">
     </span><span class="s2">"172.29.151.3"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-scheduler"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-scheduler"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -616,21 +616,21 @@ kube-scheduler.csr  kube-scheduler-csr.json  kube-scheduler-key.pem  kube-schedu
 <p><strong>kube-admin-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kube-admin"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kube-admin"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="s2">"172.29.151.8"</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:masters"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:masters"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -667,20 +667,20 @@ kube-admin.csr  kube-admin-csr.json  kube-admin-key.pem  kube-admin.pem
 <p><strong>kube-proxy-csr.json</strong></p>
 
 <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-proxy"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"CN"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-proxy"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"hosts"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
   </span><span class="p">],</span><span class="w">
-  </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
+  </span><span class="nl">"key"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"algo"</span><span class="p">:</span><span class="w"> </span><span class="s2">"rsa"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"size"</span><span class="p">:</span><span class="w"> </span><span class="mi">2048</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="s2">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+  </span><span class="nl">"names"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="s2">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-proxy"</span><span class="p">,</span><span class="w">
-      </span><span class="s2">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
+      </span><span class="nl">"C"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CN"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"ST"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wuhan"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"L"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Hubei"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"O"</span><span class="p">:</span><span class="w"> </span><span class="s2">"system:kube-proxy"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"OU"</span><span class="p">:</span><span class="w"> </span><span class="s2">"System"</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -723,7 +723,7 @@ kube-proxy.csr  kube-proxy-csr.json  kube-proxy-key.pem  kube-proxy.pem
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
 
-head <span class="nt">-c</span> 16 /dev/urandom | od <span class="nt">-An</span> <span class="nt">-t</span> x | tr <span class="nt">-d</span> <span class="s1">' '</span>
+<span class="nb">head</span> <span class="nt">-c</span> 16 /dev/urandom | <span class="nb">od</span> <span class="nt">-An</span> <span class="nt">-t</span> x | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">' '</span>
 04d9b6c6fd3ed8a3488b3b0913e87d64
 
 vim token.csv
@@ -740,13 +740,13 @@ vim token.csv
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
-  </span>ssh root@172.29.151.<span class="nv">$IP</span> mkdir <span class="nt">-p</span> /etc/kubernetes/ssl
-  ssh root@172.29.151.<span class="nv">$IP</span> mkdir <span class="nt">-p</span> /etc/etcd/ssl
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
+  </span>ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/kubernetes/ssl
+  ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/etcd/ssl
   scp ca<span class="k">*</span>.pem kube-apiserver<span class="k">*</span>.pem kube-controller-manager<span class="k">*</span>.pem kube-scheduler<span class="k">*</span>.pem root@172.29.151.<span class="nv">$IP</span>:/etc/kubernetes/ssl/
-  ssh root@172.29.151.<span class="nv">$IP</span> chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl
+  ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">chown</span> <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl
   scp ca<span class="k">*</span>.pem etcd<span class="k">*</span>.pem root@172.29.151.<span class="nv">$IP</span>:/etc/etcd/ssl
-  ssh root@172.29.151.<span class="nv">$IP</span> chown <span class="nt">-R</span> etcd:etcd /etc/etcd/ssl
+  ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">chown</span> <span class="nt">-R</span> etcd:etcd /etc/etcd/ssl
 <span class="k">done</span>
 </code></pre></div></div>
 
@@ -754,10 +754,10 @@ vim token.csv
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
-  </span>ssh root@172.29.151.<span class="nv">$IP</span> mkdir <span class="nt">-p</span> /etc/kubernetes/ssl
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+  </span>ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/kubernetes/ssl
   scp ca<span class="k">*</span>.pem kube-proxy<span class="k">*</span>.pem root@172.29.151.<span class="nv">$IP</span>:/etc/kubernetes/ssl/
-  ssh root@172.29.151.<span class="nv">$IP</span> chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl
+  ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">chown</span> <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl
 <span class="k">done</span>
 </code></pre></div></div>
 
@@ -765,18 +765,18 @@ vim token.csv
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
 
-cp kube-admin<span class="k">*</span>.pem /etc/kubernetes/ssl/
-chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
+<span class="nb">cp </span>kube-admin<span class="k">*</span>.pem /etc/kubernetes/ssl/
+<span class="nb">chown</span> <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
 </code></pre></div></div>
 
 <h5 id="211-token分发">2.11 token分发</h5>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
-  </span>ssh root@172.29.151.<span class="nv">$IP</span> mkdir <span class="nt">-p</span> /etc/kubernetes/known_token
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
+  </span>ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/kubernetes/known_token
   scp token.csv root@172.29.151.<span class="nv">$IP</span>:/etc/kubernetes/known_token/
-  ssh root@172.29.151.<span class="nv">$IP</span> chown <span class="nt">-R</span> kube:kube /etc/kubernetes/known_token
+  ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">chown</span> <span class="nt">-R</span> kube:kube /etc/kubernetes/known_token
 <span class="k">done</span>
 </code></pre></div></div>
 <h3 id="三分发二进制文件">三.分发二进制文件</h3>
@@ -786,7 +786,7 @@ chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>zxvf etcd-v3.2.7-linux-amd64.tar.gz
 <span class="nb">cd </span>etcd-v3.2.7-linux-amd64
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp etcd etcdctl root@172.29.151.<span class="nv">$IP</span>:/usr/bin/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -796,7 +796,7 @@ chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>zxvf kubernetes-server-linux-amd64.tar.gz
 <span class="nb">cd </span>kubernetes/server/bin
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>1 3<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp kube-apiserver kube-controller-manager kube-scheduler root@172.29.151.<span class="nv">$IP</span>:/usr/local/bin/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -806,7 +806,7 @@ chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">tar </span>zxvf kubernetes-node-linux-amd64.tar.gz
 <span class="nb">cd </span>kubernetes/node/bin
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp kubelet kube-proxy root@172.29.151.<span class="nv">$IP</span>:/usr/local/bin/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -814,10 +814,10 @@ chown <span class="nt">-R</span> kube:kube /etc/kubernetes/ssl/
 <h5 id="分发kubectletcdctl">分发kubectl,etcdctl</h5>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd </span>kubernetes/node/bin
-cp kubectl /usr/local/bin/
+<span class="nb">cp </span>kubectl /usr/local/bin/
 
 <span class="nb">cd </span>etcd-v3.2.7-linux-amd64
-cp etcdctl /usr/bin/
+<span class="nb">cp </span>etcdctl /usr/bin/
 </code></pre></div></div>
 
 <h3 id="四etcd集群部署">四.etcd集群部署</h3>
@@ -971,7 +971,7 @@ cluster is healthy
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 创建日志目录文件</span>
-mkdir <span class="nt">-p</span> /var/log/kubernetes
+<span class="nb">mkdir</span> <span class="nt">-p</span> /var/log/kubernetes
 </code></pre></div></div>
 
 <blockquote>
@@ -1134,7 +1134,7 @@ systemctl status kube-scheduler
   <p>在每个节点上新建配置目录</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> /etc/nginx
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/nginx
 </code></pre></div></div>
 
 <blockquote>
@@ -1171,7 +1171,7 @@ stream <span class="o">{</span>
   <p>更新权限</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +r /etc/nginx/nginx.conf
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +r /etc/nginx/nginx.conf
 </code></pre></div></div>
 
 <h5 id="将nginx配置为docker启动同时用systemd来进行守护">将nginx配置为docker启动，同时用systemd来进行守护</h5>
@@ -1195,7 +1195,7 @@ stream <span class="o">{</span>
                               <span class="nt">--restart</span><span class="o">=</span>on-failure:5 <span class="se">\</span>
                               <span class="nt">--memory</span><span class="o">=</span>512M <span class="se">\</span>
                               nginx:1.13.3-alpine
-<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker rm <span class="nt">-f</span> nginx-proxy
+<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> nginx-proxy
 <span class="nv">ExecStop</span><span class="o">=</span>/usr/bin/docker stop nginx-proxy
 <span class="nv">Restart</span><span class="o">=</span>always
 <span class="nv">RestartSec</span><span class="o">=</span>15s
@@ -1256,7 +1256,7 @@ kubectl config set-context kubernetes-admin@kubernetes <span class="se">\</span>
 kubectl config use-context kubernetes-admin@kubernetes <span class="nt">--kubeconfig</span><span class="o">=</span>admin.conf
 
 <span class="c"># cp成~/.kube/config</span>
-cp /etc/kubernetes/ssl/admin.conf ~/.kube/config
+<span class="nb">cp</span> /etc/kubernetes/ssl/admin.conf ~/.kube/config
 </code></pre></div></div>
 
 <h5 id="试试看是否生效">试试看是否生效</h5>
@@ -1326,7 +1326,7 @@ kubectl create clusterrolebinding kubelet-bootstrap <span class="nt">--clusterro
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /etc/kubernetes
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp bootstrap.kubeconfig root@172.29.151.<span class="nv">$IP</span>:/etc/kubernetes/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -1337,7 +1337,7 @@ kubectl create clusterrolebinding kubelet-bootstrap <span class="nt">--clusterro
   <p>创建kubelet工作目录</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir /var/lib/kubelet
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /var/lib/kubelet
 </code></pre></div></div>
 
 <blockquote>
@@ -1479,7 +1479,7 @@ NAME           STATUS    AGE       VERSION
   <p>分发到各个节点的/etc/kubernetes 目录</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp kube-proxy.kubeconfig root@172.29.151.<span class="nv">$IP</span>:/etc/kubernetes/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -1490,7 +1490,7 @@ NAME           STATUS    AGE       VERSION
   <p>创建 kube-proxy目录</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir <span class="nt">-p</span> /var/lib/kube-proxy
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> <span class="nt">-p</span> /var/lib/kube-proxy
 </code></pre></div></div>
 
 <blockquote>
@@ -1602,9 +1602,9 @@ etcd_key: <span class="s2">"/calico-secrets/etcd-key"</span>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data:
-  etcd-key: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/etcd-key.pem | base64 | tr <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
-  etcd-cert: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/etcd.pem | base64 | tr <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
-  etcd-ca: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/ca.pem | base64 | tr <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
+  etcd-key: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/etcd-key.pem | <span class="nb">base64</span> | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
+  etcd-cert: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/etcd.pem | <span class="nb">base64</span> | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
+  etcd-ca: <span class="o">(</span><span class="nb">cat</span> /opt/ssl/ca.pem | <span class="nb">base64</span> | <span class="nb">tr</span> <span class="nt">-d</span> <span class="s1">'\n'</span><span class="o">)</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -1685,9 +1685,9 @@ data:
   <span class="c"># not using TLS for etcd.</span>
   <span class="c"># This self-hosted install expects three files with the following names.  The values</span>
   <span class="c"># should be base64 encoded strings of the entire contents of each file.</span>
-  etcd-key: 这块自己对 etcd 相关证书做 base64
-  etcd-cert: 这块自己对 etcd 相关证书做 base64
-  etcd-ca: 这块自己对 etcd 相关证书做 base64
+  etcd-key: 这块自己对 etcd 相关证书做 <span class="nb">base64
+  </span>etcd-cert: 这块自己对 etcd 相关证书做 <span class="nb">base64
+  </span>etcd-ca: 这块自己对 etcd 相关证书做 <span class="nb">base64</span>
 
 <span class="nt">---</span>
 
@@ -1814,7 +1814,7 @@ spec:
         - name: install-cni
           image: quay.io/calico/cni:v1.11.0
           <span class="nb">command</span>: <span class="o">[</span><span class="s2">"/install-cni.sh"</span><span class="o">]</span>
-          env:
+          <span class="nb">env</span>:
             <span class="c"># The location of the Calico etcd cluster.</span>
             - name: ETCD_ENDPOINTS
               valueFrom:
@@ -1889,7 +1889,7 @@ spec:
       containers:
         - name: calico-kube-controllers
           image: quay.io/calico/kube-controllers:v1.0.0
-          env:
+          <span class="nb">env</span>:
             <span class="c"># The location of the Calico etcd cluster.</span>
             - name: ETCD_ENDPOINTS
               valueFrom:
@@ -1952,7 +1952,7 @@ spec:
       containers:
         - name: calico-policy-controller
           image: quay.io/calico/kube-controllers:v1.0.0
-          env:
+          <span class="nb">env</span>:
             <span class="c"># The location of the Calico etcd cluster.</span>
             - name: ETCD_ENDPOINTS
               valueFrom:
@@ -1984,8 +1984,8 @@ metadata:
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cd</span> /opt/ssl
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
-  </span>ssh root@172.29.151.<span class="nv">$IP</span> mkdir <span class="nt">-p</span> /etc/calico/certs
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+  </span>ssh root@172.29.151.<span class="nv">$IP</span> <span class="nb">mkdir</span> <span class="nt">-p</span> /etc/calico/certs
   scp ca.pem etcd<span class="k">*</span>.pem root@172.29.151.<span class="nv">$IP</span>:/etc/calico/certs/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -2017,7 +2017,7 @@ metadata:
 
 <span class="o">[</span>Service]
 <span class="nv">EnvironmentFile</span><span class="o">=</span>/etc/calico/calico.env
-<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker rm <span class="nt">-f</span> calico-node
+<span class="nv">ExecStartPre</span><span class="o">=</span>-/usr/bin/docker <span class="nb">rm</span> <span class="nt">-f</span> calico-node
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/docker run <span class="nt">--net</span><span class="o">=</span>host <span class="nt">--privileged</span> <span class="se">\</span>
  <span class="nt">--name</span><span class="o">=</span>calico-node <span class="se">\</span>
  <span class="nt">-e</span> <span class="nv">ETCD_ENDPOINTS</span><span class="o">=</span><span class="k">${</span><span class="nv">ETCD_ENDPOINTS</span><span class="k">}</span> <span class="se">\</span>
@@ -2100,9 +2100,9 @@ calico-node-vtcrs                          1/1       Running   0          14h
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://github.com/projectcalico/calicoctl/releases/download/v1.6.1/calicoctl
-chmod +x calicoctl
+<span class="nb">chmod</span> +x calicoctl
 
-<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span>seq 5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
+<span class="k">for </span>IP <span class="k">in</span> <span class="sb">`</span><span class="nb">seq </span>5 7<span class="sb">`</span><span class="p">;</span><span class="k">do
   </span>scp calicoctl root@172.29.151.<span class="nv">$IP</span>:/usr/local/bin/
 <span class="k">done</span>
 </code></pre></div></div>
@@ -2138,7 +2138,7 @@ No IPv6 peers found.
 <span class="na">metadata</span><span class="pi">:</span>
   <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-dm</span>
 <span class="na">spec</span><span class="pi">:</span>
-  <span class="na">replicas</span><span class="pi">:</span> <span class="s">2</span>
+  <span class="na">replicas</span><span class="pi">:</span> <span class="m">2</span>
   <span class="na">template</span><span class="pi">:</span>
     <span class="na">metadata</span><span class="pi">:</span>
       <span class="na">labels</span><span class="pi">:</span>
@@ -2149,7 +2149,7 @@ No IPv6 peers found.
           <span class="na">image</span><span class="pi">:</span> <span class="s">nginx:alpine</span>
           <span class="na">imagePullPolicy</span><span class="pi">:</span> <span class="s">IfNotPresent</span>
           <span class="na">ports</span><span class="pi">:</span>
-            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">80</span>
+            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">80</span>
 
 <span class="nn">---</span>
 
@@ -2159,8 +2159,8 @@ No IPv6 peers found.
   <span class="na">name</span><span class="pi">:</span> <span class="s">nginx-svc</span>
 <span class="na">spec</span><span class="pi">:</span>
   <span class="na">ports</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="s">80</span>
-      <span class="na">targetPort</span><span class="pi">:</span> <span class="s">80</span>
+    <span class="pi">-</span> <span class="na">port</span><span class="pi">:</span> <span class="m">80</span>
+      <span class="na">targetPort</span><span class="pi">:</span> <span class="m">80</span>
       <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
   <span class="na">selector</span><span class="pi">:</span>
     <span class="na">name</span><span class="pi">:</span> <span class="s">nginx</span>
@@ -2192,9 +2192,9 @@ nginx-svc    10.254.149.124   &lt;none&gt;        80/TCP    4m
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> nginx-dm-2214564181-bplwr /bin/sh
 / <span class="c"># ping 10.233.203.2</span>
 PING 10.233.203.2 <span class="o">(</span>10.233.203.2<span class="o">)</span>: 56 data bytes
-64 bytes from 10.233.203.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.592 ms
-64 bytes from 10.233.203.2: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.894 ms
-64 bytes from 10.233.203.2: <span class="nv">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.559 ms
+64 bytes from 10.233.203.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.592 ms
+64 bytes from 10.233.203.2: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.894 ms
+64 bytes from 10.233.203.2: <span class="nb">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>62 <span class="nb">time</span><span class="o">=</span>0.559 ms
 </code></pre></div></div>
 
 <blockquote>
@@ -2204,7 +2204,7 @@ PING 10.233.203.2 <span class="o">(</span>10.233.203.2<span class="o">)</span>: 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl 10.254.149.124
 &lt;<span class="o">!</span>DOCTYPE html&gt;
 &lt;html&gt;
-&lt;head&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
 &lt;title&gt;Welcome to nginx!&lt;/title&gt;
 &lt;style&gt;
     body <span class="o">{</span>
@@ -2237,15 +2237,15 @@ Commercial support is available at
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget https://raw.githubusercontent.com/kubernetes/kubernetes/master/cluster/addons/dns/kube-dns.yaml.sed
-mv kube-dns.yaml.sed kube-dns.yaml
+<span class="nb">mv </span>kube-dns.yaml.sed kube-dns.yaml
 </code></pre></div></div>
 
 <blockquote>
   <p>修改如下配置</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/$DNS_DOMAIN/cluster.local/gi'</span> kube-dns.yaml
-sed <span class="nt">-i</span> <span class="s1">'s/$DNS_SERVER_IP/10.254.0.2/gi'</span> kube-dns.yaml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/$DNS_DOMAIN/cluster.local/gi'</span> kube-dns.yaml
+<span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/$DNS_SERVER_IP/10.254.0.2/gi'</span> kube-dns.yaml
 </code></pre></div></div>
 
 <blockquote>
@@ -2271,7 +2271,7 @@ kube-dns-3468831164-2kl0h                  3/3       Running   0          14m
 / <span class="c"># curl nginx-svc</span>
 &lt;<span class="o">!</span>DOCTYPE html&gt;
 &lt;html&gt;
-&lt;head&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>
 &lt;title&gt;Welcome to nginx!&lt;/title&gt;
 &lt;style&gt;
     body <span class="o">{</span>
@@ -2304,7 +2304,7 @@ Commercial support is available at
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> nginx-dm-2214564181-bplwr /bin/sh
 / <span class="c"># curl https://baidu.com</span>
 &lt;html&gt;
-&lt;head&gt;&lt;title&gt;302 Found&lt;/title&gt;&lt;/head&gt;
+&lt;<span class="nb">head</span><span class="o">&gt;</span>&lt;title&gt;302 Found&lt;/title&gt;&lt;/head&gt;
 &lt;body <span class="nv">bgcolor</span><span class="o">=</span><span class="s2">"white"</span><span class="o">&gt;</span>
 &lt;center&gt;&lt;h1&gt;302 Found&lt;/h1&gt;&lt;/center&gt;
 &lt;hr&gt;&lt;center&gt;bfe/1.0.8.18&lt;/center&gt;
@@ -2325,7 +2325,7 @@ Commercial support is available at
   <p>在1.7.6中rbac还是beta版本，所以，这里我们要修改文件中的authentication.k8s.io/v1 为 authentication.k8s.io/vibeta1</p>
 </blockquote>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sed <span class="nt">-i</span> <span class="s1">'s/rbac.authorization.k8s.io\/v1/rbac.authorization.k8s.io\/v1beta1/gi'</span> dns-horizontal-autoscaler.yaml
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sed</span> <span class="nt">-i</span> <span class="s1">'s/rbac.authorization.k8s.io\/v1/rbac.authorization.k8s.io\/v1beta1/gi'</span> dns-horizontal-autoscaler.yaml
 </code></pre></div></div>
 <blockquote>
   <p>创建</p>

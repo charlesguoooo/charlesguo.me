@@ -173,10 +173,10 @@ INFO[0000] Listening <span class="k">for </span>HTTP on unix <span class="o">(</
 
 <p>1.登录到你的系统，使用root账户，或者使用sudo
 2.创建<code class="highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkdir /etc/systemd/system/docker.service.d
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mkdir</span> /etc/systemd/system/docker.service.d
 </code></pre></div></div>
 <p>3.创建<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/docker.conf</code>文件</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>mkdir /etc/systemd/system/docker.service.d/docker.conf
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo mkdir</span> /etc/systemd/system/docker.service.d/docker.conf
 </code></pre></div></div>
 <p>4.打开这个docker.conf文件</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>vi /etc/systemd/system/docker.service.d/docker.conf

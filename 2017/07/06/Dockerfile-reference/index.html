@@ -172,7 +172,7 @@ RUN <span class="o">[</span><span class="s2">"executable"</span>,<span class="s2
 上面写的<code class="highlighter-rouge">RUN</code>有两种格式</p>
 
 <p>shell格式，相当于执行/bin/sh -c “<command />”</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN apt-get install vim <span class="nt">-y</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN apt-get <span class="nb">install </span>vim <span class="nt">-y</span>
 </code></pre></div></div>
 <p>exec格式，不会触发shell，主要是为了方便在没有bash的镜像中执行，而且可以避免错误的解析命令字符串：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUN <span class="o">[</span><span class="s2">"apt-get"</span>,<span class="s2">"install"</span>,<span class="s2">"vim"</span>,<span class="s2">"-y"</span><span class="o">]</span>
@@ -318,7 +318,7 @@ ADD home<span class="k">*</span> /mydir/   <span class="c"># adds all files star
 ADD home?.txt /mydir/ <span class="c"># ? is replaced with any aingle character</span>
 
 ADD requirements.txt /tmp/
-RUN pip install /tmp/requirements.txt
+RUN pip <span class="nb">install</span> /tmp/requirements.txt
 ADD <span class="nb">.</span> /tmp/
 </code></pre></div></div>
 
@@ -339,7 +339,7 @@ ADD <span class="o">[</span><span class="s2">"&lt;src&gt;"</span>,... <span clas
 <p>VOLUME指令用来在容器中设置一个挂载点，可以用来让其他容器挂载以实现数据共享或对容器数据的备份、恢复或迁移,请参考文章<a href="https://docs.docker.com/engine/tutorials/dockervolumes/#mount-a-host-directory-as-a-data-volume">Manage data in containers</a>
 示例：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM ubuntu
-RUN mkdir /myvol
+RUN <span class="nb">mkdir</span> /myvol
 RUN <span class="nb">echo</span> <span class="s2">"hello world"</span> <span class="o">&gt;</span> /myvol/greeting
 VOLUME /myvol
 </code></pre></div></div>
@@ -511,7 +511,7 @@ FROM      ubuntu
 MAINTAINER Victor Vieux &lt;victor@docker.com&gt;
 
 LABEL <span class="nv">Description</span><span class="o">=</span><span class="s2">"This image is used to start the foobar executable"</span> <span class="nv">Vendor</span><span class="o">=</span><span class="s2">"ACME Products"</span> <span class="nv">Version</span><span class="o">=</span><span class="s2">"1.0"</span>
-RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> inotify-tools nginx apache2 openssh-server
+RUN apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> inotify-tools nginx apache2 openssh-server
 </code></pre></div></div>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Firefox over VNC</span>
@@ -521,8 +521,8 @@ RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class
 FROM ubuntu
 
 <span class="c"># Install vnc, xvfb in order to create a 'fake' display and firefox</span>
-RUN apt-get update <span class="o">&amp;&amp;</span> apt-get install <span class="nt">-y</span> x11vnc xvfb firefox
-RUN mkdir ~/.vnc
+RUN apt-get update <span class="o">&amp;&amp;</span> apt-get <span class="nb">install</span> <span class="nt">-y</span> x11vnc xvfb firefox
+RUN <span class="nb">mkdir</span> ~/.vnc
 <span class="c"># Setup a password</span>
 RUN x11vnc <span class="nt">-storepasswd</span> 1234 ~/.vnc/passwd
 <span class="c"># Autostart firefox (might not be the best way, but it does the trick)</span>

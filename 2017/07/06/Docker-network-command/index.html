@@ -279,7 +279,7 @@ bafb0c808c53        redis               <span class="s2">"/entrypoint.sh redis"<
 <span class="nv">$ </span>ifconfig
 br-7a154192d2a8: <span class="nv">flags</span><span class="o">=</span>4163&lt;UP,BROADCAST,RUNNING,MULTICAST&gt;  mtu 1500
         inet 172.23.0.1  netmask 255.255.0.0  broadcast 0.0.0.0
-        inet6 fe80::42:b3ff:fe4a:d59f  prefixlen 64  scopeid 0x20&lt;link&gt;
+        inet6 fe80::42:b3ff:fe4a:d59f  prefixlen 64  scopeid 0x20&lt;<span class="nb">link</span><span class="o">&gt;</span>
         ether 02:42:b3:4a:d5:9f  txqueuelen 0  <span class="o">(</span>Ethernet<span class="o">)</span>
         RX packets 8  bytes 648 <span class="o">(</span>648.0 B<span class="o">)</span>
         RX errors 0  dropped 0  overruns 0  frame 0
@@ -427,10 +427,10 @@ eth1      Link encap:Ethernet  HWaddr 02:42:AC:19:00:02
 <span class="c">#  ping我们刚刚启动的container3，可以ping通，因为container3是连接到自定义网络isolated_nw</span>
 / <span class="c"># ping -w 4 container3</span>
 PING container3 <span class="o">(</span>172.25.3.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.25.3.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.070 ms
-64 bytes from 172.25.3.3: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.080 ms
-64 bytes from 172.25.3.3: <span class="nv">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.080 ms
-64 bytes from 172.25.3.3: <span class="nv">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.097 ms
+64 bytes from 172.25.3.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.070 ms
+64 bytes from 172.25.3.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.080 ms
+64 bytes from 172.25.3.3: <span class="nb">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.080 ms
+64 bytes from 172.25.3.3: <span class="nb">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.097 ms
 
 <span class="c"># 而我们ping刚刚启动的container1，是无法ping通的，因为container1是连接到默认的bridge网络的</span>
 / <span class="c"># ping container1</span>
@@ -442,9 +442,9 @@ ping: bad address <span class="s1">'container1'</span>
 <span class="c">#接着再ping container1，发现是可以ping通的</span>
 / <span class="c"># ping container1</span>
 PING container1 <span class="o">(</span>172.25.0.4<span class="o">)</span>: 56 data bytes
-64 bytes from 172.25.0.4: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.250 ms
-64 bytes from 172.25.0.4: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.149 ms
-64 bytes from 172.25.0.4: <span class="nv">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.102 ms
+64 bytes from 172.25.0.4: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.250 ms
+64 bytes from 172.25.0.4: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.149 ms
+64 bytes from 172.25.0.4: <span class="nb">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.102 ms
 </code></pre></div></div>
 <p>上面的例子告诉我们，如果要使内置的DNS起作用，看到效果，我们应该使用自定义网络，而不是使用默认网络。</p>
 
@@ -493,17 +493,17 @@ PING 172.17.0.2 <span class="o">(</span>172.17.0.2<span class="o">)</span>: 56 d
 <p>2.我们在<code class="highlighter-rouge">container2</code>来ping下<code class="highlighter-rouge">container1</code>或<code class="highlighter-rouge">c1</code>试试</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> container2 ping container1
 PING container1 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.294 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.116 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.142 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.108 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.294 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.116 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.142 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.108 ms
 
 <span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> container2 ping c1
 PING c1 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.206 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.125 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.097 ms
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.122 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.206 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.125 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>2 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.097 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>3 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.122 ms
 </code></pre></div></div>
 <p>3.我们在<code class="highlighter-rouge">container1</code>下来ping<code class="highlighter-rouge">container2</code>试试</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> container1 ping container2
@@ -525,16 +525,16 @@ ping: bad address <span class="s1">'container2'</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> container2 /bin/sh
 / <span class="c"># ping c1</span>
 PING c1 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.263 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.263 ms
 
 / <span class="c"># ping foo</span>
 PING foo <span class="o">(</span>172.26.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.26.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.134 ms
+64 bytes from 172.26.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.134 ms
 </code></pre></div></div>
 <p>4.断开<code class="highlighter-rouge">container1</code>和<code class="highlighter-rouge">local_alias</code>网络的连接，再来测试</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ <span class="c"># ping c1</span>
 PING c1 <span class="o">(</span>172.17.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.17.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.263 ms
+64 bytes from 172.17.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.263 ms
 
 / <span class="c"># ping foo</span>
 ping: bad address <span class="s1">'foo'</span>
@@ -560,15 +560,15 @@ ping: bad address <span class="s1">'foo'</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#进入container2</span>
 / <span class="c"># ping app1</span>
 PING app1 <span class="o">(</span>172.19.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.19.0.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.059 ms
+64 bytes from 172.19.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.059 ms
 
 / <span class="c"># ping app2</span>
 PING app2 <span class="o">(</span>172.18.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.396 ms
+64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.396 ms
 
 / <span class="c"># ping app3</span>
 PING app3 <span class="o">(</span>172.18.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.069 ms
+64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.069 ms
 </code></pre></div></div>
 <p>5.进入container3测试</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ <span class="c"># ping app1</span>
@@ -576,11 +576,11 @@ ping: bad address <span class="s1">'app1'</span>
 
 / <span class="c"># ping app2</span>
 PING app2 <span class="o">(</span>172.18.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.117 ms
+64 bytes from 172.18.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.117 ms
 
 / <span class="c"># ping app3</span>
 PING app3 <span class="o">(</span>172.18.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.18.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.125 ms
+64 bytes from 172.18.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.125 ms
 </code></pre></div></div>
 <p>我们发现在<code class="highlighter-rouge">container2</code>中能ping通所有，而在<code class="highlighter-rouge">container3</code>中无法ping通<code class="highlighter-rouge">app1</code>，这是因为<code class="highlighter-rouge">app1</code>属于<code class="highlighter-rouge">isolated_nw</code>网络，而<code class="highlighter-rouge">container3</code>只属于<code class="highlighter-rouge">local_alias</code>网络，所以无法ping通<code class="highlighter-rouge">app1</code>，而<code class="highlighter-rouge">container2</code>同时属于<code class="highlighter-rouge">isolated_nw</code>和<code class="highlighter-rouge">local_alias</code>网络，所以都能ping通</p>
 
@@ -592,14 +592,14 @@ PING app3 <span class="o">(</span>172.18.0.3<span class="o">)</span>: 56 data by
 <p>2.进入container2进行测试,发现这时候ping通的是container4的IP(如果你重复多次ping会发现，app1的IP一会儿是172.19.0.2，一会儿是172.19.0.3)</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/ <span class="c"># ping app1</span>
 PING app1 <span class="o">(</span>172.19.0.3<span class="o">)</span>: 56 data bytes
-64 bytes from 172.19.0.3: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.064 ms
+64 bytes from 172.19.0.3: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.064 ms
 </code></pre></div></div>
 <p>3.停掉container4，再测试，发现，只会ping到container2，而不会再ping到container4</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stop container4
 
 / <span class="c"># ping app1</span>
 PING app1 <span class="o">(</span>172.19.0.2<span class="o">)</span>: 56 data bytes
-64 bytes from 172.19.0.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.064 ms
+64 bytes from 172.19.0.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.064 ms
 </code></pre></div></div>
 
 <h2 id="容器断开网络">容器断开网络</h2>

@@ -145,7 +145,7 @@
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum update
 
-yum install nginx
+yum <span class="nb">install </span>nginx
 </code></pre></div></div>
 
 <p>2.clone let’s encrypt 到服务器</p>
@@ -224,7 +224,7 @@ http <span class="o">{</span>
     include             /etc/nginx/mime.types<span class="p">;</span>
     default_type        application/octet-stream<span class="p">;</span>
 
-    gzip on<span class="p">;</span>
+    <span class="nb">gzip </span>on<span class="p">;</span>
     gzip_disable <span class="s2">"msie6"</span><span class="p">;</span>
     gzip_proxied any<span class="p">;</span>
     gzip_min_length 1000<span class="p">;</span>
@@ -287,7 +287,7 @@ server <span class="o">{</span>
        proxy_connect_timeout   10s<span class="p">;</span>
        proxy_send_timeout      100s<span class="p">;</span>
        proxy_read_timeout      300s<span class="p">;</span>
-       proxy_next_upstream error timeout http_404<span class="p">;</span>
+       proxy_next_upstream error <span class="nb">timeout </span>http_404<span class="p">;</span>
     <span class="o">}</span>
 <span class="o">}</span>
 </code></pre></div></div>

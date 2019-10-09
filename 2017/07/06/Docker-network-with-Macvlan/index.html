@@ -160,11 +160,11 @@ Docker host：enp0s8:192.168.1.1(Hostonly模式) gateway:192.168.1.100
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 配置好IP</span>
 <span class="nv">$ </span>ip addr show
 2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    link/ether 08:00:27:5a:e9:e7 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 08:00:27:5a:e9:e7 brd ff:ff:ff:ff:ff:ff
     inet 10.0.2.15/24 brd 10.0.2.255 scope global dynamic enp0s3
 
 3: enp0s8: &lt;BROADCAST,MULTICAST,PROMISC,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    link/ether 08:00:27:ac:4f:00 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 08:00:27:ac:4f:00 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.100/24 brd 192.168.1.255 scope global enp0s8
 
 <span class="c"># 开启路由转发,添加net.ipv4.ip_forward = 1</span>
@@ -179,7 +179,7 @@ net.ipv4.ip_forward <span class="o">=</span> 1
 </code></pre></div></div>
 
 <p>2.最关键的一步，在两台主机上开启混杂模式（也许实体机不需要，没有测试过），记住virtualbox上的网卡也要开启混杂模式中的全部允许。</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8 promisc on
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8 promisc on
 </code></pre></div></div>
 
 <p>3.在docker host上创建<code class="highlighter-rouge">macvlan</code>网络，然后运行一对容器</p>
@@ -197,17 +197,17 @@ net.ipv4.ip_forward <span class="o">=</span> 1
 <p>登录一个容器查看IP</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@node01 ~]# docker <span class="nb">exec</span> <span class="nt">-ti</span> desperate_raman ip a
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 6: eth0@if3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP,M-DOWN&gt; mtu 1500 qdisc noqueue state UNKNOWN
-    link/ether 02:42:c0:a8:01:c9 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 02:42:c0:a8:01:c9 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.201/24 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::42:c0ff:fea8:1c9/64 scope link
-       valid_lft forever preferred_lft forever
+    inet6 fe80::42:c0ff:fea8:1c9/64 scope <span class="nb">link
+       </span>valid_lft forever preferred_lft forever
 </code></pre></div></div>
 
 <p>查看容器路由</p>
@@ -221,13 +221,13 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 <p>ping另一个容器和网关</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@node01 ~]# docker <span class="nb">exec</span> <span class="nt">-ti</span> desperate_raman ping 192.168.1.202
     PING 192.168.1.202 <span class="o">(</span>192.168.1.202<span class="o">)</span>: 56 data bytes
-    64 bytes from 192.168.1.202: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.140 ms
-    64 bytes from 192.168.1.202: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.127 ms
+    64 bytes from 192.168.1.202: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.140 ms
+    64 bytes from 192.168.1.202: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.127 ms
 
 <span class="o">[</span>root@node01 ~]# docker <span class="nb">exec</span> <span class="nt">-ti</span> desperate_raman ping 192.168.1.100
     PING 192.168.1.100 <span class="o">(</span>192.168.1.100<span class="o">)</span>: 56 data bytes
-    64 bytes from 192.168.1.100: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.140 ms
-    64 bytes from 192.168.1.100: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.127 ms
+    64 bytes from 192.168.1.100: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.140 ms
+    64 bytes from 192.168.1.100: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>64 <span class="nb">time</span><span class="o">=</span>0.127 ms
 </code></pre></div></div>
 
 <p><strong>NOTE</strong> 在macvlan网络中，容器是无法ping通docker主机上的IP的。</p>
@@ -243,10 +243,10 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 如果用户不希望docker使用<code class="highlighter-rouge">-o parent</code>修改子接口，用户只需要传递哪些已经存在了的被作为父接口的接口即可，父接口不会被删除，只会删除没有master的子接口。
 下面的例子就可以说明：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在docker宿主机上添加两个子接口</span>
-<span class="nv">$ </span>ip link add link enp0s8 name enp0s8.200 <span class="nb">type </span>vlan id 200
-<span class="nv">$ </span>ip link add link enp0s8 name enp0s8.201 <span class="nb">type </span>vlan id 201
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.200 up
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.201 up
+<span class="nv">$ </span>ip <span class="nb">link </span>add <span class="nb">link </span>enp0s8 name enp0s8.200 <span class="nb">type </span>vlan <span class="nb">id </span>200
+<span class="nv">$ </span>ip <span class="nb">link </span>add <span class="nb">link </span>enp0s8 name enp0s8.201 <span class="nb">type </span>vlan <span class="nb">id </span>201
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.200 up
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.201 up
 
 <span class="c"># 创建基于这两个子接口的macvlan</span>
 <span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="nt">--subnet</span> 192.168.200.0/24 <span class="nt">--gateway</span><span class="o">=</span>192.168.200.100 <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>enp0s8.200 macvlan200
@@ -254,32 +254,32 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 
 <span class="c">#重启宿主机，查看ip，发现没有刚刚创建的子接口</span>
 1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN
-    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    <span class="nb">link</span>/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
     inet 127.0.0.1/8 scope host lo
        valid_lft forever preferred_lft forever
     inet6 ::1/128 scope host
        valid_lft forever preferred_lft forever
 2: enp0s3: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    link/ether 08:00:27:5a:e9:e7 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 08:00:27:5a:e9:e7 brd ff:ff:ff:ff:ff:ff
 3: enp0s8: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP qlen 1000
-    link/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
     inet 192.168.1.1/24 brd 192.168.1.255 scope global enp0s8
        valid_lft forever preferred_lft forever
-    inet6 fe80::a00:27ff:fe5f:be76/64 scope link
-       valid_lft forever preferred_lft forever
+    inet6 fe80::a00:27ff:fe5f:be76/64 scope <span class="nb">link
+       </span>valid_lft forever preferred_lft forever
 
 <span class="c"># 启动docker之后再查看</span>
 <span class="nv">$ </span>systemctl start docker
 <span class="nv">$ </span>ip addr show
 valid_lft forever preferred_lft forever
 5: enp0s8.200@enp0s8: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP
-link/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
-inet6 fe80::a00:27ff:fe5f:be76/64 scope link
-valid_lft forever preferred_lft forever
+<span class="nb">link</span>/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
+inet6 fe80::a00:27ff:fe5f:be76/64 scope <span class="nb">link
+</span>valid_lft forever preferred_lft forever
 6: enp0s8.201@enp0s8: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP
-link/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
-inet6 fe80::a00:27ff:fe5f:be76/64 scope link
-valid_lft forever preferred_lft forever
+<span class="nb">link</span>/ether 08:00:27:5f:be:76 brd ff:ff:ff:ff:ff:ff
+inet6 fe80::a00:27ff:fe5f:be76/64 scope <span class="nb">link
+</span>valid_lft forever preferred_lft forever
 </code></pre></div></div>
 
 <p>下面用个完整的例子来说明
@@ -295,7 +295,7 @@ enp0s8.201:192.168.201.100
 
 <p>1.因为是使用的turnk模式，所以，我们首先在route host上新建几个vlan，并配上IP</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装工具</span>
-<span class="nv">$ </span>yum install vconfig
+<span class="nv">$ </span>yum <span class="nb">install </span>vconfig
 <span class="c"># 新建vlan</span>
 <span class="nv">$ </span>vconfig add enp0s8 200
 <span class="nv">$ </span>vconfig add enp0s8 201
@@ -303,8 +303,8 @@ enp0s8.201:192.168.201.100
 <span class="nv">$ </span>ifconfig enp0s8.200 192.168.200.100 netmask 255.255.255.0 up
 <span class="nv">$ </span>ifconfig enp0s8.201 192.168.201.100 netmask 255.255.255.0 up
 <span class="c"># 开启混杂模式</span>
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.200 promisc on
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.201 promisc on
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.200 promisc on
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.201 promisc on
 <span class="c"># 配置SNAT</span>
 <span class="nv">$ </span>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> POSTROUTING <span class="nt">-o</span> enp0s3 <span class="nt">-s</span> 192.168.200.0/24 <span class="nt">-j</span> SNAT <span class="nt">--to-source</span> 10.0.2.15
 <span class="nv">$ </span>iptables <span class="nt">-t</span> nat <span class="nt">-A</span> POSTROUTING <span class="nt">-o</span> enp0s3 <span class="nt">-s</span> 192.168.201.0/24 <span class="nt">-j</span> SNAT <span class="nt">--to-source</span> 10.0.2.15
@@ -312,10 +312,10 @@ enp0s8.201:192.168.201.100
 <p><strong>NOTE</strong> 上面配置的信息，如果想要保存的话，需要修改配置文件，这里是测试环境，所以，笔者我并没有保存
 2.在Docker host上配置对应的子接口，并创建macvlan</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在docker宿主机上添加两个子接口</span>
-<span class="nv">$ </span>ip link add link enp0s8 name enp0s8.200 <span class="nb">type </span>vlan id 200
-<span class="nv">$ </span>ip link add link enp0s8 name enp0s8.201 <span class="nb">type </span>vlan id 201
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.200 up
-<span class="nv">$ </span>ip link <span class="nb">set </span>enp0s8.201 up
+<span class="nv">$ </span>ip <span class="nb">link </span>add <span class="nb">link </span>enp0s8 name enp0s8.200 <span class="nb">type </span>vlan <span class="nb">id </span>200
+<span class="nv">$ </span>ip <span class="nb">link </span>add <span class="nb">link </span>enp0s8 name enp0s8.201 <span class="nb">type </span>vlan <span class="nb">id </span>201
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.200 up
+<span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8.201 up
 
 <span class="c"># 创建基于这两个子接口的macvlan</span>
 <span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="nt">--subnet</span> 192.168.200.0/24 <span class="nt">--gateway</span><span class="o">=</span>192.168.200.100 <span class="nt">-o</span> <span class="nv">parent</span><span class="o">=</span>enp0s8.200 macvlan200
@@ -344,8 +344,8 @@ eth0      Link encap:Ethernet  HWaddr 02:42:C0:A8:C8:02
 <span class="c"># 从201网段测试ping200网段</span>
 <span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> gloomy_lalande ping 192.168.200.2
 PING 192.168.200.2 <span class="o">(</span>192.168.200.2<span class="o">)</span>: 56 data bytes
-64 bytes from 192.168.200.2: <span class="nv">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>63 <span class="nb">time</span><span class="o">=</span>0.946 ms
-64 bytes from 192.168.200.2: <span class="nv">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>63 <span class="nb">time</span><span class="o">=</span>1.490 ms
+64 bytes from 192.168.200.2: <span class="nb">seq</span><span class="o">=</span>0 <span class="nv">ttl</span><span class="o">=</span>63 <span class="nb">time</span><span class="o">=</span>0.946 ms
+64 bytes from 192.168.200.2: <span class="nb">seq</span><span class="o">=</span>1 <span class="nv">ttl</span><span class="o">=</span>63 <span class="nb">time</span><span class="o">=</span>1.490 ms
 
 <span class="c"># traceroute一下，发现是先将包丢给了自己网段的网关后，再转发给200网段的，所以说，如果没有路由的话，就无法ping通了</span>
 <span class="nv">$ </span>docker <span class="nb">exec</span> <span class="nt">-ti</span> gloomy_lalande traceroute 192.168.200.2

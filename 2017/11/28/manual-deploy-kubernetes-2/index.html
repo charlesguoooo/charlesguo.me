@@ -384,8 +384,8 @@
     <span class="na">name</span><span class="pi">:</span> <span class="s">kubernetes-dashboard</span>
     <span class="na">namespace</span><span class="pi">:</span> <span class="s">kube-system</span>
   <span class="na">spec</span><span class="pi">:</span>
-    <span class="na">replicas</span><span class="pi">:</span> <span class="s">1</span>
-    <span class="na">revisionHistoryLimit</span><span class="pi">:</span> <span class="s">10</span>
+    <span class="na">replicas</span><span class="pi">:</span> <span class="m">1</span>
+    <span class="na">revisionHistoryLimit</span><span class="pi">:</span> <span class="m">10</span>
     <span class="na">selector</span><span class="pi">:</span>
       <span class="na">matchLabels</span><span class="pi">:</span>
         <span class="na">k8s-app</span><span class="pi">:</span> <span class="s">kubernetes-dashboard</span>
@@ -398,7 +398,7 @@
           <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">kubernetes-dashboard</span>
             <span class="na">image</span><span class="pi">:</span> <span class="s">gcr.io/google_containers/kubernetes-dashboard-amd64:v1.7.1</span>
             <span class="na">ports</span><span class="pi">:</span>
-            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="s">9090</span>
+            <span class="pi">-</span> <span class="na">containerPort</span><span class="pi">:</span> <span class="m">9090</span>
               <span class="na">protocol</span><span class="pi">:</span> <span class="s">TCP</span>
             <span class="c1"># 这里个人添加一些必要的env</span>
             <span class="na">env</span><span class="pi">:</span>
@@ -432,9 +432,9 @@
               <span class="na">livenessProbe</span><span class="pi">:</span>
                 <span class="na">httpGet</span><span class="pi">:</span>
                   <span class="na">path</span><span class="pi">:</span> <span class="s">/</span>
-                  <span class="na">port</span><span class="pi">:</span> <span class="s">9090</span>
-                <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="s">30</span>
-                <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="s">30</span>
+                  <span class="na">port</span><span class="pi">:</span> <span class="m">9090</span>
+                <span class="na">initialDelaySeconds</span><span class="pi">:</span> <span class="m">30</span>
+                <span class="na">timeoutSeconds</span><span class="pi">:</span> <span class="m">30</span>
             <span class="na">volumes</span><span class="pi">:</span>
             <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">tmp-volume</span>
               <span class="na">emptyDir</span><span class="pi">:</span> <span class="pi">{}</span>

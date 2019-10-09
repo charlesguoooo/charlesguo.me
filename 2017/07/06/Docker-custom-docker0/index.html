@@ -131,7 +131,7 @@ docker为 <code class="highlighter-rouge">docker0</code>配置IP地址，子网�
 
 <p>一旦你运行了一个或多个容器后，你可以使用<code class="highlighter-rouge">brctl</code>命令发现这些容器的接口都连接到了docker0网桥</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brctl show
-bridge name	bridge id		STP enabled	interfaces
+bridge name	bridge <span class="nb">id		</span>STP enabled	interfaces
 bridge0		8000.86de2e92d296	no		veth79dcc4b
 							vethc054462
 </code></pre></div></div>
@@ -145,16 +145,16 @@ bridge0		8000.86de2e92d296	no		veth79dcc4b
 root@f38c87f2a42d:/# ip addr show eth0
 
 24: eth0: &lt;BROADCAST,UP,LOWER_UP&gt; mtu 1500 qdisc pfifo_fast state UP group default qlen 1000
-    link/ether 32:6f:e0:35:57:91 brd ff:ff:ff:ff:ff:ff
+    <span class="nb">link</span>/ether 32:6f:e0:35:57:91 brd ff:ff:ff:ff:ff:ff
     inet 172.17.0.3/16 scope global eth0
        valid_lft forever preferred_lft forever
-    inet6 fe80::306f:e0ff:fe35:5791/64 scope link
-       valid_lft forever preferred_lft forever
+    inet6 fe80::306f:e0ff:fe35:5791/64 scope <span class="nb">link
+       </span>valid_lft forever preferred_lft forever
 
 root@f38c87f2a42d:/# ip route
 
 default via 172.17.42.1 dev eth0
-172.17.0.0/16 dev eth0  proto kernel  scope link  src 172.17.0.3
+172.17.0.0/16 dev eth0  proto kernel  scope <span class="nb">link  </span>src 172.17.0.3
 
 root@f38c87f2a42d:/# <span class="nb">exit</span>
 </code></pre></div></div>

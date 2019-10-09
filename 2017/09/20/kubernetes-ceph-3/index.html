@@ -136,8 +136,8 @@
 <p>为每台机器添加一个sdc的硬盘，我这里用目录代替硬盘</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在每台osd节点上执行</span>
-<span class="nb">sudo </span>mkdir <span class="nt">-p</span> /data/sdc
-chown ceph.ceph /data/sdc
+<span class="nb">sudo mkdir</span> <span class="nt">-p</span> /data/sdc
+<span class="nb">chown </span>ceph.ceph /data/sdc
 
 <span class="c">#在管理节点上执行`ceph-deploy`来准备OSD</span>
 ceph-deploy osd prepare k8s-master01:/data/sdc k8s-master02:/data/sdc k8s-master03:/data/sdc k8s-node01:/data/sdc k8s-node02:/data/sdc k8s-registry:/data/sdc
@@ -176,7 +176,7 @@ mkfs.xfs /dev/rbd0
 <h5 id="创建secret">创建secret</h5>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 获取管理 key 并进行 base64 编码</span>
-ceph auth get-key client.admin | base64
+ceph auth get-key client.admin | <span class="nb">base64</span>
 
 <span class="c"># 创建一个secret 配置(key 为上一条命令生成)</span>
 vim ceph-secret.yml
@@ -280,7 +280,7 @@ kubectl create <span class="nt">-f</span> ceph-nginx.yml
 <p>我们创建好PV 和 PVC之后，进行查看时可能会出现<code class="highlighter-rouge">with: rbd: failed to modprobe rbd error:exit status 1</code>的报错，所以这时候我们需要对所有k8s-node进行如下配置</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在所有k8s node上安装ceph-common</span>
-yum install <span class="nt">-y</span> ceph-common
+yum <span class="nb">install</span> <span class="nt">-y</span> ceph-common
 
 <span class="c"># 拷贝ceph.conf和ceph.client.admin.keyring到/etc/ceph/目录下</span>
 
@@ -304,11 +304,11 @@ ceph-nginx-2497831062-5t01s   1/1       Running   0          12m
 <span class="c"># 然后进入其中一个pod，写入一个1G的文件</span>
 kubectl <span class="nb">exec</span> <span class="nt">-ti</span> ceph-nginx-2497831062-569lw  /bin/bash
 
-dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-file <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
+<span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-file <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
 
 <span class="c"># 然后查看是否已经占用了rbd中的空间呢</span>
-ceph df
-GLOBAL:
+ceph <span class="nb">df
+</span>GLOBAL:
     SIZE     AVAIL     RAW USED     %RAW USED
     575G      344G         230G         40.09
 POOLS:
@@ -330,7 +330,7 @@ test-file
 <h5 id="创建secret-1">创建secret</h5>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 获取管理 key 并进行 base64 编码</span>
-ceph auth get-key client.admin | base64
+ceph auth get-key client.admin | <span class="nb">base64</span>
 
 <span class="c"># 创建一个secret 配置(key 为上一条命令生成)</span>
 vim ceph-storageclass-secret.yml
@@ -463,7 +463,7 @@ data-ceph-storageclass-nginx-1   Bound     pvc-934ed5ad-9dca-11e7-84a9-00155d201
 data-ceph-storageclass-nginx-2   Bound     pvc-9ff7359d-9dca-11e7-84a9-00155d201312   5Gi        RWO           ceph-storageclass   11m
 
 <span class="c"># 进入pod查看使用情况，发现/data使用大小5G</span>
-<span class="o">[</span>root@k8s-master01 k8s-quark]# kubectl <span class="nb">exec</span> <span class="nt">-ti</span> ceph-storageclass-nginx-1 <span class="nt">--</span> df <span class="nt">-Th</span>
+<span class="o">[</span>root@k8s-master01 k8s-quark]# kubectl <span class="nb">exec</span> <span class="nt">-ti</span> ceph-storageclass-nginx-1 <span class="nt">--</span> <span class="nb">df</span> <span class="nt">-Th</span>
 Filesystem                                                                                      Type   Size  Used Avail Use% Mounted on
 /dev/rbd1                                                                                       ext4   4.8G   10M  4.6G   1% /data
 </code></pre></div></div>
@@ -543,7 +543,7 @@ NAME                                       CAPACITY   ACCESSMODES   RECLAIMPOLIC
 pvc-76a48238-9dcf-11e7-84a9-00155d201312   50Gi       RWX           Delete          Bound     default/test-pvc                         ceph-storageclass             10m
 
 <span class="c"># 进入pod 查看使用情况，看到/data总共50G</span>
-kubectl <span class="nb">exec</span> <span class="nt">-ti</span> ceph-nginx-3206996150-29q7j <span class="nt">--</span> df <span class="nt">-Th</span>
+kubectl <span class="nb">exec</span> <span class="nt">-ti</span> ceph-nginx-3206996150-29q7j <span class="nt">--</span> <span class="nb">df</span> <span class="nt">-Th</span>
 Filesystem                                                                                      Type   Size  Used Avail Use% Mounted on
 /dev/rbd0                                                                                       ext4    50G   52M   47G   1% /data
 </code></pre></div></div>

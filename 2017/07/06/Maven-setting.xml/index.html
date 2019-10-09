@@ -158,7 +158,7 @@ settings.xml对于maven来说，相当于全局性的配置，用于所有的项
 </code></pre></div></div>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#在POM文件中定义了distributionManagement元素，然而特定的username和password不能用于pom.xml，所以通过此配置来保存server信息，这里的id必须和后面repository中定义的id一致，主要是用来部署到nexus私服</span>
 &lt;server&gt;
-  &lt;id&gt;release&lt;/id&gt;
+  &lt;<span class="nb">id</span><span class="o">&gt;</span>release&lt;/id&gt;
   &lt;username&gt;admin&lt;/username&gt;
   &lt;password&gt;admin123&lt;/password&gt;
 &lt;/server&gt;
@@ -166,7 +166,7 @@ settings.xml对于maven来说，相当于全局性的配置，用于所有的项
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#表示镜像仓库，指定库的镜像，这里的mirrorOf表示此镜像是那个库的镜像，*表示所有库</span>
 &lt;mirrors&gt;
 &lt;mirror&gt;
-  &lt;id&gt;nexus&lt;/id&gt;
+  &lt;<span class="nb">id</span><span class="o">&gt;</span>nexus&lt;/id&gt;
   &lt;mirrorOf&gt;<span class="k">*</span>&lt;/mirrorOf&gt;
   &lt;name&gt;Nexus Repository&lt;/name&gt;
   &lt;url&gt;http://192.168.56.22:8081/nexus/content/groups/public/&lt;/url&gt;
@@ -176,7 +176,7 @@ settings.xml对于maven来说，相当于全局性的配置，用于所有的项
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#代理服务器设置，主要用于无法直接访问中心的库用户设置</span>
 &lt;proxies&gt;  
    &lt;proxy&gt;  
-     &lt;id&gt;myproxy&lt;/id&gt;  
+     &lt;<span class="nb">id</span><span class="o">&gt;</span>myproxy&lt;/id&gt;  
      &lt;active&gt;true&lt;/active&gt;  
      &lt;protocol&gt;http&lt;/protocol&gt;  
      &lt;host&gt;proxy.somewhere.com&lt;/host&gt;  
@@ -191,10 +191,10 @@ settings.xml对于maven来说，相当于全局性的配置，用于所有的项
 <span class="c">#这里的repositories表示，开发团队自己的开发库，定义这个库，一般是为了方便distributionManagement发布</span>
 &lt;profiles&gt;
 &lt;profile&gt;
-      &lt;id&gt;nexus&lt;/id&gt;
+      &lt;<span class="nb">id</span><span class="o">&gt;</span>nexus&lt;/id&gt;
       &lt;repositories&gt;
         &lt;repository&gt;
-            &lt;id&gt;public&lt;/id&gt;
+            &lt;<span class="nb">id</span><span class="o">&gt;</span>public&lt;/id&gt;
             &lt;name&gt;public&lt;/name&gt;
             &lt;url&gt;http://192.168.56.22:8081/nexus/content/groups/public/&lt;/url&gt;
             &lt;releases&gt;&lt;enabled&gt;true&lt;/enabled&gt;&lt;/releases&gt;

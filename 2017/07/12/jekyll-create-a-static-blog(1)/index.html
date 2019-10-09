@@ -160,11 +160,11 @@ ENV TZ <span class="s1">'Asia/Shanghai'</span>
 
 RUN apk upgrade <span class="nt">--no-cache</span> <span class="se">\</span>
     <span class="o">&amp;&amp;</span> apk add <span class="nt">--no-cache</span> bash git <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> /usr/share/nginx/html <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /usr/share/nginx/html <span class="se">\</span>
     <span class="o">&amp;&amp;</span> git clone https://github.com/chinakevinguo/kevinguo.me.git /usr/share/nginx/html <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> ln <span class="nt">-sf</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime <span class="se">\</span>
+    <span class="o">&amp;&amp;</span> <span class="nb">ln</span> <span class="nt">-sf</span> /usr/share/zoneinfo/Asia/Shanghai /etc/localtime <span class="se">\</span>
     <span class="o">&amp;&amp;</span> <span class="nb">echo</span> <span class="s2">"Asia/Shanghai"</span> <span class="o">&gt;</span> /etc/timezone <span class="se">\</span>
-    <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> /var/cache/apk/<span class="k">*</span>
+    <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> /var/cache/apk/<span class="k">*</span>
 
 ADD entrypoint.sh /entrypoint.sh
 
@@ -224,13 +224,13 @@ nginx <span class="nt">-g</span> <span class="s2">"daemon off;"</span>
 git clone git@github.com:chinakevinguo/chinakevinguo.github.io.git
 
 <span class="c"># 在镜像站点(chinakevinguo.github.io)下，新建`.travis.yml`文件</span>
-touch .travis.yml
+<span class="nb">touch</span> .travis.yml
 
 <span class="c"># 生成公钥和私钥</span>
 ssh-keygen
 
 <span class="c"># 安装travis命令行工具，如无法使用gem指令需先安装ruby</span>
-gem install travis
+gem <span class="nb">install </span>travis
 
 <span class="c"># --auto自动登录github账户</span>
 travis login <span class="nt">--auto</span>
@@ -261,17 +261,17 @@ rvm:
 - 2.3.3
 before_install:
 - openssl aes-256-cbc <span class="nt">-K</span> <span class="nv">$encrypted_3870315c7a22_key</span> <span class="nt">-iv</span> <span class="nv">$encrypted_3870315c7a22_iv</span> <span class="nt">-in</span> id_rsa.enc <span class="nt">-out</span> ~/.ssh/id_rsa <span class="nt">-d</span>
-- chmod 600 ~/.ssh/id_rsa
+- <span class="nb">chmod </span>600 ~/.ssh/id_rsa
 - <span class="nb">echo</span> <span class="nt">-e</span> <span class="s2">"Host 主机IP地址</span><span class="se">\n\t</span><span class="s2">StrictHostKeyChecking no</span><span class="se">\n</span><span class="s2">"</span> <span class="o">&gt;&gt;</span> ~/.ssh/config
-install:
-  - gem install jekyll
-  - gem install html-proofer
+<span class="nb">install</span>:
+  - gem <span class="nb">install </span>jekyll
+  - gem <span class="nb">install </span>html-proofer
 script:
-- bundle install
+- bundle <span class="nb">install</span>
 - bundle <span class="nb">exec </span>jekyll build
 after_success:
 - git clone https://github.com/chinakevinguo/kevinguo.me.git
-- <span class="nb">cd </span>kevinguo.me <span class="o">&amp;&amp;</span> rm <span class="nt">-rf</span> <span class="k">*</span> <span class="o">&amp;&amp;</span> cp <span class="nt">-r</span> ../_site/<span class="k">*</span> <span class="nb">.</span>
+- <span class="nb">cd </span>kevinguo.me <span class="o">&amp;&amp;</span> <span class="nb">rm</span> <span class="nt">-rf</span> <span class="k">*</span> <span class="o">&amp;&amp;</span> <span class="nb">cp</span> <span class="nt">-r</span> ../_site/<span class="k">*</span> <span class="nb">.</span>
 - git config user.name <span class="s2">"chinakevinguo"</span>
 - git config user.email <span class="s2">"chinakevinguo@live.com"</span>
 - git add <span class="nt">--all</span> <span class="nb">.</span>
@@ -281,7 +281,7 @@ after_success:
 branches:
   only:
   - master
-env:
+<span class="nb">env</span>:
   global:
   - <span class="nv">NOKOGIRI_USE_SYSTEM_LIBRARIES</span><span class="o">=</span><span class="nb">true
 </span>addons:

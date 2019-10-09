@@ -128,11 +128,11 @@
 </blockquote>
 
 <p>下面这个例子：</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl <span class="nt">-L</span> <span class="s2">"https://github.com/docker/compose/releases/download/1.9.0/docker-compose-</span><span class="k">$(</span>uname <span class="nt">-s</span><span class="k">)</span><span class="s2">-</span><span class="k">$(</span>uname <span class="nt">-m</span><span class="k">)</span><span class="s2">"</span> <span class="nt">-o</span> /usr/local/bin/docker-compose
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="nv">$ </span>curl <span class="nt">-L</span> <span class="s2">"https://github.com/docker/compose/releases/download/1.9.0/docker-compose-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-s</span><span class="si">)</span><span class="s2">-</span><span class="si">$(</span><span class="nb">uname</span> <span class="nt">-m</span><span class="si">)</span><span class="s2">"</span> <span class="nt">-o</span> /usr/local/bin/docker-compose
 </code></pre></div></div>
 <p>如果你对使用<code class="highlighter-rouge">curl</code>安装有疑问，你可以看看<a href="https://docs.docker.com/compose/install/#alternative-install-options">备用的安装选项</a>
 5.赋权</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chmod +x /usr/local/bin/docker-compose
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">chmod</span> +x /usr/local/bin/docker-compose
 </code></pre></div></div>
 <p>6.(可选)，为<code class="highlighter-rouge">bash</code>和<code class="highlighter-rouge">zsh</code>安装<a href="https://docs.docker.com/compose/completion/">命令补全</a>
 7.测试</p>
@@ -145,7 +145,7 @@
 <h2 id="pip安装">pip安装</h2>
 
 <p>这种方式是将compose当作一个python应用来从pip源中安装,建议使用<a href="https://virtualenv.pypa.io/en/latest/">virtualenv</a>避免python冲突</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip install docker-compose
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>pip <span class="nb">install </span>docker-compose
 </code></pre></div></div>
 
 <h2 id="直接作为容器运行">直接作为容器运行</h2>
@@ -153,7 +153,7 @@
 <p>既然docker-compose是一个python应用，那么当然可以作为一个容器来执行它</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>curl <span class="nt">-L</span> https://github.com/docker/compose/releases/download/1.9.0/run.sh <span class="o">&gt;</span> /usr/local/bin/docker-compose
-<span class="nv">$ </span>chmod +x /usr/local/bin/docker-compose
+<span class="nv">$ </span><span class="nb">chmod</span> +x /usr/local/bin/docker-compose
 </code></pre></div></div>
 
 <h1 id="主构建">主构建</h1>
@@ -169,13 +169,13 @@
 </code></pre></div></div>
 
 <p>或者，如果你不想保留它们，你可以删除，compose只会创建新的</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker rm <span class="nt">-f</span> <span class="nt">-v</span> myapp_web_1 myapp_db_1 ..
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker <span class="nb">rm</span> <span class="nt">-f</span> <span class="nt">-v</span> myapp_web_1 myapp_db_1 ..
 </code></pre></div></div>
 
 <h1 id="卸载">卸载</h1>
 
 <p>卸载使用<code class="highlighter-rouge">curl</code>安装的compose</p>
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm /usr/local/bin/docker-compose
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">rm</span> /usr/local/bin/docker-compose
 </code></pre></div></div>
 
 <p>卸载使用<code class="highlighter-rouge">pip</code>安装的compose</p>

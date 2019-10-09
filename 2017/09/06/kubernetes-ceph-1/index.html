@@ -256,12 +256,12 @@
 <span class="nb">type</span><span class="o">=</span>rpm-md
 <span class="nv">gpgkey</span><span class="o">=</span>https://download.ceph.com/keys/release.asc
 
-<span class="nv">$ </span>yum update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> yum install ceph-deploy <span class="nt">-y</span>
+<span class="nv">$ </span>yum update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> yum <span class="nb">install </span>ceph-deploy <span class="nt">-y</span>
 </code></pre></div></div>
 
 <p>2.更新并安装<code class="highlighter-rouge">ceph-deploy</code></p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>yum install ceph-deploy
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>yum <span class="nb">install </span>ceph-deploy
 </code></pre></div></div>
 
 <p>2.配置从部署机器到所有其他节点的免密钥登录，具体参考<a href="https://kevinguo.me/2017/07/06/ansible-client/">这里</a></p>
@@ -270,13 +270,13 @@
 
 <p>1.安装epel源</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum install yum-plugin-priorities
-<span class="nv">$ </span>yum install epel-release <span class="nt">-y</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>yum <span class="nb">install </span>yum-plugin-priorities
+<span class="nv">$ </span>yum <span class="nb">install </span>epel-release <span class="nt">-y</span>
 </code></pre></div></div>
 
 <p>2.校对时间，由于ceph使用Paxos算法保证数据一致性，所以安装前要先保证各个节点的时间同步</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum install ntp ntpdate ntp-doc
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum <span class="nb">install </span>ntp ntpdate ntp-doc
 
 <span class="nv">$ </span>ntpdate 0.cn.pool.ntp.org
 </code></pre></div></div>
@@ -297,7 +297,7 @@
 <p>1.由于ceph-deploy工具部署集群前需要创建一些集群配置信息，其保存在<code class="highlighter-rouge">ceph.conf</code>文件中，这个文件将来会被复制到每个节点的 <code class="highlighter-rouge">/etc/ceph/ceph.conf</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 创建集群配置目录</span>
-mkdir ceph-cluster <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ceph-cluster
+<span class="nb">mkdir </span>ceph-cluster <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ceph-cluster
 <span class="c"># 创建 monitor-node</span>
 ceph-deploy new k8s-master01
 <span class="c"># 追加 OSD 副本数量(测试虚拟机总共有3台)</span>
@@ -307,7 +307,7 @@ ceph-deploy new k8s-master01
 <p>2.创建集群使用 <code class="highlighter-rouge">ceph-deploy</code>工具在部署节点上执行即可</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装ceph</span>
-<span class="nv">$ </span>ceph-deploy install k8s-master01 k8s-master02 k8s-master03
+<span class="nv">$ </span>ceph-deploy <span class="nb">install </span>k8s-master01 k8s-master02 k8s-master03
 </code></pre></div></div>
 <p><strong>注意：在部署节点部署的时候，可能会因为网络原因导致无法安装ceph和ceph-radosgw，这时候，我们在各个节点上手动安装一下</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 添加ceph 源</span>
@@ -339,7 +339,7 @@ ceph-deploy new k8s-master01
 <span class="nv">priority</span><span class="o">=</span>1
 
 
-<span class="nv">$ </span>yum install ceph ceph-radosgw <span class="nt">-y</span>
+<span class="nv">$ </span>yum <span class="nb">install </span>ceph ceph-radosgw <span class="nt">-y</span>
 </code></pre></div></div>
 
 <p>3.初始化monitor node 和密钥文件</p>
@@ -350,18 +350,18 @@ ceph-deploy new k8s-master01
 <p>4.在osd节点上创建一个目录作为 osd 存储，并修改其权限,千万别创建在<code class="highlighter-rouge">/usr/local</code>目录下，否则，你的osd可能会无法挂载</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh k8s-master01
-<span class="nv">$ </span><span class="nb">sudo </span>mkdir /data/osd1
-<span class="nv">$ </span>chown <span class="nt">-R</span> ceph:ceph osd1
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /data/osd1
+<span class="nv">$ </span><span class="nb">chown</span> <span class="nt">-R</span> ceph:ceph osd1
 <span class="nv">$ </span><span class="nb">exit</span>
 
 <span class="nv">$ </span>ssh k8s-master2
-<span class="nv">$ </span><span class="nb">sudo </span>mkdir /data/osd2
-<span class="nv">$ </span>chown <span class="nt">-R</span> ceph:ceph osd2
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /data/osd2
+<span class="nv">$ </span><span class="nb">chown</span> <span class="nt">-R</span> ceph:ceph osd2
 <span class="nv">$ </span><span class="nb">exit</span>
 
 <span class="nv">$ </span>ssh k8s-master3
-<span class="nv">$ </span><span class="nb">sudo </span>mkdir /data/osd3
-<span class="nv">$ </span>chown <span class="nt">-R</span> ceph:ceph osd3
+<span class="nv">$ </span><span class="nb">sudo mkdir</span> /data/osd3
+<span class="nv">$ </span><span class="nb">chown</span> <span class="nt">-R</span> ceph:ceph osd3
 <span class="nv">$ </span><span class="nb">exit</span>
 </code></pre></div></div>
 
@@ -382,7 +382,7 @@ ceph-deploy new k8s-master01
 
 <p>8.确保你对 <code class="highlighter-rouge">ceph.client.admin.keyring</code>有正确的操作权限，在每个节点上执行</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>chmod +r /etc/ceph/ceph.client.admin.keyring
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chmod</span> +r /etc/ceph/ceph.client.admin.keyring
 </code></pre></div></div>
 
 <p>9.最后，检查集群的健康状态</p>
@@ -439,7 +439,7 @@ ID WEIGHT  TYPE NAME             UP/DOWN REWEIGHT PRIMARY-AFFINITY
 <span class="nv">$ </span>rados mkpool test-pool
 
 <span class="c"># 创建测试文件</span>
-<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>testfile <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
+<span class="nv">$ </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>testfile <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
 
 <span class="c"># 创建一个对象(这时候也将对象放入了pool中)</span>
 <span class="c"># rados put {object-name} {file-path} --pool={pool-name}</span>
@@ -453,7 +453,7 @@ ID WEIGHT  TYPE NAME             UP/DOWN REWEIGHT PRIMARY-AFFINITY
 osdmap e42 pool <span class="s1">'test-pool'</span> <span class="o">(</span>3<span class="o">)</span> object <span class="s1">'test-file'</span> -&gt; pg 3.b79653d4 <span class="o">(</span>3.4<span class="o">)</span> -&gt; up <span class="o">([</span>1,5,2,3,4], p1<span class="o">)</span> acting <span class="o">([</span>1,5,2,3,4], p1<span class="o">)</span>
 
 <span class="c"># 删除对象</span>
-<span class="nv">$ </span>rados <span class="nt">-p</span> data rm test-object
+<span class="nv">$ </span>rados <span class="nt">-p</span> data <span class="nb">rm </span>test-object
 
 <span class="c"># 删除存储池</span>
 <span class="nv">$ </span>rados rmpool test-pool test-pool <span class="nt">--yes-i-really-really-mean-it</span>
@@ -467,12 +467,12 @@ osdmap e42 pool <span class="s1">'test-pool'</span> <span class="o">(</span>3<sp
 <p>1.确认你使用了合适的内核版本，详情<a href="http://docs.ceph.com/docs/master/start/os-recommendations/">参见</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>lab_release <span class="nt">-a</span>
-uname <span class="nt">-a</span>
+<span class="nb">uname</span> <span class="nt">-a</span>
 </code></pre></div></div>
 
 <p>2.在管理节点上用 <code class="highlighter-rouge">ceph-deploy</code>安装ceph</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph-deploy install <span class="o">{</span>rbd-client<span class="o">}</span>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph-deploy <span class="nb">install</span> <span class="o">{</span>rbd-client<span class="o">}</span>
 </code></pre></div></div>
 
 <p>3.在管理节点上部署ceph cli工具和密钥</p>
@@ -550,11 +550,11 @@ log      <span class="o">=</span>internal log           <span class="nv">bsize</
 realtime <span class="o">=</span>none                   <span class="nv">extsz</span><span class="o">=</span>4096   <span class="nv">blocks</span><span class="o">=</span>0, <span class="nv">rtextents</span><span class="o">=</span>0
 
 <span class="c"># 挂载</span>
-<span class="nv">$ </span>mkdir test-block
+<span class="nv">$ </span><span class="nb">mkdir </span>test-block
 <span class="nv">$ </span>mount /dev/rbd0 test-block
 
 <span class="c"># 写入测试</span>
-<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-block/test-file <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
+<span class="nv">$ </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-block/test-file <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
 1+0 records <span class="k">in
 </span>1+0 records out
 1073741824 bytes <span class="o">(</span>1.1 GB<span class="o">)</span> copied, 2.96071 s, 363 MB/s
@@ -607,11 +607,11 @@ ceph fs new test-fs cephfs_metadata cephfs_data
 
 <p>创建目录挂载</p>
 
-<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir test-fs
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>test-fs
 mount <span class="nt">-t</span> ceph 172.30.33.90:6789:/ /root/test-fs <span class="nt">-o</span> <span class="nv">name</span><span class="o">=</span>admin,secretfile<span class="o">=</span>ceph-key
 
 <span class="c">#写入数据测试</span>
-<span class="nv">$ </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-fs/test-fs <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
+<span class="nv">$ </span><span class="nb">dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-fs/test-fs <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
 1+0 records <span class="k">in
 </span>1+0 records out
 1073741824 bytes <span class="o">(</span>1.1 GB<span class="o">)</span> copied, 2.77355 s, 387 MB/s
@@ -631,22 +631,22 @@ mount <span class="nt">-t</span> ceph 172.30.33.90:6789:/ /root/test-fs <span cl
 <span class="nv">gpgcheck</span><span class="o">=</span>0
 
 <span class="c"># 安装ceph-fuse</span>
-yum install ceph-fuse <span class="nt">-y</span>
+yum <span class="nb">install </span>ceph-fuse <span class="nt">-y</span>
 
 <span class="c"># 复制配置和ceph key到client端</span>
-<span class="nb">sudo </span>mkdir <span class="nt">-p</span> /etc/ceph
+<span class="nb">sudo mkdir</span> <span class="nt">-p</span> /etc/ceph
 <span class="nb">sudo </span>scp root@172.30.33.91:/etc/ceph/ceph.conf /etc/ceph/ceph.conf
 <span class="nb">sudo </span>scp root@172.30.33.91:/etc/ceph/ceph.client.admin.keyring /etc/ceph/ceph.client.admin.keyring
 
 <span class="c"># 创建目录挂载</span>
-mkdir test-fs-fuse
+<span class="nb">mkdir </span>test-fs-fuse
 <span class="nv">$ </span><span class="nb">sudo </span>ceph-fuse <span class="nt">-m</span> 172.30.33.91:6789 test-fs-fuse
 ceph-fuse[60551]: starting ceph client
 2017-09-12 14:47:24.137929 7f63d9719ec0 <span class="nt">-1</span> init, newargv <span class="o">=</span> 0x7f63e51d4840 <span class="nv">newargc</span><span class="o">=</span>11
 ceph-fuse[60551]: starting fuse
 
 <span class="c"># 写入数据测试</span>
-<span class="nv">$ </span><span class="nb">sudo </span>dd <span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-fs-fuse/test-fs-fuse <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
+<span class="nv">$ </span><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/dev/zero <span class="nv">of</span><span class="o">=</span>test-fs-fuse/test-fs-fuse <span class="nv">bs</span><span class="o">=</span>1G <span class="nv">count</span><span class="o">=</span>1
 1+0 records <span class="k">in
 </span>1+0 records out
 1073741824 bytes <span class="o">(</span>1.1 GB<span class="o">)</span> copied, 10.5426 s, 102 MB/s
