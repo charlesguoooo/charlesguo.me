@@ -132,8 +132,8 @@
 
 <h1 id="自定义docker-daemon-选项">自定义docker daemon 选项</h1>
 <p>有很多种方法为你的docker daemon配置daemon标志和环境变量。
-推荐的方法是使用systemd的插件文件[如<a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd.unit</a>所描述的]。这些插件文件是一些在本地<code class="highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录下的名为<code class="highlighter-rouge">&lt;something&gt;.conf</code>文件。
-但是，如果你之前使用过一个包含<code class="highlighter-rouge">EnvironmentFile</code>[通常是<code class="highlighter-rouge">/etc/sysconfig/docker</code>]的包，那么为了向后兼容，你可将具有<code class="highlighter-rouge">.conf</code>扩展名的文件放到<code class="highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录中，包含如下内容：</p>
+推荐的方法是使用systemd的插件文件[如<a href="https://www.freedesktop.org/software/systemd/man/systemd.unit.html">systemd.unit</a>所描述的]。这些插件文件是一些在本地<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录下的名为<code class="language-plaintext highlighter-rouge">&lt;something&gt;.conf</code>文件。
+但是，如果你之前使用过一个包含<code class="language-plaintext highlighter-rouge">EnvironmentFile</code>[通常是<code class="language-plaintext highlighter-rouge">/etc/sysconfig/docker</code>]的包，那么为了向后兼容，你可将具有<code class="language-plaintext highlighter-rouge">.conf</code>扩展名的文件放到<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录中，包含如下内容：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Service]
 <span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker
 <span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker-storage
@@ -161,12 +161,12 @@
 
 <span class="nv">EnvironmentFile</span><span class="o">=</span>-/etc/sysconfig/docker
 </code></pre></div></div>
-<p><code class="highlighter-rouge">/usr/lib/systemd/system </code>或<code class="highlighter-rouge">/lib/systemd/system</code>包含默认选项，建议不要修改。</p>
+<p><code class="language-plaintext highlighter-rouge">/usr/lib/systemd/system </code>或<code class="language-plaintext highlighter-rouge">/lib/systemd/system</code>包含默认选项，建议不要修改。</p>
 
 <h1 id="运行时的目录和存储驱动">运行时的目录和存储驱动</h1>
 
 <p>你可能希望通过将docker image，容器和volumes移动到单独的分区来控制用于docker image，容器和volumes的磁盘空间。
-在这个例子中，我们假设你的<code class="highlighter-rouge">docker.service</code>文件像这样：</p>
+在这个例子中，我们假设你的<code class="language-plaintext highlighter-rouge">docker.service</code>文件像这样：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Unit]
 <span class="nv">Description</span><span class="o">=</span>Docker Application Container Engine
 <span class="nv">Documentation</span><span class="o">=</span>https://docs.docker.com
@@ -196,14 +196,14 @@
 <span class="o">[</span>Install]
 <span class="nv">WantedBy</span><span class="o">=</span>multi-user.target
 </code></pre></div></div>
-<p>这将允许我们通过放置文件(如上所述)，通过在<code class="highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录中放置一个包含以下内容的文件来添加额外的标志：</p>
+<p>这将允许我们通过放置文件(如上所述)，通过在<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d</code>目录中放置一个包含以下内容的文件来添加额外的标志：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Service]
 <span class="nv">ExecStart</span><span class="o">=</span>
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd <span class="nt">--graph</span><span class="o">=</span><span class="s2">"/mnt/docker-data"</span> <span class="nt">--storage-driver</span><span class="o">=</span>overlay
 </code></pre></div></div>
-<p>你还可以在这个文件中设置其他环境变量，比如:<code class="highlighter-rouge">HTTP_PROXY</code>环境变量</p>
+<p>你还可以在这个文件中设置其他环境变量，比如:<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code>环境变量</p>
 
-<p>修改<code class="highlighter-rouge">ExecStart</code>配置，先指定一个空配置，然后指定一个新的配置</p>
+<p>修改<code class="language-plaintext highlighter-rouge">ExecStart</code>配置，先指定一个空配置，然后指定一个新的配置</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Service]
 <span class="nv">ExecStart</span><span class="o">=</span>
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd <span class="nt">--bip</span><span class="o">=</span>172.17.42.1/16
@@ -214,18 +214,18 @@
 </code></pre></div></div>
 
 <h1 id="http-proxy">HTTP proxy</h1>
-<p>这个例子会覆盖默认的<code class="highlighter-rouge">docker.service</code>文件
+<p>这个例子会覆盖默认的<code class="language-plaintext highlighter-rouge">docker.service</code>文件
 如果你在代理服务器后面，那么你需要将代理配置添加到docker systemd service文件中
 1.为docker服务创建一个systemd插件目录：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/systemd/system/docker.service.d
 </code></pre></div></div>
 
-<p>2.创建一个<code class="highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>配置文件,并添加<code class="highlighter-rouge">HTTP_PROXY</code>环境变量</p>
+<p>2.创建一个<code class="language-plaintext highlighter-rouge">/etc/systemd/system/docker.service.d/http-proxy.conf</code>配置文件,并添加<code class="language-plaintext highlighter-rouge">HTTP_PROXY</code>环境变量</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>Service]
 <span class="nv">Environment</span><span class="o">=</span><span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span>
 </code></pre></div></div>
 
-<p>3.如果内部有不需要代理访问的docker Registry，那么你可以通过<code class="highlighter-rouge">NO_PROXY</code>来指定</p>
+<p>3.如果内部有不需要代理访问的docker Registry，那么你可以通过<code class="language-plaintext highlighter-rouge">NO_PROXY</code>来指定</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">Environment</span><span class="o">=</span><span class="s2">"HTTP_PROXY=http://proxy.example.com:80/"</span> <span class="s2">"NO_PROXY=localhost,127.0.0.1,docker-registry.somecorporation.com"</span>
 </code></pre></div></div>
 

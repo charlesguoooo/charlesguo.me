@@ -114,7 +114,7 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>默认情况下，当docker daemon停止，它会关闭所有正在运行的容器。从docker1.12起，你可以配置当docker daemon不可用时依然保持容器继续运行。<code class="highlighter-rouge">live restore</code>选项有助于减少由于docker daemon崩溃，中断或升级而导致的容器停机时间。</p>
+    <p>默认情况下，当docker daemon停止，它会关闭所有正在运行的容器。从docker1.12起，你可以配置当docker daemon不可用时依然保持容器继续运行。<code class="language-plaintext highlighter-rouge">live restore</code>选项有助于减少由于docker daemon崩溃，中断或升级而导致的容器停机时间。</p>
 
 <blockquote>
   <p><strong>Note:</strong> live restore不支持windows容器，但是它支持运行在windows上的linux容器。
@@ -123,16 +123,16 @@
 
 <h1 id="开启live-restore选项">开启live restore选项</h1>
 
-<p>有两种方式开启<code class="highlighter-rouge">live restore</code>:</p>
+<p>有两种方式开启<code class="language-plaintext highlighter-rouge">live restore</code>:</p>
 <ul>
   <li>如果docker daemon正在运行并且你不想停止它，你可以添加配置到docker daemon的配置文件。例如：在linux系统上默认的配置文件是/etc/docker/daemon.json
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">{</span>
 <span class="s2">"live-restore"</span>: <span class="nb">true</span>
 <span class="o">}</span>
 </code></pre></div>    </div>
-    <p>你必须传递一个<code class="highlighter-rouge">SIGHUP</code>信号给daemon进程来重载配置。更多有关使用config.json来配置docker daemon的信息，可以参考<a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon configuration file</a></p>
+    <p>你必须传递一个<code class="language-plaintext highlighter-rouge">SIGHUP</code>信号给daemon进程来重载配置。更多有关使用config.json来配置docker daemon的信息，可以参考<a href="https://docs.docker.com/engine/reference/commandline/dockerd/#daemon-configuration-file">daemon configuration file</a></p>
   </li>
-  <li>在使用dockerd启动时指定<code class="highlighter-rouge">--live-restore</code>选项
+  <li>在使用dockerd启动时指定<code class="language-plaintext highlighter-rouge">--live-restore</code>选项
     <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>dockerd <span class="nt">--live-restore</span>
 </code></pre></div>    </div>
     <h1 id="升级docker-daemon-时的live-restore">升级docker daemon 时的Live restore</h1>
@@ -146,7 +146,7 @@
 <h1 id="live-restore-对正在运行的容器的影响">live restore 对正在运行的容器的影响</h1>
 <p>长时间缺少docker daemon可能会影响正在运行的容器。容器写入FIFO日志在daemon消耗时。如果daemon不能用于输出，缓冲区将填满并阻止对日志的进一步写入，因为阻塞该进程直到有更多的可用空间，默认缓冲区大小通常为64K。
 你必须重启docker来刷新buffers
-你可以修改<code class="highlighter-rouge">/proc/sys/fs/pipe-max-size</code>来修改内核buffer 大小</p>
+你可以修改<code class="language-plaintext highlighter-rouge">/proc/sys/fs/pipe-max-size</code>来修改内核buffer 大小</p>
 
 <h1 id="live-restore-和-swarm-模式">live restore 和 swarm 模式</h1>
 <p>live restore 和docker swarm模式不兼容。当docker 运行在swarm模式下时，是由编排功能来管理任务并使容器根据服务规范运行的。</p>

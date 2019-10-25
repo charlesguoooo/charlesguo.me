@@ -121,7 +121,7 @@
 </blockquote>
 
 <!--more-->
-<p>截至到Docker1.10，Docker守护进程实现了一个内嵌的DNS服务器，该服务器为那些提供了有效名称、网络别名或连接别名的容器，提供内置服务发现。Docker管理容器内的DNS配置会从一个版本变成下一个版本，所以，你不应该在容器里管理如<code class="highlighter-rouge">/etc/hosts</code>,<code class="highlighter-rouge">/etc/resolv.conf</code>之类的文件，而应该将它们单独进行管理。
+<p>截至到Docker1.10，Docker守护进程实现了一个内嵌的DNS服务器，该服务器为那些提供了有效名称、网络别名或连接别名的容器，提供内置服务发现。Docker管理容器内的DNS配置会从一个版本变成下一个版本，所以，你不应该在容器里管理如<code class="language-plaintext highlighter-rouge">/etc/hosts</code>,<code class="language-plaintext highlighter-rouge">/etc/resolv.conf</code>之类的文件，而应该将它们单独进行管理。
 影响容器域名服务的各种选项如下：</p>
 
 <table>
@@ -134,15 +134,15 @@
   <tbody>
     <tr>
       <td style="text-align: left">–name=CONTAINER-NAME</td>
-      <td style="text-align: left">使用<code class="highlighter-rouge">--name</code>配置的容器名，用于在用户自定义的网络中发现容器，内嵌的DNS服务器维护容器的名称和IP地址之间的隐射</td>
+      <td style="text-align: left">使用<code class="language-plaintext highlighter-rouge">--name</code>配置的容器名，用于在用户自定义的网络中发现容器，内嵌的DNS服务器维护容器的名称和IP地址之间的隐射</td>
     </tr>
     <tr>
       <td style="text-align: left">–network-alias=ALIAS</td>
-      <td style="text-align: left">除了上述的<code class="highlighter-rouge">--name</code>之外，容器在用户自定义网络中还可以定义一个或多个网络别名。内嵌的DNS服务器畏惧所有容器别名和其在特定自定义网络上的IP地址之间的隐射。一个容器可以在不同的网络上拥有不同的别名</td>
+      <td style="text-align: left">除了上述的<code class="language-plaintext highlighter-rouge">--name</code>之外，容器在用户自定义网络中还可以定义一个或多个网络别名。内嵌的DNS服务器畏惧所有容器别名和其在特定自定义网络上的IP地址之间的隐射。一个容器可以在不同的网络上拥有不同的别名</td>
     </tr>
     <tr>
       <td style="text-align: left">–link=CONTAINER_NAME:ALIAS</td>
-      <td style="text-align: left">在运行容器的时候使用<code class="highlighter-rouge">--link</code>为内嵌DNS提供一个ALIAS条目，该条目指向由CONTAINER_NAME标识的容器的IP地址</td>
+      <td style="text-align: left">在运行容器的时候使用<code class="language-plaintext highlighter-rouge">--link</code>为内嵌DNS提供一个ALIAS条目，该条目指向由CONTAINER_NAME标识的容器的IP地址</td>
     </tr>
     <tr>
       <td style="text-align: left">–dns=[IP_ADDRESS…]</td>

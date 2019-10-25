@@ -139,7 +139,7 @@
 
 <h3 id="kubernetes-dashboard">kubernetes-dashboard</h3>
 
-<p>1.从<code class="highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/kubernetes.git">最新源码</a></p>
+<p>1.从<code class="language-plaintext highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/kubernetes.git">最新源码</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/kubernetes/kubernetes.git
 </code></pre></div></div>
@@ -172,12 +172,12 @@ kubectl logs kubernetes-dashboard-1041558748-sppxt <span class="nt">-n</span> ku
 
 <h3 id="efk">EFK</h3>
 
-<p>1.从<code class="highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/kubernetes.git">最新源码</a></p>
+<p>1.从<code class="language-plaintext highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/kubernetes.git">最新源码</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/kubernetes/kubernetes.git
 </code></pre></div></div>
 
-<p>2.为你要运行fluentd的节点添加label，因为<code class="highlighter-rouge">fluentd-es-ds.yml</code>文件中有<code class="highlighter-rouge">beta.kubernetes.io/fluentd-ds-ready: "true"</code>标签</p>
+<p>2.为你要运行fluentd的节点添加label，因为<code class="language-plaintext highlighter-rouge">fluentd-es-ds.yml</code>文件中有<code class="language-plaintext highlighter-rouge">beta.kubernetes.io/fluentd-ds-ready: "true"</code>标签</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl label node k8s-node01 beta.kubernetes.io/fluentd-ds-ready<span class="o">=</span><span class="nb">true
 </span>kubectl label node k8s-node02 beta.kubernetes.io/fluentd-ds-ready<span class="o">=</span><span class="nb">true
@@ -229,7 +229,7 @@ kubectl logs kibana-logging-3636197754-tnwjh <span class="nt">-n</span> kube-sys
 
 <p>heapster比较简单</p>
 
-<p>1.从<code class="highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/heapster.git">最新源码</a></p>
+<p>1.从<code class="language-plaintext highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/heapster.git">最新源码</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/kubernetes/heapster.git
 </code></pre></div></div>
@@ -285,7 +285,7 @@ kubectl logs monitoring-influxdb-3480804314-31h4w <span class="nt">-n</span> kub
 
 <p>概念说了这么多，下面就开始实际操作吧</p>
 
-<p>1.从<code class="highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/ingress.git">最新源码</a></p>
+<p>1.从<code class="language-plaintext highlighter-rouge">kubernetes</code>官方git下载<a href="https://github.com/kubernetes/ingress.git">最新源码</a></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/kubernetes/ingress.git
 </code></pre></div></div>
@@ -296,9 +296,9 @@ kubectl logs monitoring-influxdb-3480804314-31h4w <span class="nt">-n</span> kub
 kubectl label node k8s-node02 <span class="nv">role</span><span class="o">=</span>frontal
 </code></pre></div></div>
 
-<p>3.进入ingress的<code class="highlighter-rouge">examples/daemonset/nginx</code>目录，修改yml文件</p>
+<p>3.进入ingress的<code class="language-plaintext highlighter-rouge">examples/daemonset/nginx</code>目录，修改yml文件</p>
 
-<p><strong>注意：官方给出的 daemonset 版本的yml文件中，没有绑定宿主机的80端口，也就是说前端 Nginx 没有监听宿主机的80端口（尚且不知为何），所以需要自己加一下<code class="highlighter-rouge">hostNetwork</code>；同时因为我是将ingress部署到我指定的前端，所以还需要在文件末尾加上<code class="highlighter-rouge">nodeSelector</code>,截图如下</strong></p>
+<p><strong>注意：官方给出的 daemonset 版本的yml文件中，没有绑定宿主机的80端口，也就是说前端 Nginx 没有监听宿主机的80端口（尚且不知为何），所以需要自己加一下<code class="language-plaintext highlighter-rouge">hostNetwork</code>；同时因为我是将ingress部署到我指定的前端，所以还需要在文件末尾加上<code class="language-plaintext highlighter-rouge">nodeSelector</code>,截图如下</strong></p>
 
 <p><img src="/images/posts/ingress-daemonset.png" alt="" /></p>
 

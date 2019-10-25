@@ -114,9 +114,9 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>本章节主要讲解了在Docker默认的<code class="highlighter-rouge">bridge</code>网络上绑定容器端口，这个<code class="highlighter-rouge">bridge</code>网络是在docker安装的时候，系统默认创建的。</p>
+    <p>本章节主要讲解了在Docker默认的<code class="language-plaintext highlighter-rouge">bridge</code>网络上绑定容器端口，这个<code class="language-plaintext highlighter-rouge">bridge</code>网络是在docker安装的时候，系统默认创建的。</p>
 <blockquote>
-  <p><strong>Note:</strong> docker允许创建除了默认<code class="highlighter-rouge">bridge</code>网络之外的bridge网络</p>
+  <p><strong>Note:</strong> docker允许创建除了默认<code class="language-plaintext highlighter-rouge">bridge</code>网络之外的bridge网络</p>
 </blockquote>
 
 <!--more-->
@@ -131,13 +131,13 @@ MASQUERADE  tcp  <span class="nt">--</span>  172.17.0.4           172.17.0.4    
 </code></pre></div></div>
 <p>docker服务器会创建一个伪装规则，使容器连接到外部IP地址。</p>
 
-<p>如果希望容器能接入连接，你需要在调用<code class="highlighter-rouge">docker run </code>的时候指定特别的选项
-一.你可以在运行<code class="highlighter-rouge">docker run </code>的时候指定<code class="highlighter-rouge">-P</code>或<code class="highlighter-rouge">--publish-all=true|false</code>来将Dockerfile中EXPOSE暴露的端口映射到主机上的随机端口
-二.或者使用<code class="highlighter-rouge">--expose &lt;port&gt;</code>来额外指定暴露出来的端口
-三.映射还可以使用<code class="highlighter-rouge">-p</code>或<code class="highlighter-rouge">--publish=</code>来精确指定暴露容器的某个端口到宿主机上某个IP的的某个端口
-我们可以使用<code class="highlighter-rouge">docker port</code>来查看端口的信息，而这个宿主机上随机端口是配置在<code class="highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>，范围大概是32768-61000.</p>
+<p>如果希望容器能接入连接，你需要在调用<code class="language-plaintext highlighter-rouge">docker run </code>的时候指定特别的选项
+一.你可以在运行<code class="language-plaintext highlighter-rouge">docker run </code>的时候指定<code class="language-plaintext highlighter-rouge">-P</code>或<code class="language-plaintext highlighter-rouge">--publish-all=true|false</code>来将Dockerfile中EXPOSE暴露的端口映射到主机上的随机端口
+二.或者使用<code class="language-plaintext highlighter-rouge">--expose &lt;port&gt;</code>来额外指定暴露出来的端口
+三.映射还可以使用<code class="language-plaintext highlighter-rouge">-p</code>或<code class="language-plaintext highlighter-rouge">--publish=</code>来精确指定暴露容器的某个端口到宿主机上某个IP的的某个端口
+我们可以使用<code class="language-plaintext highlighter-rouge">docker port</code>来查看端口的信息，而这个宿主机上随机端口是配置在<code class="language-plaintext highlighter-rouge">/proc/sys/net/ipv4/ip_local_port_range</code>，范围大概是32768-61000.</p>
 
-<p>无论哪种方式，你都可以通过检查<code class="highlighter-rouge">NAT</code>表来确认</p>
+<p>无论哪种方式，你都可以通过检查<code class="language-plaintext highlighter-rouge">NAT</code>表来确认</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>iptables <span class="nt">-t</span> nat <span class="nt">-L</span> <span class="nt">-n</span>
 <span class="c"># 这是允许容器访问外网</span>
 Chain POSTROUTING <span class="o">(</span>policy ACCEPT<span class="o">)</span>
@@ -155,9 +155,9 @@ DNAT       tcp  <span class="nt">--</span>  0.0.0.0/0            0.0.0.0/0      
 DNAT       tcp  <span class="nt">--</span>  0.0.0.0/0            192.168.1.1          tcp dpt:9292 to:172.17.0.11:80
 </code></pre></div></div>
 
-<p>我们可以看到docker在<code class="highlighter-rouge">0.0.0.0</code>或<code class="highlighter-rouge">192.168.1.1</code>接口上公开了指定的端口或随机端口，对应映射到容器内的端口</p>
+<p>我们可以看到docker在<code class="language-plaintext highlighter-rouge">0.0.0.0</code>或<code class="language-plaintext highlighter-rouge">192.168.1.1</code>接口上公开了指定的端口或随机端口，对应映射到容器内的端口</p>
 
-<p>如果你想要docker端口转发绑定到一个特定的IP地址，你可以编辑docker启动配置文件，添加<code class="highlighter-rouge">--ip</code>选项，当然也可以直接使用<code class="highlighter-rouge">-p</code>选项指定</p>
+<p>如果你想要docker端口转发绑定到一个特定的IP地址，你可以编辑docker启动配置文件，添加<code class="language-plaintext highlighter-rouge">--ip</code>选项，当然也可以直接使用<code class="language-plaintext highlighter-rouge">-p</code>选项指定</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker ps
 CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS                      NAMES
 a894fe52388a        <span class="nb">test</span>                <span class="s2">"/bin/bash"</span>         3 seconds ago       Up 1 seconds        192.168.1.1:9298-&gt;80/tcp   romantic_shannon

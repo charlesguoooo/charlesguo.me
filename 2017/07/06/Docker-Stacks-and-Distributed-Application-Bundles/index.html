@@ -193,7 +193,7 @@ Wrote bundle to composetest.dab
 <span class="nb">true</span>
 </code></pre></div></div>
 
-<p>使用<code class="highlighter-rouge">docker deploy</code>命令来创建stack</p>
+<p>使用<code class="language-plaintext highlighter-rouge">docker deploy</code>命令来创建stack</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker deploy <span class="nt">--help</span>
 
 Usage:	docker deploy <span class="o">[</span>OPTIONS] STACK
@@ -223,7 +223,7 @@ pr6ympnpgv9g  composetest_db   replicated  1/1       arungupta/oreilly-couchbase
 </code></pre></div></div>
 
 <h1 id="管理stacks">管理stacks</h1>
-<p>使用<code class="highlighter-rouge">docker stack</code>命令来进行管理</p>
+<p>使用<code class="language-plaintext highlighter-rouge">docker stack</code>命令来进行管理</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker stack <span class="nt">--help</span>
 
 Usage:	docker stack COMMAND
@@ -244,14 +244,14 @@ Run <span class="s1">'docker stack COMMAND --help'</span> <span class="k">for </
 </code></pre></div></div>
 
 <h1 id="bundle-文件格式">Bundle 文件格式</h1>
-<p>分布式应用程序包用<code class="highlighter-rouge">JSON</code>格式来描述。当bundles以文件方式保存时，文件的后缀是<code class="highlighter-rouge">.dab</code>。
-一个bundle有两个顶级字段：<code class="highlighter-rouge">version</code>和<code class="highlighter-rouge">services</code>。docker1.12工具使用的是0.1版</p>
+<p>分布式应用程序包用<code class="language-plaintext highlighter-rouge">JSON</code>格式来描述。当bundles以文件方式保存时，文件的后缀是<code class="language-plaintext highlighter-rouge">.dab</code>。
+一个bundle有两个顶级字段：<code class="language-plaintext highlighter-rouge">version</code>和<code class="language-plaintext highlighter-rouge">services</code>。docker1.12工具使用的是0.1版</p>
 
-<p><code class="highlighter-rouge">services</code>是指构成应用程序的服务。他们对应1.12 Docker Engine API中引述的新services对象</p>
+<p><code class="language-plaintext highlighter-rouge">services</code>是指构成应用程序的服务。他们对应1.12 Docker Engine API中引述的新services对象</p>
 
-<p>一个<code class="highlighter-rouge">services</code>包含如下字段：
+<p>一个<code class="language-plaintext highlighter-rouge">services</code>包含如下字段：
 <strong>Image[必须]</strong>
-服务将运行的image。docker images应该使用hash码来引用，如：<code class="highlighter-rouge">arungupta/oreilly-couchbase@sha256:f150fcb9fca5392075c96f1baffc7f893858ba763f3c05cf0908ef2613cbf34c</code>
+服务将运行的image。docker images应该使用hash码来引用，如：<code class="language-plaintext highlighter-rouge">arungupta/oreilly-couchbase@sha256:f150fcb9fca5392075c96f1baffc7f893858ba763f3c05cf0908ef2613cbf34c</code>
 <strong>Command</strong>[]
 在服务容器中运行的命令
 <strong>Args</strong>[]

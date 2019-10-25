@@ -240,7 +240,7 @@ vi /etc/selinux/config
 </code></pre></div></div>
 
 <blockquote>
-  <p><del>如果你想使用flanel网络，还记得在所有节点上创建 <code class="highlighter-rouge">/etc/sysctl.d/k8s.conf</code>文件，添加如下内容，如果是calico网络，请忽略这步</del></p>
+  <p><del>如果你想使用flanel网络，还记得在所有节点上创建 <code class="language-plaintext highlighter-rouge">/etc/sysctl.d/k8s.conf</code>文件，添加如下内容，如果是calico网络，请忽略这步</del></p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>net.bridge.bridge-nf-call-ip6tables <span class="o">=</span> 1
@@ -251,7 +251,7 @@ sysctl <span class="nt">-p</span> /etc/sysctl.d/k8s.conf
 </code></pre></div></div>
 
 <blockquote>
-  <p>在所有节点上编辑 <code class="highlighter-rouge">/etc/hosts</code>文件，配置host通信</p>
+  <p>在所有节点上编辑 <code class="language-plaintext highlighter-rouge">/etc/hosts</code>文件，配置host通信</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /etc/hosts
@@ -278,7 +278,7 @@ useradd kube  <span class="nt">-M</span> <span class="nt">-c</span> <span class=
 <h5 id="16-在console上配置免密钥登录">1.6 在console上配置免密钥登录</h5>
 
 <blockquote>
-  <p>所有证书分发，二进制文件分发，配置文件分发，都将在 <code class="highlighter-rouge">k8s-console</code> 上执行，所以该节点主机对集群内所有节点设置了免密钥登录</p>
+  <p>所有证书分发，二进制文件分发，配置文件分发，都将在 <code class="language-plaintext highlighter-rouge">k8s-console</code> 上执行，所以该节点主机对集群内所有节点设置了免密钥登录</p>
 </blockquote>
 
 <blockquote>
@@ -310,7 +310,7 @@ wget https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
 <h5 id="22-创建ca证书配置生成ca证书和私钥">2.2 创建CA证书配置，生成CA证书和私钥</h5>
 
 <blockquote>
-  <p>先用 <code class="highlighter-rouge">cfssl</code> 命令生成包含默认配置的 <code class="highlighter-rouge">config.json</code>和 <code class="highlighter-rouge">csr.json</code>文件</p>
+  <p>先用 <code class="language-plaintext highlighter-rouge">cfssl</code> 命令生成包含默认配置的 <code class="language-plaintext highlighter-rouge">config.json</code>和 <code class="language-plaintext highlighter-rouge">csr.json</code>文件</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir</span> /opt/ssl
@@ -398,7 +398,7 @@ cfssl gencert <span class="nt">-initca</span> csr.json | cfssljson <span class="
 <h5 id="24-创建etcd证书配置生成-etcd-证书和私钥">2.4 创建etcd证书配置，生成 etcd 证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">etcd-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">etcd-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>etcd-csr.json</strong></p>
@@ -446,7 +446,7 @@ etcd.csr  etcd-csr.json  etcd-key.pem  etcd.pem
 <h5 id="25-创建kube-apiserver证书配置生成kube-apiserver证书和私钥">2.5 创建kube-apiserver证书配置，生成kube-apiserver证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">kube-apiserver-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">kube-apiserver-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>kube-apiserver-csr.json</strong></p>
@@ -505,7 +505,7 @@ kube-apiserver.csr  kube-apiserver-csr.json  kube-apiserver-key.pem  kube-apiser
 <h5 id="26-创建kube-controller-manager证书配置生成kube-controller-manager证书和私钥">2.6 创建kube-controller-manager证书配置，生成kube-controller-manager证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">kube-controller-manager-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">kube-controller-manager-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>kube-controller-manager-csr.json</strong></p>
@@ -558,7 +558,7 @@ kube-controller-manager.csr  kube-controller-manager-csr.json  kube-controller-m
 <h5 id="27-创建kube-scheduler证书配置生成kube-scheduler证书和私钥">2.7 创建kube-scheduler证书配置，生成kube-scheduler证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">kube-scheduler-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">kube-scheduler-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>kube-scheduler-csr.json</strong></p>
@@ -610,7 +610,7 @@ kube-scheduler.csr  kube-scheduler-csr.json  kube-scheduler-key.pem  kube-schedu
 <h5 id="28-创建kube-admin证书配置生成kube-admin证书和私钥">2.8 创建kube-admin证书配置，生成kube-admin证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">kube-admin-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">kube-admin-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>kube-admin-csr.json</strong></p>
@@ -661,7 +661,7 @@ kube-admin.csr  kube-admin-csr.json  kube-admin-key.pem  kube-admin.pem
 <h5 id="29-创建kube-proxy证书配置生成kube-proxy证书和私钥">2.9 创建kube-proxy证书配置，生成kube-proxy证书和私钥</h5>
 
 <blockquote>
-  <p>在<code class="highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="highlighter-rouge">kube-proxy-csr.json</code>，内容如下</p>
+  <p>在<code class="language-plaintext highlighter-rouge">/opt/ssl</code> 下添加文件 <code class="language-plaintext highlighter-rouge">kube-proxy-csr.json</code>，内容如下</p>
 </blockquote>
 
 <p><strong>kube-proxy-csr.json</strong></p>
@@ -1533,9 +1533,9 @@ systemctl status kube-proxy
 </blockquote>
 
 <ul>
-  <li>kubelet 必须配置使用CNI插件<code class="highlighter-rouge">--network-plugin=cni</code></li>
-  <li>kube-proxy 必须以<code class="highlighter-rouge">iptables</code>的模式启动</li>
-  <li>kube-proxy 不能使用<code class="highlighter-rouge">--masquerade-all</code>启动(会与calico policy冲突)</li>
+  <li>kubelet 必须配置使用CNI插件<code class="language-plaintext highlighter-rouge">--network-plugin=cni</code></li>
+  <li>kube-proxy 必须以<code class="language-plaintext highlighter-rouge">iptables</code>的模式启动</li>
+  <li>kube-proxy 不能使用<code class="language-plaintext highlighter-rouge">--masquerade-all</code>启动(会与calico policy冲突)</li>
   <li>kubernetes networkpolicy api 至少需要kubernetes 1.3 版本以上</li>
   <li>如果开启了RBAC，那么需要注意需要创建clusterrole和clusterrolebinding</li>
 </ul>
@@ -1543,7 +1543,7 @@ systemctl status kube-proxy
 <h5 id="在每个节点上修改kubeletservice">在每个节点上修改kubelet.service</h5>
 
 <blockquote>
-  <p>修改kubelet配置，增加<code class="highlighter-rouge">--network-plugin=cni</code></p>
+  <p>修改kubelet配置，增加<code class="language-plaintext highlighter-rouge">--network-plugin=cni</code></p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /usr/lib/systemd/system/kubelet.service

@@ -128,19 +128,19 @@
 
 <h3 id="简介">简介</h3>
 
-<p>Ceph是一个符合POSIX、开源的分布式存储系统，不论你是想提供<code class="highlighter-rouge">ceph 对象存储</code>或<code class="highlighter-rouge">ceph 块设备</code>，还是想部署一个<code class="highlighter-rouge">ceph文件系统</code>或者把ceph作为他用，所有 <code class="highlighter-rouge">Ceph存储集群</code> 的部署都始于部署一个个 <code class="highlighter-rouge">ceph节点</code>、<code class="highlighter-rouge">网络</code>和<code class="highlighter-rouge">ceph存储集群</code>，ceph 存储集群至少需要一个 <code class="highlighter-rouge">ceph monitor</code>和两个<code class="highlighter-rouge">osd守护进程</code>。而运行<code class="highlighter-rouge">ceph文件系统客户端</code>，则必须需要MDS(元数据服务器)。</p>
+<p>Ceph是一个符合POSIX、开源的分布式存储系统，不论你是想提供<code class="language-plaintext highlighter-rouge">ceph 对象存储</code>或<code class="language-plaintext highlighter-rouge">ceph 块设备</code>，还是想部署一个<code class="language-plaintext highlighter-rouge">ceph文件系统</code>或者把ceph作为他用，所有 <code class="language-plaintext highlighter-rouge">Ceph存储集群</code> 的部署都始于部署一个个 <code class="language-plaintext highlighter-rouge">ceph节点</code>、<code class="language-plaintext highlighter-rouge">网络</code>和<code class="language-plaintext highlighter-rouge">ceph存储集群</code>，ceph 存储集群至少需要一个 <code class="language-plaintext highlighter-rouge">ceph monitor</code>和两个<code class="language-plaintext highlighter-rouge">osd守护进程</code>。而运行<code class="language-plaintext highlighter-rouge">ceph文件系统客户端</code>，则必须需要MDS(元数据服务器)。</p>
 
 <p>基础组件:</p>
 
 <ul>
   <li>
-    <p>Ceph OSDs: Ceph OSD 守护进程的功能是存储数据，处理数据的复制、恢复、回填、再均衡，并通过检查其他OSD守护进程的心跳来向 Ceph Monitors 提供一些监控信息。当Ceph 存储集群设定为有2个副本时，至少需要2个OSD守护进程，集群才能到到<code class="highlighter-rouge">active+clean</code>状态(Ceph 默认有3个副本，你可以调整<code class="highlighter-rouge">osd poll default size</code>)</p>
+    <p>Ceph OSDs: Ceph OSD 守护进程的功能是存储数据，处理数据的复制、恢复、回填、再均衡，并通过检查其他OSD守护进程的心跳来向 Ceph Monitors 提供一些监控信息。当Ceph 存储集群设定为有2个副本时，至少需要2个OSD守护进程，集群才能到到<code class="language-plaintext highlighter-rouge">active+clean</code>状态(Ceph 默认有3个副本，你可以调整<code class="language-plaintext highlighter-rouge">osd poll default size</code>)</p>
   </li>
   <li>
     <p>Ceph Monitors: Ceph Monitor基于PAXOS算法维护着 展示集群状态的各种图表，包括监视器图、OSD图、PG图、CRUSH图。Ceph 保存着发生在Monitors、OSD和PG上的每一次状态变更的历史信息(称为 epoch)</p>
   </li>
   <li>
-    <p>MDSs：Ceph MDS为 Ceph 文件系统存储元数据(也就是说，Ceph块设备和Ceph对象存储是不是用MDS)。MDS使得POSIX文件系统的用户们，可以在部队Ceph存储集群造成负担的前提下，执行诸如 <code class="highlighter-rouge">ls</code>、<code class="highlighter-rouge">find</code>等基本命令</p>
+    <p>MDSs：Ceph MDS为 Ceph 文件系统存储元数据(也就是说，Ceph块设备和Ceph对象存储是不是用MDS)。MDS使得POSIX文件系统的用户们，可以在部队Ceph存储集群造成负担的前提下，执行诸如 <code class="language-plaintext highlighter-rouge">ls</code>、<code class="language-plaintext highlighter-rouge">find</code>等基本命令</p>
   </li>
 </ul>
 
@@ -259,7 +259,7 @@
 <span class="nv">$ </span>yum update <span class="nt">-y</span> <span class="o">&amp;&amp;</span> yum <span class="nb">install </span>ceph-deploy <span class="nt">-y</span>
 </code></pre></div></div>
 
-<p>2.更新并安装<code class="highlighter-rouge">ceph-deploy</code></p>
+<p>2.更新并安装<code class="language-plaintext highlighter-rouge">ceph-deploy</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>yum <span class="nb">install </span>ceph-deploy
 </code></pre></div></div>
@@ -294,7 +294,7 @@
 
 <h4 id="12-创建集群">1.2 创建集群</h4>
 
-<p>1.由于ceph-deploy工具部署集群前需要创建一些集群配置信息，其保存在<code class="highlighter-rouge">ceph.conf</code>文件中，这个文件将来会被复制到每个节点的 <code class="highlighter-rouge">/etc/ceph/ceph.conf</code></p>
+<p>1.由于ceph-deploy工具部署集群前需要创建一些集群配置信息，其保存在<code class="language-plaintext highlighter-rouge">ceph.conf</code>文件中，这个文件将来会被复制到每个节点的 <code class="language-plaintext highlighter-rouge">/etc/ceph/ceph.conf</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 创建集群配置目录</span>
 <span class="nb">mkdir </span>ceph-cluster <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ceph-cluster
@@ -304,7 +304,7 @@ ceph-deploy new k8s-master01
 <span class="nb">echo</span> <span class="s2">"osd pool default size = 3"</span> <span class="o">&gt;&gt;</span> ceph.conf
 </code></pre></div></div>
 
-<p>2.创建集群使用 <code class="highlighter-rouge">ceph-deploy</code>工具在部署节点上执行即可</p>
+<p>2.创建集群使用 <code class="language-plaintext highlighter-rouge">ceph-deploy</code>工具在部署节点上执行即可</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装ceph</span>
 <span class="nv">$ </span>ceph-deploy <span class="nb">install </span>k8s-master01 k8s-master02 k8s-master03
@@ -347,7 +347,7 @@ ceph-deploy new k8s-master01
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ceph-deploy mon create-initial
 </code></pre></div></div>
 
-<p>4.在osd节点上创建一个目录作为 osd 存储，并修改其权限,千万别创建在<code class="highlighter-rouge">/usr/local</code>目录下，否则，你的osd可能会无法挂载</p>
+<p>4.在osd节点上创建一个目录作为 osd 存储，并修改其权限,千万别创建在<code class="language-plaintext highlighter-rouge">/usr/local</code>目录下，否则，你的osd可能会无法挂载</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh k8s-master01
 <span class="nv">$ </span><span class="nb">sudo mkdir</span> /data/osd1
@@ -380,7 +380,7 @@ ceph-deploy new k8s-master01
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ceph-deploy admin k8s-master01 k8s-master02 k8s-master03
 </code></pre></div></div>
 
-<p>8.确保你对 <code class="highlighter-rouge">ceph.client.admin.keyring</code>有正确的操作权限，在每个节点上执行</p>
+<p>8.确保你对 <code class="language-plaintext highlighter-rouge">ceph.client.admin.keyring</code>有正确的操作权限，在每个节点上执行</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chmod</span> +r /etc/ceph/ceph.client.admin.keyring
 </code></pre></div></div>
@@ -470,7 +470,7 @@ osdmap e42 pool <span class="s1">'test-pool'</span> <span class="o">(</span>3<sp
 <span class="nb">uname</span> <span class="nt">-a</span>
 </code></pre></div></div>
 
-<p>2.在管理节点上用 <code class="highlighter-rouge">ceph-deploy</code>安装ceph</p>
+<p>2.在管理节点上用 <code class="language-plaintext highlighter-rouge">ceph-deploy</code>安装ceph</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ceph-deploy <span class="nb">install</span> <span class="o">{</span>rbd-client<span class="o">}</span>
 </code></pre></div></div>
@@ -501,7 +501,7 @@ rbd: map failed: <span class="o">(</span>6<span class="o">)</span> No such devic
 
 <p><strong>大致意思是说features不匹配，可以通过disable features关掉一些特性来让内核支持。这是因为在Ceph高本本进行 map image时，默认ceph在创建image(上文test-block)时，会增加很多features，这些features需要内核支持，centos7上的支持有限，所以，我们需要关掉一些</strong></p>
 
-<p>我们可以用 <code class="highlighter-rouge">rbd info data</code> 看看创建的image目前有哪些features</p>
+<p>我们可以用 <code class="language-plaintext highlighter-rouge">rbd info data</code> 看看创建的image目前有哪些features</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>rbd info test-block
 rbd image <span class="s1">'test-block'</span>:
@@ -589,7 +589,7 @@ ceph fs new test-fs cephfs_metadata cephfs_data
 
 <p><strong>注意：PG的最终结果应当以最接近以上计算公式的2的N次幂(向上取值)；如我的虚拟机环境的每个存储池 PG数 = 6(OSD) * 100 / 5(副本数) / 4（4个存储池）= 30，向上取2的N次幂为32(即，2的5次方=32，最接近30)</strong></p>
 
-<p>3.挂载CephFS有两种方式，一种是使用内核驱动挂载，一种是使用 <code class="highlighter-rouge">ceph-fuse</code>用户空间挂载</p>
+<p>3.挂载CephFS有两种方式，一种是使用内核驱动挂载，一种是使用 <code class="language-plaintext highlighter-rouge">ceph-fuse</code>用户空间挂载</p>
 
 <p>内核挂载需要提取ceph管理key，方式如下：</p>
 
@@ -617,7 +617,7 @@ mount <span class="nt">-t</span> ceph 172.30.33.90:6789:/ /root/test-fs <span cl
 1073741824 bytes <span class="o">(</span>1.1 GB<span class="o">)</span> copied, 2.77355 s, 387 MB/s
 </code></pre></div></div>
 
-<p><code class="highlighter-rouge">ceph-fuse</code>用户空间挂载的方式也比较简单，需要先安装ceph-fuse，同时也需要key</p>
+<p><code class="language-plaintext highlighter-rouge">ceph-fuse</code>用户空间挂载的方式也比较简单，需要先安装ceph-fuse，同时也需要key</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 按照前面的步骤添加ceph源</span>
 <span class="nv">$ </span>vi /etc/yum.repos.d/ceph.repo
@@ -666,7 +666,7 @@ total 2.0G
 <span class="nv">$ </span>ceph-deploy rgw create k8s-node02
 </code></pre></div></div>
 
-<p>2.直接访问<code class="highlighter-rouge">http://ceph-node-ip:7480</code>返回结果如下</p>
+<p>2.直接访问<code class="language-plaintext highlighter-rouge">http://ceph-node-ip:7480</code>返回结果如下</p>
 
 <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;ListAllMyBucketsResult</span> <span class="na">xmlns=</span><span class="s">"http://s3.amazonaws.com/doc/2006-03-01/"</span><span class="nt">&gt;</span>
 <span class="nt">&lt;Owner&gt;</span>

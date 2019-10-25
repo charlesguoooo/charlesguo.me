@@ -114,7 +114,7 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p><code class="highlighter-rouge">docker logs</code>显示了正在运行的容器的日志信息。默认情况下，<code class="highlighter-rouge">docker logs</code>显示命令的输出，就好象在终端中交互运行命令时一样。UNIX和Linux命令通常在运行时打开3个I/O流，成为STDIN,STDOUT和STDERR。STDIN为标准输入，其可以包括来自键盘的输入或来自另一个命令的输入。STDOUT为标准输出，STDERR为错误输出。默认情况下，docker日志显示STDOUT和STDERR。更多关于Linux上的I/O信息，可参考<a href="http://www.tldp.org/LDP/abs/html/io-redirection.html"> Linux Documentation Project article on I/O redirection</a></p>
+    <p><code class="language-plaintext highlighter-rouge">docker logs</code>显示了正在运行的容器的日志信息。默认情况下，<code class="language-plaintext highlighter-rouge">docker logs</code>显示命令的输出，就好象在终端中交互运行命令时一样。UNIX和Linux命令通常在运行时打开3个I/O流，成为STDIN,STDOUT和STDERR。STDIN为标准输入，其可以包括来自键盘的输入或来自另一个命令的输入。STDOUT为标准输出，STDERR为错误输出。默认情况下，docker日志显示STDOUT和STDERR。更多关于Linux上的I/O信息，可参考<a href="http://www.tldp.org/LDP/abs/html/io-redirection.html"> Linux Documentation Project article on I/O redirection</a></p>
 
 <!--more-->
 <p>有时候，如果我们采取了下面的操作，那么可能在终端上使用docker logs就无法获取到日志了：</p>

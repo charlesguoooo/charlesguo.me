@@ -116,7 +116,7 @@
     <article class="article-content markdown-body">
     <h1 id="在compose文件中引用环境变量">在compose文件中引用环境变量</h1>
 
-<p>可以在compose文件中引用运行<code class="highlighter-rouge">docker-compose</code>所在的shell中的环境变量，如：</p>
+<p>可以在compose文件中引用运行<code class="language-plaintext highlighter-rouge">docker-compose</code>所在的shell中的环境变量，如：</p>
 
 <!--more-->
 
@@ -126,7 +126,7 @@
 
 <h1 id="在容器中设置环境变量">在容器中设置环境变量</h1>
 
-<p>可以在compose文件中的<code class="highlighter-rouge">environment</code>关键字下设置容器的环境变量，就像使用<code class="highlighter-rouge">docker run -e VARIABLE=VALUE</code>一样</p>
+<p>可以在compose文件中的<code class="language-plaintext highlighter-rouge">environment</code>关键字下设置容器的环境变量，就像使用<code class="language-plaintext highlighter-rouge">docker run -e VARIABLE=VALUE</code>一样</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   environment:
@@ -135,7 +135,7 @@
 
 <h1 id="将环境变量传递到容器">将环境变量传递到容器</h1>
 
-<p>可以在compose文件中的<code class="highlighter-rouge">environment</code>关键字下定义一个环境变量而不是直接赋值，就像是<code class="highlighter-rouge">docker run -e VARIABLE</code></p>
+<p>可以在compose文件中的<code class="language-plaintext highlighter-rouge">environment</code>关键字下定义一个环境变量而不是直接赋值，就像是<code class="language-plaintext highlighter-rouge">docker run -e VARIABLE</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   environment:
@@ -144,7 +144,7 @@
 
 <h1 id="env_file配置选项">env_file配置选项</h1>
 
-<p>可以使用compose文件中的<code class="highlighter-rouge">env_file</code>选项从一个外部文件传递多个环境变量到容器中，就像<code class="highlighter-rouge">docker run --env-file=FILE</code></p>
+<p>可以使用compose文件中的<code class="language-plaintext highlighter-rouge">env_file</code>选项从一个外部文件传递多个环境变量到容器中，就像<code class="language-plaintext highlighter-rouge">docker run --env-file=FILE</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   env_file:
@@ -153,7 +153,7 @@
 
 <h1 id="使用docker-compose-run设置环境变量">使用docker-compose run设置环境变量</h1>
 
-<p>就像<code class="highlighter-rouge">docker run -e</code>,可以使用<code class="highlighter-rouge">docker-compose run -e</code>为一次性容器设置环境变量</p>
+<p>就像<code class="language-plaintext highlighter-rouge">docker run -e</code>,可以使用<code class="language-plaintext highlighter-rouge">docker-compose run -e</code>为一次性容器设置环境变量</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose run <span class="nt">-e</span> <span class="nv">DEBUG</span><span class="o">=</span>1 web python console.py
 </code></pre></div></div>
@@ -164,7 +164,7 @@
 
 <h1 id="env文件">.env文件</h1>
 
-<p>可以在环境文件<code class="highlighter-rouge">.env</code>设置默认的环境变量，这些环境变量可以在compose文件中调用</p>
+<p>可以在环境文件<code class="language-plaintext highlighter-rouge">.env</code>设置默认的环境变量，这些环境变量可以在compose文件中调用</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> .env
 <span class="nv">TAG</span><span class="o">=</span>v1.5
 
@@ -175,7 +175,7 @@ services:
     image: <span class="s2">"webapp:</span><span class="k">${</span><span class="nv">TAG</span><span class="k">}</span><span class="s2">"</span>
 </code></pre></div></div>
 
-<p>当执行<code class="highlighter-rouge">docker-compose up</code>命令时，上面定义的web服务将使用webapp:v1.5镜像，可以使用config命令来打印出来：</p>
+<p>当执行<code class="language-plaintext highlighter-rouge">docker-compose up</code>命令时，上面定义的web服务将使用webapp:v1.5镜像，可以使用config命令来打印出来：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker-compose config
 version: <span class="s1">'2.0'</span>
 services:
@@ -183,7 +183,7 @@ services:
     image: <span class="s1">'webapp:v1.5'</span>
 </code></pre></div></div>
 
-<p>在shell中的环境变量将比定义在<code class="highlighter-rouge">.env</code>文件中的环境变量优先。如果在shell中设置一个不同的TAG，镜像将优先使用shell中的定义，而不是.evn文件中的：</p>
+<p>在shell中的环境变量将比定义在<code class="language-plaintext highlighter-rouge">.env</code>文件中的环境变量优先。如果在shell中设置一个不同的TAG，镜像将优先使用shell中的定义，而不是.evn文件中的：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">export </span><span class="nv">TAG</span><span class="o">=</span>v2.0
 <span class="nv">$ </span>docker-compose config
 version: <span class="s1">'2.0'</span>
@@ -194,7 +194,7 @@ services:
 
 <h1 id="使用环境变量来配置compose">使用环境变量来配置compose</h1>
 
-<p>某些环境变量可用来配置以改变<code class="highlighter-rouge">docker compose</code>的命令行特性，以<code class="highlighter-rouge">COMPOSE_</code>或<code class="highlighter-rouge">DOCKER_</code>开头，详细信息参考<a href="https://docs.docker.com/compose/reference/envvars/">CLI Environment Variables</a></p>
+<p>某些环境变量可用来配置以改变<code class="language-plaintext highlighter-rouge">docker compose</code>的命令行特性，以<code class="language-plaintext highlighter-rouge">COMPOSE_</code>或<code class="language-plaintext highlighter-rouge">DOCKER_</code>开头，详细信息参考<a href="https://docs.docker.com/compose/reference/envvars/">CLI Environment Variables</a></p>
 
     </article>
     <div class="share">

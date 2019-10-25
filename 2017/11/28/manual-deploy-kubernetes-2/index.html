@@ -200,9 +200,9 @@
 
 <p><img src="/images/posts/fabio-consul-registrator.png" alt="fabio-consul-registrator" /></p>
 
-<p>首先我们需要部署一套<code class="highlighter-rouge">consul server cluster</code>，具体部署过程，这里就不再演示了，请参考<a href="https://github.com/kaizamm/consul/blob/master/consul%2Bdocker%2Bregistrator.md">Consul 集群搭建</a></p>
+<p>首先我们需要部署一套<code class="language-plaintext highlighter-rouge">consul server cluster</code>，具体部署过程，这里就不再演示了，请参考<a href="https://github.com/kaizamm/consul/blob/master/consul%2Bdocker%2Bregistrator.md">Consul 集群搭建</a></p>
 
-<p>然后，我们所有的节点都需要包含在<code class="highlighter-rouge">calico-network</code>范围之内，calico网络部署请参考<a href="https://kevinguo.me/2017/09/22/manual-deploy-kubernetes/">第一章</a>,将所有fabio所在的节点配置为noscheduler</p>
+<p>然后，我们所有的节点都需要包含在<code class="language-plaintext highlighter-rouge">calico-network</code>范围之内，calico网络部署请参考<a href="https://kevinguo.me/2017/09/22/manual-deploy-kubernetes/">第一章</a>,将所有fabio所在的节点配置为noscheduler</p>
 
 <p>1.consul client 部署</p>
 
@@ -307,7 +307,7 @@
 
 </code></pre></div></div>
 
-<p>至此，我们的fabio+consul+registrator就算是部署完成了，那么我们怎么使用呢，这里，我们以<code class="highlighter-rouge">kubernetes-dashboard</code>为例</p>
+<p>至此，我们的fabio+consul+registrator就算是部署完成了，那么我们怎么使用呢，这里，我们以<code class="language-plaintext highlighter-rouge">kubernetes-dashboard</code>为例</p>
 
 <p><strong>kubernetes-dashboard.yaml</strong></p>
 

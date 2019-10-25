@@ -160,12 +160,12 @@
   </tbody>
 </table>
 
-<p>例如：指定一个 <code class="highlighter-rouge">--log-opt tag="{ { .ImageName } }/{ { .Name } }/{ { .ID } }"</code>,让其输出到syslog，那么最终他输出的内容如下</p>
+<p>例如：指定一个 <code class="language-plaintext highlighter-rouge">--log-opt tag="{ { .ImageName } }/{ { .Name } }/{ { .ID } }"</code>,让其输出到syslog，那么最终他输出的内容如下</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Aug  7 18:33:19 HOSTNAME docker/hello-world/foobar/5790672ab6a0[9103]: Hello from Docker
 </code></pre></div></div>
 
-<p>在启动时，系统会在<code class="highlighter-rouge">tag</code>中设置<code class="highlighter-rouge">container_name</code> 字段和<code class="highlighter-rouge">{ { .name } }</code>字段，如果你使用<code class="highlighter-rouge">docker rename</code>重命名容器，新名称不会反映在日志消息中，这些消息会继续使用原来的容器名。</p>
+<p>在启动时，系统会在<code class="language-plaintext highlighter-rouge">tag</code>中设置<code class="language-plaintext highlighter-rouge">container_name</code> 字段和<code class="language-plaintext highlighter-rouge">{ { .name } }</code>字段，如果你使用<code class="language-plaintext highlighter-rouge">docker rename</code>重命名容器，新名称不会反映在日志消息中，这些消息会继续使用原来的容器名。</p>
 
 <p>更高级的用法，可以去参考<a href="https://golang.org/pkg/text/template/">go templates</a>和<a href="https://github.com/docker/docker/blob/master/daemon/logger/context.go">container’s logging context</a></p>
 

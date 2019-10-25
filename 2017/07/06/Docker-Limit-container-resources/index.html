@@ -114,7 +114,7 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>默认情况下，容器没有资源约束，可以使用与主机的内核调度程序允许的的资源一样多的资源。docker提供了在运行<code class="highlighter-rouge">docker run</code>指定选项来控制容器内存，cpu或IO的方法。这部分提供了有关何时应该设置这类限制以及设置这些限制可能有什么影响的详细信息。</p>
+    <p>默认情况下，容器没有资源约束，可以使用与主机的内核调度程序允许的的资源一样多的资源。docker提供了在运行<code class="language-plaintext highlighter-rouge">docker run</code>指定选项来控制容器内存，cpu或IO的方法。这部分提供了有关何时应该设置这类限制以及设置这些限制可能有什么影响的详细信息。</p>
 
 <!--more-->
 <h1 id="memory">Memory</h1>
@@ -139,11 +139,11 @@
     </tr>
     <tr>
       <td style="text-align: left">–memory-swappiness</td>
-      <td style="text-align: left">默认情况下，主机内核可以交换容器使用的匿名页面的百分比，可以在0-100之间设置<code class="highlighter-rouge">--memory-swappiness</code>的百分比，可参考<a href="https://docs.docker.com/engine/admin/resource_constraints/#memory-swappiness-details">–memory-swappiness details</a></td>
+      <td style="text-align: left">默认情况下，主机内核可以交换容器使用的匿名页面的百分比，可以在0-100之间设置<code class="language-plaintext highlighter-rouge">--memory-swappiness</code>的百分比，可参考<a href="https://docs.docker.com/engine/admin/resource_constraints/#memory-swappiness-details">–memory-swappiness details</a></td>
     </tr>
     <tr>
       <td style="text-align: left">–memory-reservation</td>
-      <td style="text-align: left">允许你指定一个小于<code class="highlighter-rouge">--memory</code>的软限制，当docker在主机上检测到争用或低内存时激活该限制。如果使用<code class="highlighter-rouge">--memory-reservation</code>，则必须将其设置为低于<code class="highlighter-rouge">--memory</code>，以使其优先。因为它是一个软限制，不保证容器不会超过限制。</td>
+      <td style="text-align: left">允许你指定一个小于<code class="language-plaintext highlighter-rouge">--memory</code>的软限制，当docker在主机上检测到争用或低内存时激活该限制。如果使用<code class="language-plaintext highlighter-rouge">--memory-reservation</code>，则必须将其设置为低于<code class="language-plaintext highlighter-rouge">--memory</code>，以使其优先。因为它是一个软限制，不保证容器不会超过限制。</td>
     </tr>
     <tr>
       <td style="text-align: left">–kernel-memory</td>
@@ -151,7 +151,7 @@
     </tr>
     <tr>
       <td style="text-align: left">–oom-kill-disable</td>
-      <td style="text-align: left">默认情况下，如果发生内存不足(OOM)错误，内核会杀死容器中的进程。我们可以使用<code class="highlighter-rouge">--oom-kill-disable</code>选项来改变设置，如果你设置了<code class="highlighter-rouge">-m/--memory</code>选项，那么容器会一直耗尽到<code class="highlighter-rouge">-m</code>限制的内存大小。而如果你没有设定<code class="highlighter-rouge">-m</code>，主机会尽可能的耗尽内存，内核可能需要杀死主机系统的进程以释放内存。</td>
+      <td style="text-align: left">默认情况下，如果发生内存不足(OOM)错误，内核会杀死容器中的进程。我们可以使用<code class="language-plaintext highlighter-rouge">--oom-kill-disable</code>选项来改变设置，如果你设置了<code class="language-plaintext highlighter-rouge">-m/--memory</code>选项，那么容器会一直耗尽到<code class="language-plaintext highlighter-rouge">-m</code>限制的内存大小。而如果你没有设定<code class="language-plaintext highlighter-rouge">-m</code>，主机会尽可能的耗尽内存，内核可能需要杀死主机系统的进程以释放内存。</td>
     </tr>
   </tbody>
 </table>
@@ -160,8 +160,8 @@
 
 <blockquote>
   <ul>
-    <li>如果没有设置<code class="highlighter-rouge">--memory-swap</code>，而设置了<code class="highlighter-rouge">--memory</code>，容器能够使用<code class="highlighter-rouge">--memory</code>值的两倍的swap。例如：<code class="highlighter-rouge">--memory=300m</code>,<code class="highlighter-rouge">--memory-swap</code>没有设置，那么容器能够使用300m内存和600m swap。</li>
-    <li>如果<code class="highlighter-rouge">--memory</code>和<code class="highlighter-rouge">--memory-swap</code>都设置了，<code class="highlighter-rouge">--memory-swap</code>表示能够使用内存和swap的总数，<code class="highlighter-rouge">--memory</code>控制非swap的内存大小。例如：<code class="highlighter-rouge">--memory=300m</code>,<code class="highlighter-rouge">--memory-swap=1g</code>，那么容器能够使用300m内存和700m的swap。</li>
+    <li>如果没有设置<code class="language-plaintext highlighter-rouge">--memory-swap</code>，而设置了<code class="language-plaintext highlighter-rouge">--memory</code>，容器能够使用<code class="language-plaintext highlighter-rouge">--memory</code>值的两倍的swap。例如：<code class="language-plaintext highlighter-rouge">--memory=300m</code>,<code class="language-plaintext highlighter-rouge">--memory-swap</code>没有设置，那么容器能够使用300m内存和600m swap。</li>
+    <li>如果<code class="language-plaintext highlighter-rouge">--memory</code>和<code class="language-plaintext highlighter-rouge">--memory-swap</code>都设置了，<code class="language-plaintext highlighter-rouge">--memory-swap</code>表示能够使用内存和swap的总数，<code class="language-plaintext highlighter-rouge">--memory</code>控制非swap的内存大小。例如：<code class="language-plaintext highlighter-rouge">--memory=300m</code>,<code class="language-plaintext highlighter-rouge">--memory-swap=1g</code>，那么容器能够使用300m内存和700m的swap。</li>
     <li>如果设置为-1(默认)，表示容器可以无限使用swap</li>
   </ul>
 </blockquote>
@@ -172,7 +172,7 @@
   <ul>
     <li>如果值为0，关闭匿名页面交换</li>
     <li>值100，将所有匿名页面设置为可交换</li>
-    <li>默认情况下，如果不设置<code class="highlighter-rouge">--memory-swappiness</code>，容器将继承主机计算机的值</li>
+    <li>默认情况下，如果不设置<code class="language-plaintext highlighter-rouge">--memory-swappiness</code>，容器将继承主机计算机的值</li>
   </ul>
 </blockquote>
 
@@ -182,10 +182,10 @@
 
 <blockquote>
   <ul>
-    <li>没有限制<code class="highlighter-rouge">--memory</code>，没有限制<code class="highlighter-rouge">--kernel-memory</code>： 这是默认值</li>
-    <li>没有限制<code class="highlighter-rouge">--memory</code>，有限制<code class="highlighter-rouge">--kernel-memory</code>: 当所有的cgroups所需的内存量超过主机实际拥有的内存量时，适合设置为这样子。你可以设置内核内存不超过主机可用内存，容器需要更多内存只能等待了。</li>
-    <li>有限制<code class="highlighter-rouge">--memory</code>，没有限制<code class="highlighter-rouge">--kernel-memory</code>：总内存是限制的，不过内核内存无限制</li>
-    <li>有限制<code class="highlighter-rouge">--memory</code>，有限制<code class="highlighter-rouge">--kernel-memory</code>：用户和内核限制都限制时，对调试内存相关问题会有帮助。如果一个容器用完了这两种内存之中的一种，它不会影响到其他的容器和主机。如果内核内存限制比用户内存低，使用完内核内存后，会导致容器长生OOM错误，反之，则不会。</li>
+    <li>没有限制<code class="language-plaintext highlighter-rouge">--memory</code>，没有限制<code class="language-plaintext highlighter-rouge">--kernel-memory</code>： 这是默认值</li>
+    <li>没有限制<code class="language-plaintext highlighter-rouge">--memory</code>，有限制<code class="language-plaintext highlighter-rouge">--kernel-memory</code>: 当所有的cgroups所需的内存量超过主机实际拥有的内存量时，适合设置为这样子。你可以设置内核内存不超过主机可用内存，容器需要更多内存只能等待了。</li>
+    <li>有限制<code class="language-plaintext highlighter-rouge">--memory</code>，没有限制<code class="language-plaintext highlighter-rouge">--kernel-memory</code>：总内存是限制的，不过内核内存无限制</li>
+    <li>有限制<code class="language-plaintext highlighter-rouge">--memory</code>，有限制<code class="language-plaintext highlighter-rouge">--kernel-memory</code>：用户和内核限制都限制时，对调试内存相关问题会有帮助。如果一个容器用完了这两种内存之中的一种，它不会影响到其他的容器和主机。如果内核内存限制比用户内存低，使用完内核内存后，会导致容器长生OOM错误，反之，则不会。</li>
   </ul>
 </blockquote>
 
@@ -207,11 +207,11 @@
     </tr>
     <tr>
       <td style="text-align: left">–cpu-period</td>
-      <td style="text-align: left">容器的一个逻辑CPU的调度周期。默认值是100000（100ms），当然我们也可以自己设置CPU周期，限制容器CPU用量，通常和<code class="highlighter-rouge">--cpu-quota</code>参数使用</td>
+      <td style="text-align: left">容器的一个逻辑CPU的调度周期。默认值是100000（100ms），当然我们也可以自己设置CPU周期，限制容器CPU用量，通常和<code class="language-plaintext highlighter-rouge">--cpu-quota</code>参数使用</td>
     </tr>
     <tr>
       <td style="text-align: left">–cpu-quota</td>
-      <td style="text-align: left">在由<code class="highlighter-rouge">--cpu-period</code>设置的时间段内，容器可以调度的最大CPU使用量，默认是0，以为着允许容器获得1个CPU的100%的资源量。设置50000限制CPU资源的50%</td>
+      <td style="text-align: left">在由<code class="language-plaintext highlighter-rouge">--cpu-period</code>设置的时间段内，容器可以调度的最大CPU使用量，默认是0，以为着允许容器获得1个CPU的100%的资源量。设置50000限制CPU资源的50%</td>
     </tr>
     <tr>
       <td style="text-align: left">–cpuset-cpus</td>
@@ -234,11 +234,11 @@
   <tbody>
     <tr>
       <td style="text-align: left">blkio-weight</td>
-      <td style="text-align: left">默认情况下，每个容器可以使用相同比例的IO带宽。默认权重是500，要提高或者降低，可以设置<code class="highlighter-rouge">--blkio-weight</code>来设置介于10-1000之间的值，此设置会平等的影响到所有块IO设备</td>
+      <td style="text-align: left">默认情况下，每个容器可以使用相同比例的IO带宽。默认权重是500，要提高或者降低，可以设置<code class="language-plaintext highlighter-rouge">--blkio-weight</code>来设置介于10-1000之间的值，此设置会平等的影响到所有块IO设备</td>
     </tr>
     <tr>
       <td style="text-align: left">blkio-weight-device</td>
-      <td style="text-align: left">与<code class="highlighter-rouge">--blkio-weight</code>相同，但你可以使用<code class="highlighter-rouge">--blkio-weight-device=DEVICE_NAME:WEGITH</code>为每个设备设置权重。</td>
+      <td style="text-align: left">与<code class="language-plaintext highlighter-rouge">--blkio-weight</code>相同，但你可以使用<code class="language-plaintext highlighter-rouge">--blkio-weight-device=DEVICE_NAME:WEGITH</code>为每个设备设置权重。</td>
     </tr>
     <tr>
       <td style="text-align: left">–device-read-bps和–device-write-bps</td>

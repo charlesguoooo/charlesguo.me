@@ -122,7 +122,7 @@
 
 <h2 id="默认的网络模式">默认的网络模式</h2>
 <p>这部分主要介绍了Docker Engine本机提供的默认网络特性，描述了默认创建的网络类型，以及如何创建用户自定义网络，同时还描述了在单个主机或集群上创建网络需要哪些资源。
-当你安装Docker的时候，Docker默认安装了三种网络，你可以使用<code class="highlighter-rouge">docker network ls</code>命令进行查看：</p>
+当你安装Docker的时候，Docker默认安装了三种网络，你可以使用<code class="language-plaintext highlighter-rouge">docker network ls</code>命令进行查看：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network <span class="nb">ls
 
 </span>NETWORK ID          NAME                DRIVER
@@ -131,9 +131,9 @@
 cf03ee007fb4        host                host
 </code></pre></div></div>
 
-<p>当运行容器的时候，可以使用<code class="highlighter-rouge">--network</code>来指定将容器运行在那个网络上</p>
+<p>当运行容器的时候，可以使用<code class="language-plaintext highlighter-rouge">--network</code>来指定将容器运行在那个网络上</p>
 
-<p><strong>bridge</strong>网络模式，表示Docker默认安装的docker0网络，除非你通过<code class="highlighter-rouge">--network</code>进行了指定，否则Docker daemon会将所有容器都连接到docker0网络，你可以使用<code class="highlighter-rouge">ifconfig</code>命令对docker0网络进行查看：</p>
+<p><strong>bridge</strong>网络模式，表示Docker默认安装的docker0网络，除非你通过<code class="language-plaintext highlighter-rouge">--network</code>进行了指定，否则Docker daemon会将所有容器都连接到docker0网络，你可以使用<code class="language-plaintext highlighter-rouge">ifconfig</code>命令对docker0网络进行查看：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ifconfig
 
 docker0   Link encap:Ethernet  HWaddr 02:42:47:bc:3a:eb
@@ -170,7 +170,7 @@ lo        Link encap:Local Loopback
 <p><strong>host</strong>网络模式，在这种模式下，docker没有自己的Network Namespace，而是和主机公用一个Network Namespace，容器不会虚拟出自己的网络卡，配置自己的IP，而是直接使用宿主机的IP和端口</p>
 
 <h2 id="bridge网络的详细信息">bridge网络的详细信息</h2>
-<p>除了默认的<code class="highlighter-rouge">bridge</code>网络外，我们一般不需要和其他的网络进行任何交互，这些默认的网络模式，你不能删除，但是你可以使用<code class="highlighter-rouge">docker network inspect</code>来进行查看。</p>
+<p>除了默认的<code class="language-plaintext highlighter-rouge">bridge</code>网络外，我们一般不需要和其他的网络进行任何交互，这些默认的网络模式，你不能删除，但是你可以使用<code class="language-plaintext highlighter-rouge">docker network inspect</code>来进行查看。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@vultr ~]# docker network inspect bridge
 <span class="o">[</span>
     <span class="o">{</span>
@@ -219,8 +219,8 @@ lo        Link encap:Local Loopback
 <span class="o">]</span>
 
 </code></pre></div></div>
-<p>上面的<code class="highlighter-rouge">docker network inspect</code>命令列出了给定网络上的所有连接的容器和网络资源。
-容器之间默认是使用IP地址进行通信，bridge网络模式不支持服务自动发现，如果你想要在bridge网络模式下容器之间通过容器名进行通信，你需要使用<code class="highlighter-rouge">docker run --link</code>来连接容器。</p>
+<p>上面的<code class="language-plaintext highlighter-rouge">docker network inspect</code>命令列出了给定网络上的所有连接的容器和网络资源。
+容器之间默认是使用IP地址进行通信，bridge网络模式不支持服务自动发现，如果你想要在bridge网络模式下容器之间通过容器名进行通信，你需要使用<code class="language-plaintext highlighter-rouge">docker run --link</code>来连接容器。</p>
 
 <h2 id="用户自定义网络">用户自定义网络</h2>
 <p>为了更好的隔离和操作容器，用户可以创建自己的自定义网络，为此，Docker提供了许多默认的网络驱动，包括<strong>bridge network</strong>,<strong>overlay network</strong>,<strong>MACVLAN network</strong>,你甚至可以自己来编写网络插件来操作自己的网络。</p>
@@ -256,7 +256,7 @@ lo        Link encap:Local Loopback
     <span class="o">}</span>
 <span class="o">]</span>
 </code></pre></div></div>
-<p>当你创建了网络后，你可以使用<code class="highlighter-rouge">docker run  --network=&lt;NETWORK&gt;</code>选项来启动容器</p>
+<p>当你创建了网络后，你可以使用<code class="language-plaintext highlighter-rouge">docker run  --network=&lt;NETWORK&gt;</code>选项来启动容器</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@vultr ~]<span class="nv">$ </span>docker run <span class="nt">--network</span><span class="o">=</span>isolated_nw <span class="nt">-tid</span> <span class="nt">--name</span><span class="o">=</span>container1 busybox
 4d84de8318d4131fcb6d86a29a916d5354111667806fa15f6c5e3f9589766416
 
@@ -302,15 +302,15 @@ lo        Link encap:Local Loopback
 <p><strong>bridge</strong>网络在单个主机上运行比较有用，但是，在大规模网络中，一般使用<strong>overlay</strong>网络模式</p>
 
 <h3 id="the-docker_gwbridge-network">The docker_gwbridge network</h3>
-<p><code class="highlighter-rouge">docker_gwbridge</code>是一个本地的bridge network，一般在如下两种情况下，Docker会自动创建：</p>
+<p><code class="language-plaintext highlighter-rouge">docker_gwbridge</code>是一个本地的bridge network，一般在如下两种情况下，Docker会自动创建：</p>
 <blockquote>
   <ul>
-    <li>初始化或者加入swarm,Docker会创建<code class="highlighter-rouge">docker_gwbridge</code>网络，并使用它在不同主机节点间进行通信</li>
-    <li>当容器的网络都不能提供外部链接时，Docker会将容器链接到<code class="highlighter-rouge">docker_gwbridge</code>网络以及容器的其他网络，以便容器能连接到外部网络或其他swarm节点</li>
+    <li>初始化或者加入swarm,Docker会创建<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>网络，并使用它在不同主机节点间进行通信</li>
+    <li>当容器的网络都不能提供外部链接时，Docker会将容器链接到<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>网络以及容器的其他网络，以便容器能连接到外部网络或其他swarm节点</li>
   </ul>
 </blockquote>
 
-<p>如果你需要自定义配置，你可以提前创建<code class="highlighter-rouge">docker_gwbridge</code>网络，否则Docker会按需创建，下面的例子介绍了，如何创建一个带有自定义选项的<code class="highlighter-rouge">docker_gwbridge</code>网络：</p>
+<p>如果你需要自定义配置，你可以提前创建<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>网络，否则Docker会按需创建，下面的例子介绍了，如何创建一个带有自定义选项的<code class="language-plaintext highlighter-rouge">docker_gwbridge</code>网络：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--subnet</span> 172.30.0.0/16 <span class="se">\</span>
                         <span class="nt">--opt</span> com.docker.network.bridge.name<span class="o">=</span>docker_gwbridge <span class="se">\</span>
                         <span class="nt">--opt</span> com.docker.network.bridge.enable_icc<span class="o">=</span><span class="nb">false</span> <span class="se">\</span>
@@ -318,11 +318,11 @@ lo        Link encap:Local Loopback
 </code></pre></div></div>
 
 <h3 id="an-overlay-network-with-docker-engine-swarm-mode-without-key-value-store">An overlay network with Docker Engine swarm mode without key-value store</h3>
-<p>你可以在没有外部key-value存储的情况下，在swarm的管理节点上创建<code class="highlighter-rouge">overlay</code>网络，swarm集群使<code class="highlighter-rouge">overlay</code>网络仅对集群中需要服务的节点可用，当你创建了一个在<code class="highlighter-rouge">overlay</code>网络覆盖下的服务时，管理节点会自动扩展<code class="highlighter-rouge">overlay</code>到运行该服务的节点上。</p>
+<p>你可以在没有外部key-value存储的情况下，在swarm的管理节点上创建<code class="language-plaintext highlighter-rouge">overlay</code>网络，swarm集群使<code class="language-plaintext highlighter-rouge">overlay</code>网络仅对集群中需要服务的节点可用，当你创建了一个在<code class="language-plaintext highlighter-rouge">overlay</code>网络覆盖下的服务时，管理节点会自动扩展<code class="language-plaintext highlighter-rouge">overlay</code>到运行该服务的节点上。</p>
 
-<p>想了解更多有关<code class="highlighter-rouge">Docker swarm</code>的信息，可参考<a href="https://docs.docker.com/engine/swarm/">Swarm mode overview</a></p>
+<p>想了解更多有关<code class="language-plaintext highlighter-rouge">Docker swarm</code>的信息，可参考<a href="https://docs.docker.com/engine/swarm/">Swarm mode overview</a></p>
 
-<p>下面的例子介绍了如何创建<code class="highlighter-rouge">overlay</code>网络，并将其用于swarm集群中的服务节点：</p>
+<p>下面的例子介绍了如何创建<code class="language-plaintext highlighter-rouge">overlay</code>网络，并将其用于swarm集群中的服务节点：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># Create an overlay network `my-multi-host-network`.</span>
 <span class="nv">$ </span>docker network create <span class="se">\</span>
   <span class="nt">--driver</span> overlay <span class="se">\</span>
@@ -337,10 +337,10 @@ lo        Link encap:Local Loopback
 
 716thylsndqma81j6kkkb5aus
 </code></pre></div></div>
-<p><code class="highlighter-rouge">overlay</code>网络不能应用于不属于swarm集群服务的容器，更多信息可参考<a href="https://docs.docker.com/engine/userguide/networking/overlay-security-model/">Docker swarm mode overlay network security model</a></p>
+<p><code class="language-plaintext highlighter-rouge">overlay</code>网络不能应用于不属于swarm集群服务的容器，更多信息可参考<a href="https://docs.docker.com/engine/userguide/networking/overlay-security-model/">Docker swarm mode overlay network security model</a></p>
 
 <h3 id="an-overlay-network-with-an-external-key-value-store">An overlay network with an external key-value store</h3>
-<p>如果你没有使用swarm，那么<code class="highlighter-rouge">overlay</code>网络可能会需要一个<code class="highlighter-rouge">key-value</code>的存储服务。支持以<code class="highlighter-rouge">key-value</code>方式存储的服务包括<code class="highlighter-rouge">Cousul</code>,<code class="highlighter-rouge">Etcd</code>,<code class="highlighter-rouge">ZooKeeper</code>…所以在此之前，你先要创建和配置你选择的<code class="highlighter-rouge">key-value</code>store，保证docker host和key-value store能够互相通信。</p>
+<p>如果你没有使用swarm，那么<code class="language-plaintext highlighter-rouge">overlay</code>网络可能会需要一个<code class="language-plaintext highlighter-rouge">key-value</code>的存储服务。支持以<code class="language-plaintext highlighter-rouge">key-value</code>方式存储的服务包括<code class="language-plaintext highlighter-rouge">Cousul</code>,<code class="language-plaintext highlighter-rouge">Etcd</code>,<code class="language-plaintext highlighter-rouge">ZooKeeper</code>…所以在此之前，你先要创建和配置你选择的<code class="language-plaintext highlighter-rouge">key-value</code>store，保证docker host和key-value store能够互相通信。</p>
 
 <blockquote>
   <ul>
@@ -378,7 +378,7 @@ lo        Link encap:Local Loopback
 <p>你的key-value store服务如果还需要打开其他端口，可以参考服务供应商提供给你的文档进行操作
 如果你还准备使用加密方式[–opt encrypted]，你还需要打开50[ESP]端口
 一旦你配置了多态机器，你可以使用Docker swarm将他们快速的组成一个包含服务自动发现的集群。
-创建<code class="highlighter-rouge">overlay</code>网络，你可以在每个你需要使用<code class="highlighter-rouge">overlay</code>网络<code class="highlighter-rouge">Docker Engine</code>上配置如下选项：</p>
+创建<code class="language-plaintext highlighter-rouge">overlay</code>网络，你可以在每个你需要使用<code class="language-plaintext highlighter-rouge">overlay</code>网络<code class="language-plaintext highlighter-rouge">Docker Engine</code>上配置如下选项：</p>
 
 <table>
   <thead>
@@ -403,17 +403,17 @@ lo        Link encap:Local Loopback
   </tbody>
 </table>
 
-<p>在docker swarm中的某一台机器上创建<code class="highlighter-rouge">overlay</code>网络：</p>
+<p>在docker swarm中的某一台机器上创建<code class="language-plaintext highlighter-rouge">overlay</code>网络：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--driver</span> overlay my-multi-host-network
 </code></pre></div></div>
 
-<p>创建之后，<code class="highlighter-rouge">overlay</code>网络会覆盖多个主机，网络范围下的容器会与其他网络的主机完全隔离
+<p>创建之后，<code class="language-plaintext highlighter-rouge">overlay</code>网络会覆盖多个主机，网络范围下的容器会与其他网络的主机完全隔离
 <img src="/images/posts/overlay_network.png" alt="overlay_network" />
 然后，在每个host上启动容器的时候记住都要制定network name</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-tid</span> <span class="nt">--network</span><span class="o">=</span>my-multi-host-network busybox
 </code></pre></div></div>
 
-<p>一旦连接，<code class="highlighter-rouge">overlay</code>网络范围内的所有容器都可以互相访问，而不管该容器是在哪个主机上
+<p>一旦连接，<code class="language-plaintext highlighter-rouge">overlay</code>网络范围内的所有容器都可以互相访问，而不管该容器是在哪个主机上
 <img src="/images/posts/overlay-network-final.png" alt="overlay-network-final" /></p>
 
 <p>如果你想自己试试，可以参考<a href="https://docs.docker.com/engine/userguide/networking/get-started-overlay/">Getting started for overlay</a></p>
@@ -422,10 +422,10 @@ lo        Link encap:Local Loopback
 <p>If you like ,you can write your own network driver plugin.网络驱动插件都是以Docker的基础插件为基础,if you like and you can do it ,you can refer <a href="https://docs.docker.com/engine/extend/legacy_plugins/">Extending Docker</a> and <a href="https://docs.docker.com/engine/extend/plugins_network/">writing a network driver plugin</a></p>
 
 <h3 id="docker-内嵌的dns-server">Docker 内嵌的DNS server</h3>
-<p>Docker daemon 运行一个内嵌的DNS服务来为链接到自定义网络的容器提供服务自动发现，来自容器的名称解析首先由内嵌的DNS服务进行解析，如果内置的DNS无法解析，那么就转发给为容器配置的任意外部DNS服务器，在<code class="highlighter-rouge">resolv.conf</code>文件中，可看到<code class="highlighter-rouge">127.0.0.11</code>DNS，更多关于内嵌DNS的信息可参考<a href="https://docs.docker.com/engine/userguide/networking/configure-dns/">embedded DNS server in user-defined</a></p>
+<p>Docker daemon 运行一个内嵌的DNS服务来为链接到自定义网络的容器提供服务自动发现，来自容器的名称解析首先由内嵌的DNS服务进行解析，如果内置的DNS无法解析，那么就转发给为容器配置的任意外部DNS服务器，在<code class="language-plaintext highlighter-rouge">resolv.conf</code>文件中，可看到<code class="language-plaintext highlighter-rouge">127.0.0.11</code>DNS，更多关于内嵌DNS的信息可参考<a href="https://docs.docker.com/engine/userguide/networking/configure-dns/">embedded DNS server in user-defined</a></p>
 
 <h2 id="links">Links</h2>
-<p>在这之前，我们使用<code class="highlighter-rouge">docker link</code>来让容器之间进行通信。通过引入docker network，容器可以通过主机名进行通信，但是，你仍然可以使用<code class="highlighter-rouge">docker link</code>，但是只能在docker0网桥中使用。更多有关信息，可以参考<a href="https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/">Legacy Links</a>和<a href="https://docs.docker.com/engine/userguide/networking/work-with-networks/#linking-containers-in-user-defined-networks">linking containers in user-defined networks</a></p>
+<p>在这之前，我们使用<code class="language-plaintext highlighter-rouge">docker link</code>来让容器之间进行通信。通过引入docker network，容器可以通过主机名进行通信，但是，你仍然可以使用<code class="language-plaintext highlighter-rouge">docker link</code>，但是只能在docker0网桥中使用。更多有关信息，可以参考<a href="https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/">Legacy Links</a>和<a href="https://docs.docker.com/engine/userguide/networking/work-with-networks/#linking-containers-in-user-defined-networks">linking containers in user-defined networks</a></p>
 
     </article>
     <div class="share">

@@ -122,7 +122,7 @@
     <h3 id="前言">前言</h3>
 
 <blockquote>
-  <p>由于公司目前有部分业务跑在docker上，但又还没有上诸如:swarm,kubernetes之类的容器编排工具，但是又想要能对docker主机及容器进行一个简单可视化的管理，筛选来，筛选去，发现无论是:DockerUI、Shipyard、portainer还是Daocloud都不能符合我们的心意，最终决定使用<code class="highlighter-rouge">rancher</code>来进行管理。</p>
+  <p>由于公司目前有部分业务跑在docker上，但又还没有上诸如:swarm,kubernetes之类的容器编排工具，但是又想要能对docker主机及容器进行一个简单可视化的管理，筛选来，筛选去，发现无论是:DockerUI、Shipyard、portainer还是Daocloud都不能符合我们的心意，最终决定使用<code class="language-plaintext highlighter-rouge">rancher</code>来进行管理。</p>
 </blockquote>
 
 <!--more-->
@@ -135,7 +135,7 @@
 
 <h3 id="环境准备">环境准备</h3>
 
-<p>所有系统均为<code class="highlighter-rouge">CentOS 7.2</code></p>
+<p>所有系统均为<code class="language-plaintext highlighter-rouge">CentOS 7.2</code></p>
 
 <table>
   <thead>
@@ -217,7 +217,7 @@
 
 <h5 id="ecternal-mysql-server">Ecternal mySQL Server</h5>
 
-<p>使用如下命令，创建<code class="highlighter-rouge">cattle</code>数据库和<code class="highlighter-rouge">cattle</code>用户</p>
+<p>使用如下命令，创建<code class="language-plaintext highlighter-rouge">cattle</code>数据库和<code class="language-plaintext highlighter-rouge">cattle</code>用户</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CREATE DATABASE IF NOT EXISTS cattle COLLATE <span class="o">=</span> <span class="s1">'utf8_general_ci'</span> CHARACTER SET <span class="o">=</span> <span class="s1">'utf8'</span><span class="p">;</span>
 GRANT ALL ON cattle.<span class="k">*</span> TO <span class="s1">'cattle'</span>@<span class="s1">'%'</span> IDENTIFIED BY <span class="s1">'cattle'</span><span class="p">;</span>
@@ -234,7 +234,7 @@ GRANT ALL ON cattle.<span class="k">*</span> TO <span class="s1">'cattle'</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>注意：</strong> 如果你改变了<code class="highlighter-rouge">-p 8080:8080</code>端口，则需要额外添加一个参数<code class="highlighter-rouge">--addvertise-http-port &lt;host_port&gt;</code></p>
+  <p><strong>注意：</strong> 如果你改变了<code class="language-plaintext highlighter-rouge">-p 8080:8080</code>端口，则需要额外添加一个参数<code class="language-plaintext highlighter-rouge">--addvertise-http-port &lt;host_port&gt;</code></p>
 </blockquote>
 
 <h5 id="nginx-lb">Nginx LB</h5>

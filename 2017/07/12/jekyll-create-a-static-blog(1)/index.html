@@ -127,7 +127,7 @@
 
 <h3 id="整体思路">整体思路</h3>
 
-<p>我们都知道通过jekyll搭建博客最终都是将通过<code class="highlighter-rouge">jekyll build</code>生成的<code class="highlighter-rouge">_site</code>下的静态文件发布出去，那么我们是不是可以直接采用 <code class="highlighter-rouge">nginx</code> + <code class="highlighter-rouge">静态文件</code>的方式来发布呢，当然是可以的</p>
+<p>我们都知道通过jekyll搭建博客最终都是将通过<code class="language-plaintext highlighter-rouge">jekyll build</code>生成的<code class="language-plaintext highlighter-rouge">_site</code>下的静态文件发布出去，那么我们是不是可以直接采用 <code class="language-plaintext highlighter-rouge">nginx</code> + <code class="language-plaintext highlighter-rouge">静态文件</code>的方式来发布呢，当然是可以的</p>
 
 <h4 id="准备两个站点仓库">准备两个站点仓库</h4>
 
@@ -136,7 +136,7 @@
   <li>镜像站点Github (触发 travis ，生成静态文件)</li>
 </ul>
 
-<p>我们只需要将 Travis CI生成的静态文件推送到 主站点Github，博客通过 docker 化部署，采用 <code class="highlighter-rouge">nginx</code> + <code class="highlighter-rouge">静态文件</code> 方式；每次容器启动后都要从主站点Github pull 最新的静态文件，流程如下</p>
+<p>我们只需要将 Travis CI生成的静态文件推送到 主站点Github，博客通过 docker 化部署，采用 <code class="language-plaintext highlighter-rouge">nginx</code> + <code class="language-plaintext highlighter-rouge">静态文件</code> 方式；每次容器启动后都要从主站点Github pull 最新的静态文件，流程如下</p>
 
 <ul>
   <li>本地提交博客 Markdown 文件到镜像站点Github</li>
@@ -150,7 +150,7 @@
 
 <h4 id="构建所需docker镜像">构建所需docker镜像</h4>
 
-<p>既然博客是通过 docker 化部署，采用<code class="highlighter-rouge">nginx</code> + <code class="highlighter-rouge">静态文件</code> 的方式发布，那么我们第一步就是要构建我们博客所需的镜像，<code class="highlighter-rouge">Dockerfile</code> 内容如下</p>
+<p>既然博客是通过 docker 化部署，采用<code class="language-plaintext highlighter-rouge">nginx</code> + <code class="language-plaintext highlighter-rouge">静态文件</code> 的方式发布，那么我们第一步就是要构建我们博客所需的镜像，<code class="language-plaintext highlighter-rouge">Dockerfile</code> 内容如下</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM nginx:1.11.10-alpine
 
@@ -173,7 +173,7 @@ WORKDIR /usr/share/nginx/html
 CMD <span class="o">[</span><span class="s2">"/entrypoint.sh"</span><span class="o">]</span>
 </code></pre></div></div>
 
-<p>容器每次重启的时候都会去主站点Github上拉取最新的静态文件，并且启动 nginx，<code class="highlighter-rouge">entrypoint.sh</code>内容如下</p>
+<p>容器每次重启的时候都会去主站点Github上拉取最新的静态文件，并且启动 nginx，<code class="language-plaintext highlighter-rouge">entrypoint.sh</code>内容如下</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 
@@ -181,7 +181,7 @@ git pull
 nginx <span class="nt">-g</span> <span class="s2">"daemon off;"</span>
 </code></pre></div></div>
 
-<p>最后执行<code class="highlighter-rouge">docker build</code>，生成我们所需的镜像</p>
+<p>最后执行<code class="language-plaintext highlighter-rouge">docker build</code>，生成我们所需的镜像</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker build <span class="nt">-t</span> chinakevinguo_jekyll_kevinguo_me <span class="nb">.</span>
 </code></pre></div></div>
@@ -190,31 +190,31 @@ nginx <span class="nt">-g</span> <span class="s2">"daemon off;"</span>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">--name</span> chinakevinguo_jekyll_kevinguo_me <span class="nt">--restart</span><span class="o">=</span>always <span class="nt">-p</span> 80:80 <span class="nt">-p</span> 443:443 chinakevinguo_jekyll_kevinguo_me
 </code></pre></div></div>
-<p>下一步就是 <code class="highlighter-rouge">静态文件</code> 了</p>
+<p>下一步就是 <code class="language-plaintext highlighter-rouge">静态文件</code> 了</p>
 
 <h4 id="静态文件的自动更新">静态文件的自动更新</h4>
 
-<p>通过上面 <code class="highlighter-rouge">Dockerfile</code> 文件中的内容，你会发现，我是将 <code class="highlighter-rouge">kevinguo.me.git</code>下的内容clone到 <code class="highlighter-rouge">/usr/share/nginx/html</code>，也就是说，我实际上是发布的 <code class="highlighter-rouge">kevinguo.me.git</code> 下的静态文件，那么 <code class="highlighter-rouge">kevinguo.me.git</code> 下面的内容又是怎么来的呢</p>
+<p>通过上面 <code class="language-plaintext highlighter-rouge">Dockerfile</code> 文件中的内容，你会发现，我是将 <code class="language-plaintext highlighter-rouge">kevinguo.me.git</code>下的内容clone到 <code class="language-plaintext highlighter-rouge">/usr/share/nginx/html</code>，也就是说，我实际上是发布的 <code class="language-plaintext highlighter-rouge">kevinguo.me.git</code> 下的静态文件，那么 <code class="language-plaintext highlighter-rouge">kevinguo.me.git</code> 下面的内容又是怎么来的呢</p>
 
-<p>实际上这些文件是 Travis CI 基于镜像站点(chinakevinguo.github.io) 完成 build 后在 <code class="highlighter-rouge">_site</code>目录下生成的镜像文件</p>
+<p>实际上这些文件是 Travis CI 基于镜像站点(chinakevinguo.github.io) 完成 build 后在 <code class="language-plaintext highlighter-rouge">_site</code>目录下生成的镜像文件</p>
 
 <h5 id="travis-配置">Travis 配置</h5>
 
-<p>1.使用 <code class="highlighter-rouge">Github</code> 账号登录 Travis，右上方按钮点击同步项目，下方打开需要继承的项目，最后点击齿轮进入项目配置页面</p>
+<p>1.使用 <code class="language-plaintext highlighter-rouge">Github</code> 账号登录 Travis，右上方按钮点击同步项目，下方打开需要继承的项目，最后点击齿轮进入项目配置页面</p>
 
 <p><img src="/images/posts/travis.png" alt="travis" /></p>
 
-<p>2.打开 <code class="highlighter-rouge">Build only if .travis.yml is present</code></p>
+<p>2.打开 <code class="language-plaintext highlighter-rouge">Build only if .travis.yml is present</code></p>
 
 <p><img src="/images/posts/travis-yml.png" alt="travis-yml" /></p>
 
 <p>3.Travis CI push静态文件到Github 通过 Github的token实现授权配置，准备 Github上的token</p>
 
-<p><strong>注意： 这里的<code class="highlighter-rouge">token</code>，复制之后，最好自己保存好哟，因为只显示一次，如果丢失只能再次生成了</strong></p>
+<p><strong>注意： 这里的<code class="language-plaintext highlighter-rouge">token</code>，复制之后，最好自己保存好哟，因为只显示一次，如果丢失只能再次生成了</strong></p>
 
 <p><img src="/images/posts/github-token.png" alt="github-token.png" /></p>
 
-<p>4.配置Travis CI 部署所需环境变量，<code class="highlighter-rouge">$JEKYLL_GITHUB_TOKEN</code></p>
+<p>4.配置Travis CI 部署所需环境变量，<code class="language-plaintext highlighter-rouge">$JEKYLL_GITHUB_TOKEN</code></p>
 
 <p><img src="/images/posts/travis-token.png" alt="travis-token" /></p>
 
@@ -242,19 +242,19 @@ travis encrypt-file ~/.ssh/id_rsa <span class="nt">--add</span>
 ssh-copy-id root@kevinguo.me
 </code></pre></div></div>
 
-<p>执行完成后会发现<code class="highlighter-rouge">travis</code>网站项目里的环境变量多了两个参数</p>
+<p>执行完成后会发现<code class="language-plaintext highlighter-rouge">travis</code>网站项目里的环境变量多了两个参数</p>
 
 <p><img src="/images/posts/travis-key.png" alt="travis-key" /></p>
 
-<p>并且在<code class="highlighter-rouge">.travis.yml</code>里的 <code class="highlighter-rouge">before_install</code>周期中多了下面2行</p>
+<p>并且在<code class="language-plaintext highlighter-rouge">.travis.yml</code>里的 <code class="language-plaintext highlighter-rouge">before_install</code>周期中多了下面2行</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- openssl aes-256-cbc <span class="nt">-K</span> <span class="nv">$encrypted_3870315c7a22_key</span> <span class="nt">-iv</span> <span class="nv">$encrypted_3870315c7a22_iv</span>
   <span class="nt">-in</span> id_rsa.enc <span class="nt">-out</span> ~<span class="se">\/</span>.ssh/id_rsa <span class="nt">-d</span>
 </code></pre></div></div>
 
-<p>默认生成的命令会在<code class="highlighter-rouge">/</code>前面带转义符<code class="highlighter-rouge">\</code>，我们不需要，手动删除即可</p>
+<p>默认生成的命令会在<code class="language-plaintext highlighter-rouge">/</code>前面带转义符<code class="language-plaintext highlighter-rouge">\</code>，我们不需要，手动删除即可</p>
 
-<p>6.进一步修改 <code class="highlighter-rouge">.travis.yml</code> 文件，内容如下</p>
+<p>6.进一步修改 <code class="language-plaintext highlighter-rouge">.travis.yml</code> 文件，内容如下</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>language: ruby
 rvm:
@@ -288,9 +288,9 @@ branches:
   ssh_known_hosts: host.kevinguo.me
 </code></pre></div></div>
 
-<p>7.修改镜像站点下的其他内容，比如<code class="highlighter-rouge">_config.yml</code>，将一些内容替换成你自己的,下一篇，我将会介绍 <code class="highlighter-rouge">disqus</code> 和 <code class="highlighter-rouge">cloudflare</code></p>
+<p>7.修改镜像站点下的其他内容，比如<code class="language-plaintext highlighter-rouge">_config.yml</code>，将一些内容替换成你自己的,下一篇，我将会介绍 <code class="language-plaintext highlighter-rouge">disqus</code> 和 <code class="language-plaintext highlighter-rouge">cloudflare</code></p>
 
-<p>8.所有内容都修改好后，<code class="highlighter-rouge">push</code>到 Github上，会发现触发了 Travis CI，并且将生成的静态文件 <code class="highlighter-rouge">push</code> 到了主站点仓库 <code class="highlighter-rouge">kevinguo.me</code>，然后重启了容器</p>
+<p>8.所有内容都修改好后，<code class="language-plaintext highlighter-rouge">push</code>到 Github上，会发现触发了 Travis CI，并且将生成的静态文件 <code class="language-plaintext highlighter-rouge">push</code> 到了主站点仓库 <code class="language-plaintext highlighter-rouge">kevinguo.me</code>，然后重启了容器</p>
 
 <p><img src="/images/posts/travis-done.png" alt="travis-done" /></p>
 

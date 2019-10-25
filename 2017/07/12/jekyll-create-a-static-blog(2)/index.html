@@ -131,17 +131,17 @@
 
 <p>1.在<a href="https://disqus.com/">disqus官网</a>注册一个账号</p>
 
-<p>2.点击<code class="highlighter-rouge">Admin</code>，然后新建站点，在<code class="highlighter-rouge">Website Name</code>处输入你的站点名称，并且根据你的情况选择站点种类</p>
+<p>2.点击<code class="language-plaintext highlighter-rouge">Admin</code>，然后新建站点，在<code class="language-plaintext highlighter-rouge">Website Name</code>处输入你的站点名称，并且根据你的情况选择站点种类</p>
 
 <p><img src="/images/posts/disqus-create.png" alt="disqus-create" /></p>
 
-<p>3.在<code class="highlighter-rouge">Website URL</code>处输入你的站点 url，保存即可</p>
+<p>3.在<code class="language-plaintext highlighter-rouge">Website URL</code>处输入你的站点 url，保存即可</p>
 
 <p><img src="/images/posts/disqus-conf.png" alt="disqus-conf" /></p>
 
-<p>4.修改你的<code class="highlighter-rouge">_config.yml</code>文件中的 <code class="highlighter-rouge">comments_provider</code> 和 <code class="highlighter-rouge">username</code></p>
+<p>4.修改你的<code class="language-plaintext highlighter-rouge">_config.yml</code>文件中的 <code class="language-plaintext highlighter-rouge">comments_provider</code> 和 <code class="language-plaintext highlighter-rouge">username</code></p>
 
-<p><strong>重要： 这里的<code class="highlighter-rouge">username</code>，实际上是 disqus 中的shortname</strong></p>
+<p><strong>重要： 这里的<code class="language-plaintext highlighter-rouge">username</code>，实际上是 disqus 中的shortname</strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>comments_provider: disqus
 disqus:
@@ -156,19 +156,19 @@ disqus:
 
 <h3 id="cloudflare">Cloudflare</h3>
 
-<p>cloudflare 主要是为客户提供网站安全管理，性能优化等，比如 <code class="highlighter-rouge">HTTPS</code>,<code class="highlighter-rouge">CDN</code></p>
+<p>cloudflare 主要是为客户提供网站安全管理，性能优化等，比如 <code class="language-plaintext highlighter-rouge">HTTPS</code>,<code class="language-plaintext highlighter-rouge">CDN</code></p>
 
 <p>1.在<a href="https://sg.godaddy.com/zh/">godaddy</a>上去申请一个域名吧，一年也就 5$</p>
 
 <p>2.在<a href="https://www.cloudflare.com">cloudflare官网</a>注册一个账号</p>
 
-<p>3.点击 <code class="highlighter-rouge">Add Site</code>，添加一个站点，然后 <code class="highlighter-rouge">Begin Scan</code>,大概需要60s</p>
+<p>3.点击 <code class="language-plaintext highlighter-rouge">Add Site</code>，添加一个站点，然后 <code class="language-plaintext highlighter-rouge">Begin Scan</code>,大概需要60s</p>
 
 <p><img src="/images/posts/cloudflare-add.png" alt="cloudflare-add" /></p>
 
 <p>4.扫描完成后，会看到 DNS 记录，自行添加(其中彩色的云朵表示开启SSL，否则就只是DNS)</p>
 
-<p><strong>注意 如果你的A记录启用的SSL，那么所有关于这个A记录的请求都会转发给 Cloudflare，然后通过 Cloudflare再转发到你的服务器，所以这个时候，你通过 <code class="highlighter-rouge">nslookup kevinguo.me</code> 的时候解析出来的地址，并不是你的服务器地址，而是 Cloudflare的地址;如果你有其他服务(诸如VPS,FTP等)使用的是这个地址的话，最好是再添加一条不走SSL的A记录</strong></p>
+<p><strong>注意 如果你的A记录启用的SSL，那么所有关于这个A记录的请求都会转发给 Cloudflare，然后通过 Cloudflare再转发到你的服务器，所以这个时候，你通过 <code class="language-plaintext highlighter-rouge">nslookup kevinguo.me</code> 的时候解析出来的地址，并不是你的服务器地址，而是 Cloudflare的地址;如果你有其他服务(诸如VPS,FTP等)使用的是这个地址的话，最好是再添加一条不走SSL的A记录</strong></p>
 
 <p><img src="/images/posts/cloudflare-dns.png" alt="cloudflare-dns" /></p>
 
@@ -176,24 +176,24 @@ disqus:
 
 <p><img src="/images/posts/godaddy-dns.png" alt="godaddy-dns" /></p>
 
-<p>6.修改完成后，在 Cloudflare点击继续，大概5~30分钟后 <code class="highlighter-rouge">Overview</code> 状态会变成 <code class="highlighter-rouge">Status: Active</code></p>
+<p>6.修改完成后，在 Cloudflare点击继续，大概5~30分钟后 <code class="language-plaintext highlighter-rouge">Overview</code> 状态会变成 <code class="language-plaintext highlighter-rouge">Status: Active</code></p>
 
 <p><img src="/images/posts/cloudflare-status.png" alt="cloudflare-status" /></p>
 
-<p>7.点击 <code class="highlighter-rouge">Crypto</code>来设置SSL 级别</p>
+<p>7.点击 <code class="language-plaintext highlighter-rouge">Crypto</code>来设置SSL 级别</p>
 
 <p><img src="/images/posts/cloudflare-ssl.png" alt="cloudflare-ssl" /></p>
 
-<p>8.点击 <code class="highlighter-rouge">Page Rules</code>来设置域名重定向</p>
+<p>8.点击 <code class="language-plaintext highlighter-rouge">Page Rules</code>来设置域名重定向</p>
 
 <ul>
-  <li>将顶级域名都重定向到 <code class="highlighter-rouge">https://www.kevinguo.me</code></li>
+  <li>将顶级域名都重定向到 <code class="language-plaintext highlighter-rouge">https://www.kevinguo.me</code></li>
 </ul>
 
 <p><img src="/images/posts/cloudflare-forwarding.png" alt="cloudflare-forwarding" /></p>
 
 <ul>
-  <li>添加自动使用 HTTPS，所有访问<code class="highlighter-rouge">http://www.kevinguo.me</code>的请求都使用HTTPS</li>
+  <li>添加自动使用 HTTPS，所有访问<code class="language-plaintext highlighter-rouge">http://www.kevinguo.me</code>的请求都使用HTTPS</li>
 </ul>
 
 <p><img src="/images/posts/cloudflare-always-https.png" alt="cloudflare-always-https" /></p>

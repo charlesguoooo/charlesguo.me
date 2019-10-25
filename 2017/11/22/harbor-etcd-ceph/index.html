@@ -184,7 +184,7 @@ yum-config-manager <span class="nt">--disable</span> docker-ce-test
 <span class="nv">gpgkey</span><span class="o">=</span>https://download.ceph.com/keys/release.asc
 </code></pre></div></div>
 
-<p>2.更新并安装<code class="highlighter-rouge">ceph-deploy</code></p>
+<p>2.更新并安装<code class="language-plaintext highlighter-rouge">ceph-deploy</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo </span>yum update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>yum <span class="nb">install </span>ceph-deploy
 </code></pre></div></div>
@@ -219,7 +219,7 @@ yum-config-manager <span class="nt">--disable</span> docker-ce-test
 
 <h4 id="创建集群">创建集群</h4>
 
-<p>1.由于ceph-deploy工具部署集群前需要创建一些集群配置信息，其保存在<code class="highlighter-rouge">ceph.conf</code>文件中，这个文件将来会被复制到每个节点的 <code class="highlighter-rouge">/etc/ceph/ceph.conf</code></p>
+<p>1.由于ceph-deploy工具部署集群前需要创建一些集群配置信息，其保存在<code class="language-plaintext highlighter-rouge">ceph.conf</code>文件中，这个文件将来会被复制到每个节点的 <code class="language-plaintext highlighter-rouge">/etc/ceph/ceph.conf</code></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 创建集群配置目录</span>
 <span class="nb">mkdir </span>ceph-cluster <span class="o">&amp;&amp;</span> <span class="nb">cd </span>ceph-cluster
@@ -232,7 +232,7 @@ mon_clock_drift_allowed <span class="o">=</span> 5
 mon_clock_drift_warn_backoff <span class="o">=</span> 30
 </code></pre></div></div>
 
-<p>2.创建集群使用 <code class="highlighter-rouge">ceph-deploy</code>工具在部署节点上执行即可</p>
+<p>2.创建集群使用 <code class="language-plaintext highlighter-rouge">ceph-deploy</code>工具在部署节点上执行即可</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 安装ceph</span>
 <span class="nv">$ </span>ceph-deploy <span class="nb">install </span>i711-ustorage-1 i711-ustorage-2 i711-ustorage-3
@@ -291,7 +291,7 @@ mon_clock_drift_warn_backoff <span class="o">=</span> 30
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ceph-deploy admin i711-ustorage-1 i711-ustorage-2 i711-ustorage-3
 </code></pre></div></div>
 
-<p>7.确保你对 <code class="highlighter-rouge">ceph.client.admin.keyring</code>有正确的操作权限，在每个节点上执行</p>
+<p>7.确保你对 <code class="language-plaintext highlighter-rouge">ceph.client.admin.keyring</code>有正确的操作权限，在每个节点上执行</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">sudo chmod</span> +r /etc/ceph/ceph.client.admin.keyring
 </code></pre></div></div>
@@ -346,7 +346,7 @@ rbd map docker3 <span class="nt">--name</span> client.admin <span class="nt">-p<
 <p>5.格式化设备</p>
 
 <blockquote>
-  <p>这里我们为了满足docker overlay2的需求，格式化的时候需要指定<code class="highlighter-rouge">-n ftype=1</code></p>
+  <p>这里我们为了满足docker overlay2的需求，格式化的时候需要指定<code class="language-plaintext highlighter-rouge">-n ftype=1</code></p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkfs.xfs <span class="nt">-n</span> <span class="nv">ftype</span><span class="o">=</span>1 /dev/rbd0
@@ -377,7 +377,7 @@ rbd map docker3 <span class="nt">--name</span> client.admin <span class="nt">-p<
   <p>因为ceph在每次重启的时候都需要去重新map，所以这里，我们需要配置下rbdmap.service</p>
 </blockquote>
 
-<p>7.配置<code class="highlighter-rouge">/etc/ceph/rbdmap</code>(依次在每个节点上操作)</p>
+<p>7.配置<code class="language-plaintext highlighter-rouge">/etc/ceph/rbdmap</code>(依次在每个节点上操作)</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># docker1</span>
 <span class="c"># RbdDevice             Parameters</span>
@@ -561,7 +561,7 @@ systemctl <span class="nb">enable </span>docker
 </code></pre></div></div>
 
 <blockquote>
-  <p>2.由于使用外部mysql，所以删除<code class="highlighter-rouge">mysql</code>service，并且删除掉其他service对mysql的依赖(depends_on)
+  <p>2.由于使用外部mysql，所以删除<code class="language-plaintext highlighter-rouge">mysql</code>service，并且删除掉其他service对mysql的依赖(depends_on)
 <strong>如果你的harbor中已经有数据，那么请先导出mysql的数据，然后导入到你外部的mysql中</strong></p>
 </blockquote>
 
@@ -613,7 +613,7 @@ mysql&gt; <span class="nb">source</span> ./registry.dump
 </code></pre></div></div>
 
 <blockquote>
-  <p>8.修改<code class="highlighter-rouge">common/templates/registry/config.yml</code>，修改<code class="highlighter-rouge">auth.token.realm</code>的地址</p>
+  <p>8.修改<code class="language-plaintext highlighter-rouge">common/templates/registry/config.yml</code>，修改<code class="language-plaintext highlighter-rouge">auth.token.realm</code>的地址</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>auth:
@@ -699,14 +699,14 @@ total 20
 </code></pre></div></div>
 
 <blockquote>
-  <p>4.将<code class="highlighter-rouge">harbor.quark.com.crt</code> 和 <code class="highlighter-rouge">harbor.quark.com.key</code> 复制到你自己的nginx的ssl目录下</p>
+  <p>4.将<code class="language-plaintext highlighter-rouge">harbor.quark.com.crt</code> 和 <code class="language-plaintext highlighter-rouge">harbor.quark.com.key</code> 复制到你自己的nginx的ssl目录下</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>harbor.quark.com.<span class="k">*</span> /data/bkv2.0.1/common/nginx/ssl
 </code></pre></div></div>
 
 <blockquote>
-  <p>5.配置nginx的upstream 和 <code class="highlighter-rouge">.conf</code>文件</p>
+  <p>5.配置nginx的upstream 和 <code class="language-plaintext highlighter-rouge">.conf</code>文件</p>
 </blockquote>
 
 <p><strong>harbor-upstream.conf</strong></p>
@@ -765,14 +765,14 @@ server <span class="o">{</span>
 <p>七.配置docker，让docker可以访问自签名证书的harbor</p>
 
 <blockquote>
-  <p>1.在每个docker主机上创建<code class="highlighter-rouge">/etc/docker/certs.d/harbor.quark.com</code>目录</p>
+  <p>1.在每个docker主机上创建<code class="language-plaintext highlighter-rouge">/etc/docker/certs.d/harbor.quark.com</code>目录</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/docker/certs.d/harbor.quark.com
 </code></pre></div></div>
 
 <blockquote>
-  <p>2.将<code class="highlighter-rouge">harbor.quark.com.crt</code> 复制到每个docker主机上的 <code class="highlighter-rouge">/etc/docker/certs.d/harbor.quark.com/</code>目录下</p>
+  <p>2.将<code class="language-plaintext highlighter-rouge">harbor.quark.com.crt</code> 复制到每个docker主机上的 <code class="language-plaintext highlighter-rouge">/etc/docker/certs.d/harbor.quark.com/</code>目录下</p>
 </blockquote>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="k">for </span>IP <span class="k">in </span><span class="nb">seq</span> <span class="sb">`</span>39 31<span class="sb">`</span><span class="p">;</span><span class="k">do

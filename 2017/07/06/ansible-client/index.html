@@ -132,7 +132,7 @@
 <span class="nv">$ </span><span class="k">for </span>x <span class="k">in</span> <span class="k">${</span><span class="nv">IP</span><span class="p">[*]</span><span class="k">}</span><span class="p">;</span> <span class="k">do </span>ssh-copy-id <span class="nt">-i</span> ~/.ssh/id_rsa.pub <span class="nv">$x</span><span class="p">;</span> <span class="k">done</span>
 </code></pre></div></div>
 
-<p>2.ansible-client 上安装pip,python,setuptools,最好能先<code class="highlighter-rouge">yum update</code>一下</p>
+<p>2.ansible-client 上安装pip,python,setuptools,最好能先<code class="language-plaintext highlighter-rouge">yum update</code>一下</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># setuptools安装</span>
 <span class="nv">$ </span>wget https://bootstrap.pypa.io/get-pip.py
 <span class="nv">$ </span>python get-pip.py

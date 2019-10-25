@@ -120,11 +120,11 @@ compose 非常适用于开发，测试和临时环境以及CI工作流。我们�
 
 <p>使用compose一般有三步：</p>
 
-<p>1.在<code class="highlighter-rouge">Dockerfile</code>中定义好你的应用的运行环境
-2.在<code class="highlighter-rouge">docker-compose.yml</code>中定义组成应用的服务，以便他们可以在一个隔离的环境中一起运行
-3.运行<code class="highlighter-rouge">docker-compose up</code>命令，compose将会启动和运行你定义的应用服务</p>
+<p>1.在<code class="language-plaintext highlighter-rouge">Dockerfile</code>中定义好你的应用的运行环境
+2.在<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>中定义组成应用的服务，以便他们可以在一个隔离的环境中一起运行
+3.运行<code class="language-plaintext highlighter-rouge">docker-compose up</code>命令，compose将会启动和运行你定义的应用服务</p>
 
-<p><code class="highlighter-rouge">docker-compose.yml</code>文件内容如下：</p>
+<p><code class="language-plaintext highlighter-rouge">docker-compose.yml</code>文件内容如下：</p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">version</span><span class="pi">:</span> <span class="s1">'</span><span class="s">2'</span>
 <span class="na">services</span><span class="pi">:</span>
   <span class="na">web</span><span class="pi">:</span>
@@ -178,13 +178,13 @@ compose 非常适用于开发，测试和临时环境以及CI工作流。我们�
   <li>在共享主机或dev主机上，以防止可能使用相同服务名称的不同项目互相干扰</li>
 </ul>
 
-<p>默认的项目名称是项目 目录的基本名称。你可以使用<a href="https://docs.docker.com/compose/reference/overview/"><code class="highlighter-rouge">-p</code>命令行选项</a>或<a href="https://docs.docker.com/compose/reference/envvars/#compose-project-name"><code class="highlighter-rouge">COMPOSE_PROJECT_NAME</code>环境变量</a>设置自定义项目名称。</p>
+<p>默认的项目名称是项目 目录的基本名称。你可以使用<a href="https://docs.docker.com/compose/reference/overview/"><code class="language-plaintext highlighter-rouge">-p</code>命令行选项</a>或<a href="https://docs.docker.com/compose/reference/envvars/#compose-project-name"><code class="language-plaintext highlighter-rouge">COMPOSE_PROJECT_NAME</code>环境变量</a>设置自定义项目名称。</p>
 
 <h2 id="当容器创建时保留volume-数据">当容器创建时，保留volume 数据</h2>
 
-<p>compose 会保留你的服务所使用的所有的vomules。当<code class="highlighter-rouge">docker-compose up</code>运行时，如果找到先前运行的任何容器，都会将volume从旧容器复制到新容器。以确保你在volume中的数据不会丢失。</p>
+<p>compose 会保留你的服务所使用的所有的vomules。当<code class="language-plaintext highlighter-rouge">docker-compose up</code>运行时，如果找到先前运行的任何容器，都会将volume从旧容器复制到新容器。以确保你在volume中的数据不会丢失。</p>
 
-<p>如果是在windows上运行<code class="highlighter-rouge">docker-compose</code>，需要根据特定的环境设定必要的环境变量。</p>
+<p>如果是在windows上运行<code class="language-plaintext highlighter-rouge">docker-compose</code>，需要根据特定的环境设定必要的环境变量。</p>
 
 <h2 id="只重建发生改变的容器">只重建发生改变的容器</h2>
 
@@ -194,7 +194,7 @@ compose 非常适用于开发，测试和临时环境以及CI工作流。我们�
 
 <p>compose 支持在compose file中使用变量。你可以使用这些变量来为不同的环境或不同的用户自定义组合。详情<a href="https://docs.docker.com/compose/compose-file/#variable-substitution">variable substitution</a></p>
 
-<p>你还可以使用<code class="highlighter-rouge">extend</code>字段或通过创建多个compose文件来扩展compose文件。详情参考<a href="https://docs.docker.com/compose/extends/">extends</a></p>
+<p>你还可以使用<code class="language-plaintext highlighter-rouge">extend</code>字段或通过创建多个compose文件来扩展compose文件。详情参考<a href="https://docs.docker.com/compose/extends/">extends</a></p>
 
 <h1 id="compose-使用例子">compose 使用例子</h1>
 
@@ -203,7 +203,7 @@ compose 非常适用于开发，测试和临时环境以及CI工作流。我们�
 <h2 id="开发环境">开发环境</h2>
 
 <p>当你开发软件时，在独立的环境中运行应用程序并与其交互十分重要，compose命令行工具可用于创建环境并与之交互。
-compose 文件提供了一种记录和配置所有应用服务之间依赖(数据库，队列，缓存，web服务API等)的方法。使用compose命令行工具，你可以使用单个命令<code class="highlighter-rouge">docker-compose up</code>为每个依赖关系创建一个或多个容器。</p>
+compose 文件提供了一种记录和配置所有应用服务之间依赖(数据库，队列，缓存，web服务API等)的方法。使用compose命令行工具，你可以使用单个命令<code class="language-plaintext highlighter-rouge">docker-compose up</code>为每个依赖关系创建一个或多个容器。</p>
 
 <p>总之，这些功能为开发人员提供了一个方便的方法来开始项目。compose可以将多页的”开发人员入门指南”减少到单个机器可读的compose文件和几个命令。</p>
 
@@ -224,7 +224,7 @@ compose 文件提供了一种记录和配置所有应用服务之间依赖(数�
 <p>docker compose目前正在积极开发中，如果，你需要获取帮助，想要贡献，或者只是想要和志同道合的人沟通，我们有以下开发的渠道：</p>
 <ul>
   <li>反馈bug或者功能请求，<a href="https://github.com/docker/compose/issues">issue tracker on Github</a></li>
-  <li>和其他人讨论，可以加入IRC上的<code class="highlighter-rouge">docker-compose</code>频道</li>
+  <li>和其他人讨论，可以加入IRC上的<code class="language-plaintext highlighter-rouge">docker-compose</code>频道</li>
   <li>提交贡献，<a href="https://github.com/docker/compose/pulls">pull request on Github</a></li>
 </ul>
 

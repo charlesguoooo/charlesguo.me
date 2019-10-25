@@ -151,7 +151,7 @@
 
 <h4 id="5crush">5.CRUSH</h4>
 
-<p>在传统的文件存储系统中，元数据占着及其重要的位置，每次系统中数据更新时，元数据会首先被更新，然后才是实际数据的写入；在较小的存储系统中(GB/TB)，这种将元数据存储在某个固定几点或者磁盘阵列中的做法还能满足需求；但当数据量增大到PB/ZB时，元数据查找的性能会成为很大的一个瓶颈；而且元数据的统一存放还可能造成单点故障，即当元数据丢失后，实际数据将无法被找回；与传统文件存储系统不同的是，Ceph使用<code class="highlighter-rouge">CRUSH</code>算法来精确的计算数据应该被写入那里/从哪里读取；CRUSH按需计算元数据，而不是存储元数据，从而解决了传统文件存储系统的瓶颈。</p>
+<p>在传统的文件存储系统中，元数据占着及其重要的位置，每次系统中数据更新时，元数据会首先被更新，然后才是实际数据的写入；在较小的存储系统中(GB/TB)，这种将元数据存储在某个固定几点或者磁盘阵列中的做法还能满足需求；但当数据量增大到PB/ZB时，元数据查找的性能会成为很大的一个瓶颈；而且元数据的统一存放还可能造成单点故障，即当元数据丢失后，实际数据将无法被找回；与传统文件存储系统不同的是，Ceph使用<code class="language-plaintext highlighter-rouge">CRUSH</code>算法来精确的计算数据应该被写入那里/从哪里读取；CRUSH按需计算元数据，而不是存储元数据，从而解决了传统文件存储系统的瓶颈。</p>
 
 <h4 id="6crush计算">6.CRUSH计算</h4>
 
@@ -169,7 +169,7 @@ data distribution policy由 placement rules组成。rule决定了每个数据对
 
 <h4 id="8恢复和再平衡">8.恢复和再平衡</h4>
 
-<p>在Ceph集群中，如果OSD挂了，且老师处于<code class="highlighter-rouge">degraded</code>状态，Ceph 都会将其标记为 down 和 out 状态；然后默认情况下 Ceph 会等待 300秒之后进行数据恢复和再平衡，这个值可以通过在配置文件中的 mon osd down out interval 参数来调整</p>
+<p>在Ceph集群中，如果OSD挂了，且老师处于<code class="language-plaintext highlighter-rouge">degraded</code>状态，Ceph 都会将其标记为 down 和 out 状态；然后默认情况下 Ceph 会等待 300秒之后进行数据恢复和再平衡，这个值可以通过在配置文件中的 mon osd down out interval 参数来调整</p>
 
 <h4 id="总结">总结</h4>
 

@@ -125,13 +125,13 @@
 
 <h2 id="理解多compose文件组合">理解多compose文件组合</h2>
 
-<p>默认，compose会读取两个文件，一个<code class="highlighter-rouge">docker-compose.yml</code>和一个可选的<code class="highlighter-rouge">docker-compose.override.yml</code>文件。通常，<code class="highlighter-rouge">docker-compose.yml</code>文件包含你的基本配置，而<code class="highlighter-rouge">docker-compose.override.yml</code>，顾名思义，就是包含的现有服务配置的覆盖内容，或完全新的配置。</p>
+<p>默认，compose会读取两个文件，一个<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>和一个可选的<code class="language-plaintext highlighter-rouge">docker-compose.override.yml</code>文件。通常，<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>文件包含你的基本配置，而<code class="language-plaintext highlighter-rouge">docker-compose.override.yml</code>，顾名思义，就是包含的现有服务配置的覆盖内容，或完全新的配置。</p>
 
 <p>如果一个服务在这两个文件中都有定义，那么compose将使用<a href="https://docs.docker.com/compose/extends/#adding-and-overriding-configuration">添加和覆盖配置</a>中所描述的规则来合并服务。</p>
 
-<p>要使用多个override文件或不同名称的override文件，可以使用<code class="highlighter-rouge">-f</code>选项来指定文件列表。compose根据在命令行指定的顺序来合并它们。</p>
+<p>要使用多个override文件或不同名称的override文件，可以使用<code class="language-plaintext highlighter-rouge">-f</code>选项来指定文件列表。compose根据在命令行指定的顺序来合并它们。</p>
 
-<p>当使用多个配置文件时，必须确保文件中所有的路径都是相对于<code class="highlighter-rouge">base compose</code>文件的(-f 指定的第一个compose文件)。这样要求是因为override文件不需要一个有效的compose文件。override文件可以只包含配置中的一小片段。跟踪一个服务的片段是相对于那个路径的，这是很困难的事，所以一定要保持路径容易理解，所以路径必须定义为相对于base文件的路径。</p>
+<p>当使用多个配置文件时，必须确保文件中所有的路径都是相对于<code class="language-plaintext highlighter-rouge">base compose</code>文件的(-f 指定的第一个compose文件)。这样要求是因为override文件不需要一个有效的compose文件。override文件可以只包含配置中的一小片段。跟踪一个服务的片段是相对于那个路径的，这是很困难的事，所以一定要保持路径容易理解，所以路径必须定义为相对于base文件的路径。</p>
 
 <h2 id="示例">示例</h2>
 <p>在本段介绍两个常见的多compose文件用例：为不同的环境更改compose app和正对compose app运行管理任务。</p>
@@ -174,7 +174,7 @@ cache:
   ports:
     - 6379:6379
 </code></pre></div></div>
-<p>当执行<code class="highlighter-rouge">docker-cmopose up</code>命令时，它会自动读取这个override文件。</p>
+<p>当执行<code class="language-plaintext highlighter-rouge">docker-cmopose up</code>命令时，它会自动读取这个override文件。</p>
 
 <p>现在我们创建另一个用于生产环境的override文件
 <strong>docker-compose.prod.yml</strong></p>
@@ -191,11 +191,11 @@ cache:
 <p>要使用这个生产compose文件部署，运行如下命令：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose <span class="nt">-f</span> docker-compose.yml <span class="nt">-f</span> docker-compose.prod.yml up <span class="nt">-d</span>
 </code></pre></div></div>
-<p>这将会使用<code class="highlighter-rouge">docker-compose.yml</code>和<code class="highlighter-rouge">docker-compose.prod.yml</code>来部署这三个服务</p>
+<p>这将会使用<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>和<code class="language-plaintext highlighter-rouge">docker-compose.prod.yml</code>来部署这三个服务</p>
 
 <h2 id="管理任务">管理任务</h2>
 
-<p>另一个常见的用力是正对在<code class="highlighter-rouge">compose app</code>中的一个或多个服务运行adhoc或管理任务。这个示例演示备份运行中的数据库。</p>
+<p>另一个常见的用力是正对在<code class="language-plaintext highlighter-rouge">compose app</code>中的一个或多个服务运行adhoc或管理任务。这个示例演示备份运行中的数据库。</p>
 
 <p><strong>docker-compose.yml</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
@@ -207,7 +207,7 @@ db:
   image: postgres:latest
 </code></pre></div></div>
 
-<p>在<code class="highlighter-rouge">docker-cmopose.admin.yml</code>中添加一个新的服务来运行数据库导出或备份
+<p>在<code class="language-plaintext highlighter-rouge">docker-cmopose.admin.yml</code>中添加一个新的服务来运行数据库导出或备份
 <strong>docker-compose.admin.yml</strong></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dbadmin:
   build: database_admin/
@@ -215,7 +215,7 @@ db:
     - db
 </code></pre></div></div>
 
-<p>要启动一个正常的环境运行<code class="highlighter-rouge">docker-compose up -d</code>。要备份数据库，运行：</p>
+<p>要启动一个正常的环境运行<code class="language-plaintext highlighter-rouge">docker-compose up -d</code>。要备份数据库，运行：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker-compose <span class="nt">-f</span> docker-compose.yml <span class="nt">-f</span> docker-compose.admin.yml <span class="se">\</span>
     run dbadmin db-backup
 </code></pre></div></div>
@@ -224,12 +224,12 @@ db:
 
 <p>docker compose的extends关键字能在不同的文件甚至是完全不同的项目之间共享通用的配置。如果有几个服务使用同样的通用配置项，则扩展服务非常有用。使用extends你可以在一个地方定义一个通用的服务选项集，然后在任何地方引用。</p>
 <blockquote>
-  <p><strong>注意：</strong> 不能使用extends来共享<code class="highlighter-rouge">links</code>,<code class="highlighter-rouge">volumes_from</code>和<code class="highlighter-rouge">depends_on</code>配置。这是为了避免隐式依赖-始终在本地定义links和volumes_from.这确保了当读取当前文件时服务之间的依赖是清晰可见的。在本地定义这些还确保对引用文件的更改不会导致破坏。</p>
+  <p><strong>注意：</strong> 不能使用extends来共享<code class="language-plaintext highlighter-rouge">links</code>,<code class="language-plaintext highlighter-rouge">volumes_from</code>和<code class="language-plaintext highlighter-rouge">depends_on</code>配置。这是为了避免隐式依赖-始终在本地定义links和volumes_from.这确保了当读取当前文件时服务之间的依赖是清晰可见的。在本地定义这些还确保对引用文件的更改不会导致破坏。</p>
 </blockquote>
 
 <h2 id="理解extends配置">理解extends配置</h2>
 
-<p>当在<code class="highlighter-rouge">docker-compose.yml</code>定义服务时，我们可以像这样声明扩展另一个服务：</p>
+<p>当在<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>定义服务时，我们可以像这样声明扩展另一个服务：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>web:
   extends:
     file: common-services.yml
@@ -277,7 +277,7 @@ db:
 
 <p>当多个服务有一个通用配置时，扩展单个服务非常有用。下面示例是有两个服务的compose app：一个web应用程序和一个queue worker。两个服务使用相同的代码和共享许多配置项</p>
 
-<p>在<code class="highlighter-rouge">common.yml</code>我们定义通用的配置：</p>
+<p>在<code class="language-plaintext highlighter-rouge">common.yml</code>我们定义通用的配置：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>app:
   build: <span class="nb">.</span>
   environment:
@@ -286,7 +286,7 @@ db:
   cpu_shares: 5
 </code></pre></div></div>
 
-<p>在<code class="highlighter-rouge">docker-compose.yml</code>文件我们定义使用通用配置的具体服务：</p>
+<p>在<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>文件我们定义使用通用配置的具体服务：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>webapp:
   extends:
     file: common.yml

@@ -114,17 +114,17 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>在这篇文章中，我将向您展示如何使用<code class="highlighter-rouge">macvlan</code>接口与Docker进行网络连接。’</p>
+    <p>在这篇文章中，我将向您展示如何使用<code class="language-plaintext highlighter-rouge">macvlan</code>接口与Docker进行网络连接。’</p>
 
 <!--more-->
 
-<p>‘使用<code class="highlighter-rouge">macvlan</code>接口为Docker容器提供一个有趣的网络配置，可能(取决于您的环境)地址与标准Linux网桥配置。<code class="highlighter-rouge">macvlan</code>接口，如果你不熟悉它们，它们是一个最近才添加到Linux内核的东西，使用户能够添加多个基于MAC地址的逻辑接口到单个物理接口。这些逻辑接口必须位于与关联的物理接口相同的广播域中，换句话说，Docker容器将在与主机相同的网络上(没有iptables规则，没有Linux网桥)，只是直接连接到主机的网络。</p>
+<p>‘使用<code class="language-plaintext highlighter-rouge">macvlan</code>接口为Docker容器提供一个有趣的网络配置，可能(取决于您的环境)地址与标准Linux网桥配置。<code class="language-plaintext highlighter-rouge">macvlan</code>接口，如果你不熟悉它们，它们是一个最近才添加到Linux内核的东西，使用户能够添加多个基于MAC地址的逻辑接口到单个物理接口。这些逻辑接口必须位于与关联的物理接口相同的广播域中，换句话说，Docker容器将在与主机相同的网络上(没有iptables规则，没有Linux网桥)，只是直接连接到主机的网络。</p>
 
-<p>Docker官网的解释是，<code class="highlighter-rouge">macvlan</code>驱动使Docker用户的使用实例和审查实施硬件化和就绪化，Libnetwork使用户能够完全控制IPv4和IPv6的寻址。Vlan驱动程序就是在此基础上构建，使运营商能够完全控制第二层的vlan tag。</p>
+<p>Docker官网的解释是，<code class="language-plaintext highlighter-rouge">macvlan</code>驱动使Docker用户的使用实例和审查实施硬件化和就绪化，Libnetwork使用户能够完全控制IPv4和IPv6的寻址。Vlan驱动程序就是在此基础上构建，使运营商能够完全控制第二层的vlan tag。</p>
 
-<p><code class="highlighter-rouge">Macvlan</code>是一种新的尝试和真正的网络虚拟化技术。因为不是使用传统的Linux桥来进行隔离，所以<code class="highlighter-rouge">Macvlan</code>在linux上实现起来特别轻量级，它们只是关联到Linux物理接口，以实现网络之间的分离和到物理网络的连接。</p>
+<p><code class="language-plaintext highlighter-rouge">Macvlan</code>是一种新的尝试和真正的网络虚拟化技术。因为不是使用传统的Linux桥来进行隔离，所以<code class="language-plaintext highlighter-rouge">Macvlan</code>在linux上实现起来特别轻量级，它们只是关联到Linux物理接口，以实现网络之间的分离和到物理网络的连接。</p>
 
-<p><code class="highlighter-rouge">Macvlan</code>的各种模式，提供了很多的独有的功能，以及其提供了大量改进和创新的空间。这样有两个好处：</p>
+<p><code class="language-plaintext highlighter-rouge">Macvlan</code>的各种模式，提供了很多的独有的功能，以及其提供了大量改进和创新的空间。这样有两个好处：</p>
 <ul>
   <li>绕开网桥，提高了网络性能</li>
   <li>可移动的部件少，更简单
@@ -135,27 +135,27 @@
 <ul>
   <li>配置了Docker engine 1.12.0+的单台主机</li>
   <li>内核必须是V3.9-3.19和4.0+</li>
-  <li>使用子接口(如eth0.10)的示例都可以替换成eth0或者其他接口，子接口eth0.x是动态创建的，可以和<code class="highlighter-rouge">-o parent</code>指定的接口一起创建，并且驱动程序会创建虚拟接口，其将使本机能够保持连接</li>
+  <li>使用子接口(如eth0.10)的示例都可以替换成eth0或者其他接口，子接口eth0.x是动态创建的，可以和<code class="language-plaintext highlighter-rouge">-o parent</code>指定的接口一起创建，并且驱动程序会创建虚拟接口，其将使本机能够保持连接</li>
 </ul>
 
 <p>通过为物理网卡创建Macvlan子接口，允许一块物理网卡拥有多个独立的MAC地址和IP地址。虚拟出来的子接口将直接暴露在底层物理网络中。从外界看来，就像是把网线分成多股，分别接到了不同的主机上一样</p>
 
 <h2 id="macvlan-桥接模式例子">Macvlan 桥接模式例子</h2>
-<p><code class="highlighter-rouge">Macvlan</code>桥接模式拥有每个容器唯一的MAC地址，用于追踪Docker主机的MAC到端口映射</p>
+<p><code class="language-plaintext highlighter-rouge">Macvlan</code>桥接模式拥有每个容器唯一的MAC地址，用于追踪Docker主机的MAC到端口映射</p>
 <ul>
   <li>Macvlan 网络驱动连接到一个Docker主机的父接口。实例中是一个物理接口如eth0，一个用802.1q VLAN标记的子接口eth0.10(.10表示VLAN10)，或者捆绑两个以太网接口到一个逻辑接口的绑定主机适配器</li>
   <li>一个外部的网关路由</li>
   <li>每个Macvlan bridge 模式的Docker 网络彼此隔离，并且每次只能有一个网络连接到父接口，每个主机的适配器理论上可以连接4094个子接口</li>
   <li>同一子网的任何容器可以与同一网络的任何其他容器进行通信</li>
-  <li><code class="highlighter-rouge">docker network</code>命令同样适用于vlan驱动</li>
-  <li>在<code class="highlighter-rouge">macvlan</code>模式下，如果两个网络/子网之间没有外部路由，那么两个网络上的容器是无法通信的，这一规则同样适用于同一docker网络的多个子网</li>
+  <li><code class="language-plaintext highlighter-rouge">docker network</code>命令同样适用于vlan驱动</li>
+  <li>在<code class="language-plaintext highlighter-rouge">macvlan</code>模式下，如果两个网络/子网之间没有外部路由，那么两个网络上的容器是无法通信的，这一规则同样适用于同一docker网络的多个子网</li>
 </ul>
 
 <p>在下面的例子中，都是在virtualbox中操作的
 Route host： enp0s8:192.168.1.100(Hostonly模式) enp0s3:10.0.2.15(NAT模式，连接外网)
 Docker host：enp0s8:192.168.1.1(Hostonly模式) gateway:192.168.1.100
 <img src="/images/posts/macvlan-docker.png" alt="macvlan-bridge" />
-<strong>Note:</strong> Macvlan bridge模式下的子网必须和其所关联的网卡的网段相同，在这个例子中，使用<code class="highlighter-rouge">-o parent=enp0s8</code>来指定
+<strong>Note:</strong> Macvlan bridge模式下的子网必须和其所关联的网卡的网段相同，在这个例子中，使用<code class="language-plaintext highlighter-rouge">-o parent=enp0s8</code>来指定
 1.配置router host的ip，以及路由转发等功能，使其成为一台路由</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 配置好IP</span>
 <span class="nv">$ </span>ip addr show
@@ -182,7 +182,7 @@ net.ipv4.ip_forward <span class="o">=</span> 1
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ip <span class="nb">link set </span>enp0s8 promisc on
 </code></pre></div></div>
 
-<p>3.在docker host上创建<code class="highlighter-rouge">macvlan</code>网络，然后运行一对容器</p>
+<p>3.在docker host上创建<code class="language-plaintext highlighter-rouge">macvlan</code>网络，然后运行一对容器</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 创建一个macvlan网络</span>
 <span class="nv">$ </span>docker network create <span class="nt">-d</span> macvlan <span class="se">\</span>
       <span class="nt">--subnet</span><span class="o">=</span>192.168.1.0/24 <span class="se">\</span>
@@ -240,7 +240,7 @@ Destination     Gateway         Genmask         Flags Metric Ref    Use Iface
 <p>和所有其他的docker网络驱动程序一样，macvlan的主要目的是为了减少网络资源管理的操作性，所以，当网络收到一个不存在的子接口时，驱动会在创建网络的时候创建vlan 标记接口。</p>
 
 <p>在宿主机重启的时候，驱动程序将在Docker守护程序重启的时候重新创建所有的网络连接，而不需要常常修改复杂的网络配置文件，驱动程序会跟踪，是否创建了最初网络创建时创建的带有VLAN 标记的子接口，并且在重启或者被删除后，会在原有的位置重新创建子接口（而且只会创建子接口）
-如果用户不希望docker使用<code class="highlighter-rouge">-o parent</code>修改子接口，用户只需要传递哪些已经存在了的被作为父接口的接口即可，父接口不会被删除，只会删除没有master的子接口。
+如果用户不希望docker使用<code class="language-plaintext highlighter-rouge">-o parent</code>修改子接口，用户只需要传递哪些已经存在了的被作为父接口的接口即可，父接口不会被删除，只会删除没有master的子接口。
 下面的例子就可以说明：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在docker宿主机上添加两个子接口</span>
 <span class="nv">$ </span>ip <span class="nb">link </span>add <span class="nb">link </span>enp0s8 name enp0s8.200 <span class="nb">type </span>vlan <span class="nb">id </span>200
@@ -356,7 +356,7 @@ traceroute to 192.168.200.2 <span class="o">(</span>192.168.200.2<span class="o"
 
 <p>通过上面的例子，我们发现，通过macvlan基本实现了vlan隔离，如果route host上没有200和201的话，两个vlan之间是完全无法通信的</p>
 
-<p><code class="highlighter-rouge">macvlan</code>先说到这里，更多了解，后续如果有新的内容，再补充吧。</p>
+<p><code class="language-plaintext highlighter-rouge">macvlan</code>先说到这里，更多了解，后续如果有新的内容，再补充吧。</p>
 
     </article>
     <div class="share">

@@ -115,26 +115,26 @@
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
     <h1 id="registry">Registry</h1>
-<p><code class="highlighter-rouge">Registry</code>用来管理您的<code class="highlighter-rouge">IMAGE</code>镜像，常见的有:
-<code class="highlighter-rouge">Private Registry</code>:私有仓库，自己搭建
-<code class="highlighter-rouge">DockerHub</code>：由<code class="highlighter-rouge">Docker</code>维护
-<code class="highlighter-rouge">Docker Trusted Registry</code>：采购
+<p><code class="language-plaintext highlighter-rouge">Registry</code>用来管理您的<code class="language-plaintext highlighter-rouge">IMAGE</code>镜像，常见的有:
+<code class="language-plaintext highlighter-rouge">Private Registry</code>:私有仓库，自己搭建
+<code class="language-plaintext highlighter-rouge">DockerHub</code>：由<code class="language-plaintext highlighter-rouge">Docker</code>维护
+<code class="language-plaintext highlighter-rouge">Docker Trusted Registry</code>：采购
 <!--more--></p>
-<h2 id="今天我们主要介绍如何搭建自己的private-registry">今天我们主要介绍，如何搭建自己的<code class="highlighter-rouge">Private Registry</code></h2>
+<h2 id="今天我们主要介绍如何搭建自己的private-registry">今天我们主要介绍，如何搭建自己的<code class="language-plaintext highlighter-rouge">Private Registry</code></h2>
 <h3 id="why-use-it">Why use it</h3>
 <p>官网列了三条，其实就一句话，能够自己管理自己的IMAGE</p>
 
 <h3 id="storage">Storage</h3>
-<p>默认是存储在本地，所有的数据都作为<code class="highlighter-rouge">Docker volume</code>持久保存在本地主机上，适用于开发和小型部署，还支持其他云存储方式，如S3,Microsoft Azure,OpenStack Swift和Aliyun OSS，如果使用其他的存储方式，用户需要自己编写<a href="https://docs.docker.com/registry/storage-drivers/">Storage API</a>。</p>
+<p>默认是存储在本地，所有的数据都作为<code class="language-plaintext highlighter-rouge">Docker volume</code>持久保存在本地主机上，适用于开发和小型部署，还支持其他云存储方式，如S3,Microsoft Azure,OpenStack Swift和Aliyun OSS，如果使用其他的存储方式，用户需要自己编写<a href="https://docs.docker.com/registry/storage-drivers/">Storage API</a>。</p>
 <h3 id="running-a-domain-registry">Running a domain registry</h3>
-<p>搭建<code class="highlighter-rouge">Private Registry</code>不仅仅是为了自己用，还可能给公司其他的人用，那这个时候就需要使用<code class="highlighter-rouge">TLS</code>来确保Registry的安全，有点类似于Web服务器的<code class="highlighter-rouge">SSL</code></p>
+<p>搭建<code class="language-plaintext highlighter-rouge">Private Registry</code>不仅仅是为了自己用，还可能给公司其他的人用，那这个时候就需要使用<code class="language-plaintext highlighter-rouge">TLS</code>来确保Registry的安全，有点类似于Web服务器的<code class="language-plaintext highlighter-rouge">SSL</code></p>
 <h4 id="纯http的registry">纯HTTP的Registry</h4>
 <h6 id="从官方拉取一个registry">从官方拉取一个Registry</h6>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-d</span> <span class="nt">-p</span> 5000:5000 <span class="nt">--restart</span><span class="o">=</span>always <span class="nt">--name</span> registry <span class="se">\</span>
     <span class="nt">-v</span> <span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>/data:/var/lib/registry <span class="se">\</span>
     registry:2
 </code></pre></div></div>
-<h6 id="修改registry-server以及所有要访问registry-server的client端让其支持http传输默认是https传输">修改<code class="highlighter-rouge">Registry server</code>以及所有要访问<code class="highlighter-rouge">Registry server</code>的<code class="highlighter-rouge">client端</code>，让其支持HTTP传输(默认是HTTPS传输)</h6>
+<h6 id="修改registry-server以及所有要访问registry-server的client端让其支持http传输默认是https传输">修改<code class="language-plaintext highlighter-rouge">Registry server</code>以及所有要访问<code class="language-plaintext highlighter-rouge">Registry server</code>的<code class="language-plaintext highlighter-rouge">client端</code>，让其支持HTTP传输(默认是HTTPS传输)</h6>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">##1.12版</span>
 <span class="c">#Create or modify /etc/docker/daemon.json</span>
 <span class="nv">$ </span><span class="o">{</span> <span class="s2">"insecure-registries"</span>:[<span class="s2">"youripordomain:5000"</span><span class="o">]</span> <span class="o">}</span>
@@ -161,7 +161,7 @@
     <span class="nt">-newkey</span> rsa:2048 <span class="nt">-nodes</span> <span class="nt">-keyout</span> certs/domain.key
     <span class="nt">-x509</span> <span class="nt">-days</span> 365 <span class="nt">-out</span> certs/domain.crt
 </code></pre></div></div>
-<h6 id="将生成的domaincrt文件的内容放入docker客户端系统的ca-bundle文件中使操作系统信任我们的自签名证书或者将domaincrt复制成docker客户端的etcdockercertsdwwwoo3pcom5000cacrt两种方式皆可">将生成的domain.crt文件的内容，放入docker客户端系统的<code class="highlighter-rouge">ca-bundle</code>文件中，使操作系统信任我们的自签名证书，或者将domain.crt复制成docker客户端的/etc/docker/certs.d/www.oo3p.com:5000/ca.crt，两种方式皆可</h6>
+<h6 id="将生成的domaincrt文件的内容放入docker客户端系统的ca-bundle文件中使操作系统信任我们的自签名证书或者将domaincrt复制成docker客户端的etcdockercertsdwwwoo3pcom5000cacrt两种方式皆可">将生成的domain.crt文件的内容，放入docker客户端系统的<code class="language-plaintext highlighter-rouge">ca-bundle</code>文件中，使操作系统信任我们的自签名证书，或者将domain.crt复制成docker客户端的/etc/docker/certs.d/www.oo3p.com:5000/ca.crt，两种方式皆可</h6>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cat</span> ~/certs/domain.crt <span class="o">&gt;&gt;</span>/etc/pki/tls/certs/ca-bundle.crt
 <span class="nv">$ </span>systemctl restart docker
 </code></pre></div></div>
@@ -184,7 +184,7 @@
 </code></pre></div></div>
 
 <h4 id="从lets-encrypt获取证书的registry">从Lets Encrypt获取证书的Registry</h4>
-<p>从认证<code class="highlighter-rouge">CA</code>处获取签名证书，大多数需要付出一定的费用，这里可以使用<code class="highlighter-rouge">Lets Encrypt</code>(被大多数浏览器信任)提供的免费证书，和自签名证书不一样的是，我们不需要将domain.crt文件再复制到我们的docker客户端中了
+<p>从认证<code class="language-plaintext highlighter-rouge">CA</code>处获取签名证书，大多数需要付出一定的费用，这里可以使用<code class="language-plaintext highlighter-rouge">Lets Encrypt</code>(被大多数浏览器信任)提供的免费证书，和自签名证书不一样的是，我们不需要将domain.crt文件再复制到我们的docker客户端中了
 <strong>获取证书所需条件</strong></p>
 <ul>
   <li>Registry server需要有公网IP地址</li>
@@ -394,7 +394,7 @@ storagedriver:
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com:5000
 </code></pre></div></div>
 
-<p>将registry主机上生成的证书<code class="highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>
+<p>将registry主机上生成的证书<code class="language-plaintext highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ ip</span><span class="o">=(</span>192.168.1.1 192.168.1.2 192.168.1.3<span class="o">)</span>
 <span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="k">${</span><span class="nv">ip</span><span class="p">[*]</span><span class="k">}</span><span class="p">;</span>
     <span class="se">\ </span><span class="k">do</span>
@@ -581,7 +581,7 @@ upstream registry <span class="o">{</span>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir</span> <span class="nt">-p</span> /etc/docker/certs.d/registry.quarkfinance.com
 </code></pre></div></div>
 
-<p>将registry主机上生成的证书<code class="highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>
+<p>将registry主机上生成的证书<code class="language-plaintext highlighter-rouge">docker_registry.crt</code>复制到所有要访问docker registry的主机上</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ ip</span><span class="o">=(</span>192.168.1.1 192.168.1.2 192.168.1.3<span class="o">)</span>
 <span class="nv">$ </span><span class="k">for </span>i <span class="k">in</span> <span class="k">${</span><span class="nv">ip</span><span class="p">[*]</span><span class="k">}</span><span class="p">;</span>
     <span class="se">\ </span><span class="k">do</span>

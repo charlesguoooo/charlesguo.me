@@ -192,8 +192,8 @@ kubernetes里所有资源的调度中心</p>
 <h4 id="pause-容器">pause 容器</h4>
 
 <ul>
-  <li>既然pod是一组容器组成，那么如何来判断这个pod的状态呢，是其中一个容器死亡了，就算整个pod死亡了，还是说按照某种N/M的死亡率来算呢？kubernetes里面引入了一个不易死亡又和业务无关的<code class="highlighter-rouge">pause</code>容器，以它的状态来表示整个pod的状态。</li>
-  <li>pod里面的多个容器共享<code class="highlighter-rouge">pause</code>容器里面的网络和volumes。</li>
+  <li>既然pod是一组容器组成，那么如何来判断这个pod的状态呢，是其中一个容器死亡了，就算整个pod死亡了，还是说按照某种N/M的死亡率来算呢？kubernetes里面引入了一个不易死亡又和业务无关的<code class="language-plaintext highlighter-rouge">pause</code>容器，以它的状态来表示整个pod的状态。</li>
+  <li>pod里面的多个容器共享<code class="language-plaintext highlighter-rouge">pause</code>容器里面的网络和volumes。</li>
 </ul>
 
 <h4 id="普通pod和静态pod">普通pod和静态pod</h4>
@@ -206,7 +206,7 @@ kubernetes里所有资源的调度中心</p>
 
 <h4 id="endpoints">endpoints</h4>
 
-<p>kubernetes中，每个pod都有一个属于他的IP。<code class="highlighter-rouge">Pod IP + 需要暴露出来的ContainerPort</code> 就组成了endpoint
+<p>kubernetes中，每个pod都有一个属于他的IP。<code class="language-plaintext highlighter-rouge">Pod IP + 需要暴露出来的ContainerPort</code> 就组成了endpoint
 说到service的endpoint，这里就不得不说下targetPort，targetPort属性用来确定提供该服务的容器所暴露的端口号，如果你不指定targetPort，kubernetes默认使用你提供的port为targetPort</p>
 
 <p>所以他们的关系应该是如下：</p>
@@ -267,26 +267,26 @@ kubernetes里所有资源的调度中心</p>
   <li>Requests 资源允许使用的最小值，最少必须满足这个需求</li>
 </ul>
 
-<p>我们通常将<code class="highlighter-rouge">request</code> 设置为容器平时正常运行时所需的资源，而将<code class="highlighter-rouge">Limits</code>设置为容器峰值负载情况下的最大使用量</p>
+<p>我们通常将<code class="language-plaintext highlighter-rouge">request</code> 设置为容器平时正常运行时所需的资源，而将<code class="language-plaintext highlighter-rouge">Limits</code>设置为容器峰值负载情况下的最大使用量</p>
 
 <h4 id="label-and-label-selector">label and label selector</h4>
 
-<p>label即标签，是Kubernetes系统中另一个核心概念。一个label是一个<code class="highlighter-rouge">key=value</code>的键值对。label可以附加到各种资源对象上，如Node、Pod、RC、Service等，一个资源对象可以附加无数的label，同一个label也可以附加到无数的资源对象上。</p>
+<p>label即标签，是Kubernetes系统中另一个核心概念。一个label是一个<code class="language-plaintext highlighter-rouge">key=value</code>的键值对。label可以附加到各种资源对象上，如Node、Pod、RC、Service等，一个资源对象可以附加无数的label，同一个label也可以附加到无数的资源对象上。</p>
 
-<p>通过指定<code class="highlighter-rouge">label selector</code>来查询和筛选某些拥有label的资源对象，常用到的两种表达式</p>
+<p>通过指定<code class="language-plaintext highlighter-rouge">label selector</code>来查询和筛选某些拥有label的资源对象，常用到的两种表达式</p>
 <ul>
   <li>等式 (key=value)</li>
   <li>集合式 (key in values)</li>
 </ul>
 
-<p><code class="highlighter-rouge">label selector</code>在kubernetes中常用的场景如下：</p>
+<p><code class="language-plaintext highlighter-rouge">label selector</code>在kubernetes中常用的场景如下：</p>
 <ul>
-  <li>kub-controller-manager通过在RC上定义的<code class="highlighter-rouge">label selector</code>来监控并控制POD的数量</li>
-  <li>kube-proxy 通过service上的<code class="highlighter-rouge">label selector</code>来选择对应的pod，自动建立每个service到pod的路由请求，从而实现service的智能负载均衡</li>
+  <li>kub-controller-manager通过在RC上定义的<code class="language-plaintext highlighter-rouge">label selector</code>来监控并控制POD的数量</li>
+  <li>kube-proxy 通过service上的<code class="language-plaintext highlighter-rouge">label selector</code>来选择对应的pod，自动建立每个service到pod的路由请求，从而实现service的智能负载均衡</li>
   <li>通过NodeSelector，将某些pod调度到指定的node上</li>
 </ul>
 
-<p><strong>注意：我们在指定<code class="highlighter-rouge">label selector</code>时，需要和<code class="highlighter-rouge">.spec.template.metadata.labels</code>下的值相同，如果不指定<code class="highlighter-rouge">label selector</code>则默认保持和<code class="highlighter-rouge">.spec.template.metadata.labels</code>的值相同</strong></p>
+<p><strong>注意：我们在指定<code class="language-plaintext highlighter-rouge">label selector</code>时，需要和<code class="language-plaintext highlighter-rouge">.spec.template.metadata.labels</code>下的值相同，如果不指定<code class="language-plaintext highlighter-rouge">label selector</code>则默认保持和<code class="language-plaintext highlighter-rouge">.spec.template.metadata.labels</code>的值相同</strong></p>
 
 <h4 id="init容器">init容器</h4>
 
@@ -369,12 +369,12 @@ kubectl scale rc mysql <span class="nt">--replicas</span><span class="o">=</span
 
 <h3 id="replicaset">ReplicaSet</h3>
 
-<p>ReplicaSet和ReplicationController唯一的区别就是:ReplicaSet支持集合式的<code class="highlighter-rouge">label selector</code>，我们平时很少单独使用<code class="highlighter-rouge">Replica Set</code>，它主要是被<code class="highlighter-rouge">Deployment</code>这个更高层的资源对象使用。</p>
+<p>ReplicaSet和ReplicationController唯一的区别就是:ReplicaSet支持集合式的<code class="language-plaintext highlighter-rouge">label selector</code>，我们平时很少单独使用<code class="language-plaintext highlighter-rouge">Replica Set</code>，它主要是被<code class="language-plaintext highlighter-rouge">Deployment</code>这个更高层的资源对象使用。</p>
 
 <h3 id="deployment">Deployment</h3>
-<p>Deployment在内部使用<code class="highlighter-rouge">Replica Set</code>来实现目的，它管理着<code class="highlighter-rouge">Replica Set</code>，而它管理<code class="highlighter-rouge">Replica Set</code>的主要目的是为了支持版本回滚<code class="highlighter-rouge">Rollback</code></p>
+<p>Deployment在内部使用<code class="language-plaintext highlighter-rouge">Replica Set</code>来实现目的，它管理着<code class="language-plaintext highlighter-rouge">Replica Set</code>，而它管理<code class="language-plaintext highlighter-rouge">Replica Set</code>的主要目的是为了支持版本回滚<code class="language-plaintext highlighter-rouge">Rollback</code></p>
 
-<p>从下面命令所展示出来的命名规则我们不难发现，<code class="highlighter-rouge">Deployment</code>创建的时候创建了<code class="highlighter-rouge">Replica Set</code>，而<code class="highlighter-rouge">Replica Set</code>创建了<code class="highlighter-rouge">Pod</code></p>
+<p>从下面命令所展示出来的命名规则我们不难发现，<code class="language-plaintext highlighter-rouge">Deployment</code>创建的时候创建了<code class="language-plaintext highlighter-rouge">Replica Set</code>，而<code class="language-plaintext highlighter-rouge">Replica Set</code>创建了<code class="language-plaintext highlighter-rouge">Pod</code></p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>kubectl get deployment <span class="nt">-l</span> k8s-app<span class="o">=</span>kube-dns <span class="nt">-n</span> kube-system
 NAME       DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
 kube-dns   2         2         2            2           6d
@@ -389,20 +389,20 @@ kube-dns-1446441763-0th37   3/3       Running   0          6d
 kube-dns-1446441763-1w5gx   3/3       Running   0          6d
 </code></pre></div></div>
 
-<p>稍后，用实验来说明<code class="highlighter-rouge">Deployment</code>在滚动升级中的作用</p>
+<p>稍后，用实验来说明<code class="language-plaintext highlighter-rouge">Deployment</code>在滚动升级中的作用</p>
 
 <h3 id="pod滚动升级">Pod滚动升级</h3>
 
-<p>在说Deployment的滚动升级之前，我们先来看看<code class="highlighter-rouge">ReplicationController</code>的滚动升级</p>
+<p>在说Deployment的滚动升级之前，我们先来看看<code class="language-plaintext highlighter-rouge">ReplicationController</code>的滚动升级</p>
 
-<p><code class="highlighter-rouge">ReplicationController</code>的滚动升级和<code class="highlighter-rouge">Deployment</code>的滚动升级有所不同，命令都不一样，通过执行<code class="highlighter-rouge">kubectl rolling-update</code>来一键完成，该命令创建了一个新的RC，然后自动控制旧的RC中的POD副本数两逐渐减少到0，同时新RC中的POD数量从0逐步增加到目标值，最终实现POD的升级，滚动升级的配置文件必须满足如下三个条件：</p>
+<p><code class="language-plaintext highlighter-rouge">ReplicationController</code>的滚动升级和<code class="language-plaintext highlighter-rouge">Deployment</code>的滚动升级有所不同，命令都不一样，通过执行<code class="language-plaintext highlighter-rouge">kubectl rolling-update</code>来一键完成，该命令创建了一个新的RC，然后自动控制旧的RC中的POD副本数两逐渐减少到0，同时新RC中的POD数量从0逐步增加到目标值，最终实现POD的升级，滚动升级的配置文件必须满足如下三个条件：</p>
 <ul>
-  <li><code class="highlighter-rouge">metadata.name</code>必须和旧RC文件中的不同</li>
-  <li><code class="highlighter-rouge">spec.selector</code>至少有一个与旧RC的不同(<strong>这里有个BUG，具体参考<a href="http://valleylord.github.io/post/201603-kubernetes-roll/">这里</a></strong>)</li>
-  <li><code class="highlighter-rouge">metadata.namespace</code> 命名空间必须的是一样的</li>
+  <li><code class="language-plaintext highlighter-rouge">metadata.name</code>必须和旧RC文件中的不同</li>
+  <li><code class="language-plaintext highlighter-rouge">spec.selector</code>至少有一个与旧RC的不同(<strong>这里有个BUG，具体参考<a href="http://valleylord.github.io/post/201603-kubernetes-roll/">这里</a></strong>)</li>
+  <li><code class="language-plaintext highlighter-rouge">metadata.namespace</code> 命名空间必须的是一样的</li>
 </ul>
 
-<p>下面我们将上面的<code class="highlighter-rouge">myweb</code>进行一下升级，内容如下</p>
+<p>下面我们将上面的<code class="language-plaintext highlighter-rouge">myweb</code>进行一下升级，内容如下</p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">ReplicationController</span>
 <span class="na">metadata</span><span class="pi">:</span>
@@ -603,23 +603,23 @@ Scaling myweb down to 2
 Scaling myweb-v2 up to 4
 </code></pre></div></div>
 
-<p><strong>这说明什么？这说明，以后如果你要用<code class="highlighter-rouge">ReplicationController</code>的时候，至少要给他指定不少于2个的label，否则，你无法用yaml来进行升级，这真的是很蛋疼的一件事。</strong></p>
+<p><strong>这说明什么？这说明，以后如果你要用<code class="language-plaintext highlighter-rouge">ReplicationController</code>的时候，至少要给他指定不少于2个的label，否则，你无法用yaml来进行升级，这真的是很蛋疼的一件事。</strong></p>
 
-<p>当然了，保不齐以后kubernetes会将<code class="highlighter-rouge">ReplicationController</code>抛弃掉，毕竟现在它已经有了更好的<code class="highlighter-rouge">Deployment</code>和<code class="highlighter-rouge">StatefulSet</code>等…</p>
+<p>当然了，保不齐以后kubernetes会将<code class="language-plaintext highlighter-rouge">ReplicationController</code>抛弃掉，毕竟现在它已经有了更好的<code class="language-plaintext highlighter-rouge">Deployment</code>和<code class="language-plaintext highlighter-rouge">StatefulSet</code>等…</p>
 
 <h3 id="horizontal-pod-autoscaler-hpa">Horizontal Pod Autoscaler (HPA)</h3>
 
-<p>前面我们说到能用<code class="highlighter-rouge">kubectl scale</code>命令来手动实现 Pod 的扩容和缩容，这未免也太 low 了吧，我们既然用了kubernetes，那就是因为他的智能化，自动化。所以这里我们要讲讲kubernetes的智能扩容 HPA。</p>
+<p>前面我们说到能用<code class="language-plaintext highlighter-rouge">kubectl scale</code>命令来手动实现 Pod 的扩容和缩容，这未免也太 low 了吧，我们既然用了kubernetes，那就是因为他的智能化，自动化。所以这里我们要讲讲kubernetes的智能扩容 HPA。</p>
 
-<p>HPA 基于获取到的metrics value(CPU utilization,custom metrics),对RC,Deployment管理的pods进行自动伸缩。HPA是kubernetes <code class="highlighter-rouge">autoscaling</code> API组中的一个API资源，当前的stable版本只支持CPU，alpha版本中红，已经开始支持memory和custom metrics。</p>
+<p>HPA 基于获取到的metrics value(CPU utilization,custom metrics),对RC,Deployment管理的pods进行自动伸缩。HPA是kubernetes <code class="language-plaintext highlighter-rouge">autoscaling</code> API组中的一个API资源，当前的stable版本只支持CPU，alpha版本中红，已经开始支持memory和custom metrics。</p>
 
 <p>HPA 以kubernetes API resource 和一个controller来实现，resource决定了controller的行为，而controller控制着pods的数量。</p>
 
 <blockquote>
-  <p>截至到kubernetes 1.6 ，Release特性中仅支持CPU utilization这一 <code class="highlighter-rouge">resource metrics</code>, 对<code class="highlighter-rouge">custom metrics</code>的支持目前仍在alpha阶段。</p>
+  <p>截至到kubernetes 1.6 ，Release特性中仅支持CPU utilization这一 <code class="language-plaintext highlighter-rouge">resource metrics</code>, 对<code class="language-plaintext highlighter-rouge">custom metrics</code>的支持目前仍在alpha阶段。</p>
 </blockquote>
 
-<p>HPA controller 周期性的调整对应rc，deployment中的pods数量，使得获取到的<code class="highlighter-rouge">metrics value</code>能匹配用户指定的<code class="highlighter-rouge">target utilization</code>。这个周期默认为30s，可以通过<code class="highlighter-rouge">kube-controller-manager</code>的flag <code class="highlighter-rouge">--horizontal-pod-autoscaler-sync-period</code>进行设置。</p>
+<p>HPA controller 周期性的调整对应rc，deployment中的pods数量，使得获取到的<code class="language-plaintext highlighter-rouge">metrics value</code>能匹配用户指定的<code class="language-plaintext highlighter-rouge">target utilization</code>。这个周期默认为30s，可以通过<code class="language-plaintext highlighter-rouge">kube-controller-manager</code>的flag <code class="language-plaintext highlighter-rouge">--horizontal-pod-autoscaler-sync-period</code>进行设置。</p>
 
 <p>在每个HPA Controller的处理周期中，kube-controller-manager都去查询HPA获取到的metrics的utilization。查询方式根据metric类型不同而不同：</p>
 
@@ -653,7 +653,7 @@ deployment <span class="s2">"php-apache"</span> autoscaled
 
 <p>下面我们用实验来感受下HPA</p>
 
-<p>首先我们来新建一个<code class="highlighter-rouge">php-apache</code>的服务</p>
+<p>首先我们来新建一个<code class="language-plaintext highlighter-rouge">php-apache</code>的服务</p>
 
 <p>php-apache-deploy.yml</p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">extensions/v1beta1</span>
@@ -716,9 +716,9 @@ NAME         REFERENCE               TARGETS    MINPODS   MAXPODS   REPLICAS   A
 php-apache   Deployment/php-apache   0% / 50%   1         10        1          19m
 
 </code></pre></div></div>
-<p>这条命令的意思是，我们为<code class="highlighter-rouge">php-apache</code>创建了一个HPA，指定了target metrics value是cpu利用率50%，而伸缩最小值为1，最大值为10</p>
+<p>这条命令的意思是，我们为<code class="language-plaintext highlighter-rouge">php-apache</code>创建了一个HPA，指定了target metrics value是cpu利用率50%，而伸缩最小值为1，最大值为10</p>
 
-<p>最后，我们来持续访问<code class="highlighter-rouge">php-apache</code>来给它压力，看看HPA会不会自动为我们扩容呢？</p>
+<p>最后，我们来持续访问<code class="language-plaintext highlighter-rouge">php-apache</code>来给它压力，看看HPA会不会自动为我们扩容呢？</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 进入一个容器</span>
 kubectl run <span class="nt">-ti</span> load-generator <span class="nt">--image</span><span class="o">=</span>busybox /bin/sh
@@ -746,7 +746,7 @@ php-apache   Deployment/php-apache   90% / 50%   1         10        8          
 
 </code></pre></div></div>
 
-<p>我们发现，随着我们的持续访问增压，HPA会自动的为我们将<code class="highlighter-rouge">php-apache</code>进行扩容，随着<code class="highlighter-rouge">php-apahce</code>的扩容，CPU开始慢慢下降，直到最终符合我们指定的低于50%的标准，或者达到最大值10个POD。而当我们停止对<code class="highlighter-rouge">php-apache</code>的访问，最终，HPA会恢复到默认1个pod的状态。</p>
+<p>我们发现，随着我们的持续访问增压，HPA会自动的为我们将<code class="language-plaintext highlighter-rouge">php-apache</code>进行扩容，随着<code class="language-plaintext highlighter-rouge">php-apahce</code>的扩容，CPU开始慢慢下降，直到最终符合我们指定的低于50%的标准，或者达到最大值10个POD。而当我们停止对<code class="language-plaintext highlighter-rouge">php-apache</code>的访问，最终，HPA会恢复到默认1个pod的状态。</p>
 
 <p>用yaml文件的方式，最终的效果和上面是一样的</p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">autoscaling/v1</span>
@@ -772,7 +772,7 @@ php-apache   Deployment/php-apache   90% / 50%   1         10        8          
 
 <p><img src="/images/posts/service-rc-pod.png" alt="" /></p>
 
-<p>透过上图，我们可以发现，service定义了一个服务的访问入口地址，前端的pod通过这个入口地址来访问其背后一组由pod组成的集群实例，而背后这组pod则是通过RC来生成并保持住的。他们三者之间，通过<code class="highlighter-rouge">label selector</code>来保持关联。</p>
+<p>透过上图，我们可以发现，service定义了一个服务的访问入口地址，前端的pod通过这个入口地址来访问其背后一组由pod组成的集群实例，而背后这组pod则是通过RC来生成并保持住的。他们三者之间，通过<code class="language-plaintext highlighter-rouge">label selector</code>来保持关联。</p>
 
 <p>我们知道，正常情况下，要通过一个如果访问后端的集群服务，最好的办法是在前端弄一个负载均衡(nginx,haproxy…)，暴露一个对外服务的端口，然后反代到后端的ip+port。而kubernetes也遵循了这样的做法。
 在上图中，frontal pod 访问 service 时，kubernetes其实是通过其内部的 kube-proxy 来进行负载均衡，然后将请求转发到后端的某个pod上。但kubernetes不是使用的一个实际的负载均衡IP地址，而是为每个service分配了一个全局唯一的虚拟IP地址，这个虚拟IP被称为Cluster IP，只能在kubernetes 集群内部被访问(意思就是只能在集群内的pod中才能访问)，而且一旦创建，在service的整个生命周期内，都不会发生变动。</p>
@@ -805,7 +805,7 @@ php-apache   Deployment/php-apache   90% / 50%   1         10        8          
 <h5 id="kubernetes内部dns寻址服务发现">kubernetes内部dns寻址服务发现</h5>
 
 <p>1.kubectl 执行创建的时候会向APIServer请求创建一个service。APIServer获取到请求后调用相应的api创建一个service对象，并写入etcd保存。
-2.kube-dns通过<code class="highlighter-rouge">list/watch</code>操作向APIServer发送GET请求。这时因为有service的创建，所以APIServer会相应这个请求并把service回复给kube-dns。
+2.kube-dns通过<code class="language-plaintext highlighter-rouge">list/watch</code>操作向APIServer发送GET请求。这时因为有service的创建，所以APIServer会相应这个请求并把service回复给kube-dns。
 3.APIServer将创建的service信息回复给kube-dns,还会附带一个APIServer分配给service的Cluster IP。
 4.kube-dns通过检测并得到APIServer回复的service信息，会生成DNS条目，并把这个DNS条目存储到内存(Tree-Cache)中
 5.kubernetes中访问service的时候，会先去dnsmasq中查找缓存，找不到则去kubedns中查找dns条目，最终实现service的解析。(sidecar是用于检查其他两个容器的健康状态)</p>
@@ -859,12 +859,12 @@ etcd：大体实现方式，就是写脚本通过etcd的api注册服务，然后
 <span class="nt">-A</span> KUBE-NODEPORTS <span class="nt">-p</span> tcp <span class="nt">-m</span> comment <span class="nt">--comment</span> <span class="s2">"default/myweb-service:"</span> <span class="nt">-m</span> tcp <span class="nt">--dport</span> 30001 <span class="nt">-j</span> KUBE-SVC-KINM4OXG42E5QTAT
 </code></pre></div></div>
 
-<p>然后进一步跳转到<code class="highlighter-rouge">KUBE-SVC-KINM4OXG42E5QTAT</code>的链</p>
+<p>然后进一步跳转到<code class="language-plaintext highlighter-rouge">KUBE-SVC-KINM4OXG42E5QTAT</code>的链</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-A</span> KUBE-SVC-KINM4OXG42E5QTAT <span class="nt">-m</span> comment <span class="nt">--comment</span> <span class="s2">"default/myweb-service:"</span> <span class="nt">-j</span> KUBE-SEP-I4OJ7A6SXM5YG2QP
 </code></pre></div></div>
 
-<p>然后会跳转到<code class="highlighter-rouge">KUBE-SEP-I4OJ7A6SXM5YG2QP</code>链，最终将请求转发到10.233.88.53的pod上</p>
+<p>然后会跳转到<code class="language-plaintext highlighter-rouge">KUBE-SEP-I4OJ7A6SXM5YG2QP</code>链，最终将请求转发到10.233.88.53的pod上</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">-A</span> KUBE-SEP-I4OJ7A6SXM5YG2QP <span class="nt">-p</span> tcp <span class="nt">-m</span> comment <span class="nt">--comment</span> <span class="s2">"default/myweb-service:"</span> <span class="nt">-m</span> tcp <span class="nt">-j</span> DNAT <span class="nt">--to-destination</span> 10.233.88.53:8080
 </code></pre></div></div>
@@ -884,7 +884,7 @@ etcd：大体实现方式，就是写脚本通过etcd的api注册服务，然后
 <span class="nt">-A</span> KUBE-NODEPORTS <span class="nt">-p</span> tcp <span class="nt">-m</span> comment <span class="nt">--comment</span> <span class="s2">"default/myweb-service:"</span> <span class="nt">-m</span> tcp <span class="nt">--dport</span> 30001 <span class="nt">-j</span> KUBE-SVC-KINM4OXG42E5QTAT
 </code></pre></div></div>
 
-<p>然后进一步跳转到<code class="highlighter-rouge">KUBE-SEP-5I5KUCBAI2CKFMN2</code>、<code class="highlighter-rouge">KUBE-SEP-I4OJ7A6SXM5YG2QP</code>、<code class="highlighter-rouge">KUBE-SEP-FDQHGZ7N6PHRDJRL</code>的链</p>
+<p>然后进一步跳转到<code class="language-plaintext highlighter-rouge">KUBE-SEP-5I5KUCBAI2CKFMN2</code>、<code class="language-plaintext highlighter-rouge">KUBE-SEP-I4OJ7A6SXM5YG2QP</code>、<code class="language-plaintext highlighter-rouge">KUBE-SEP-FDQHGZ7N6PHRDJRL</code>的链</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 有分为30%，50%，20%的几率</span>
 <span class="nt">-A</span> KUBE-SVC-KINM4OXG42E5QTAT <span class="nt">-m</span> comment <span class="nt">--comment</span> <span class="s2">"default/myweb-service:"</span> <span class="nt">-m</span> statistic <span class="nt">--mode</span> random <span class="nt">--probability</span> 0.33332999982 <span class="nt">-j</span> KUBE-SEP-5I5KUCBAI2CKFMN2
@@ -946,7 +946,7 @@ etcd：大体实现方式，就是写脚本通过etcd的api注册服务，然后
   <li>临时目录，临时储存那些无需持久化的数据</li>
 </ul>
 
-<p>默认情况下，<code class="highlighter-rouge">emptyDir</code> 数据存储在SSD或者网络存储上。但是，你也可以设置<code class="highlighter-rouge">emptyDir.medium</code>为<code class="highlighter-rouge">Memory</code>来启用<code class="highlighter-rouge">tmpfs</code>,tmpfs会将数据写入到内存中，因此，当机器重启之后，数据也会永久删除，并且，因为是存放在内存中，这些数据会占用你容器内存的limit指标。</p>
+<p>默认情况下，<code class="language-plaintext highlighter-rouge">emptyDir</code> 数据存储在SSD或者网络存储上。但是，你也可以设置<code class="language-plaintext highlighter-rouge">emptyDir.medium</code>为<code class="language-plaintext highlighter-rouge">Memory</code>来启用<code class="language-plaintext highlighter-rouge">tmpfs</code>,tmpfs会将数据写入到内存中，因此，当机器重启之后，数据也会永久删除，并且，因为是存放在内存中，这些数据会占用你容器内存的limit指标。</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
 <span class="na">kind</span><span class="pi">:</span> <span class="s">Pod</span>
@@ -1076,7 +1076,7 @@ etcd：大体实现方式，就是写脚本通过etcd的api注册服务，然后
 
 <h4 id="hostpath">hostPath</h4>
 
-<p>hostPath 就是将宿主机上的目录或文件挂在到pod里。比如我们常用到<code class="highlighter-rouge">hostPath</code>的几个例子</p>
+<p>hostPath 就是将宿主机上的目录或文件挂在到pod里。比如我们常用到<code class="language-plaintext highlighter-rouge">hostPath</code>的几个例子</p>
 
 <ul>
   <li>容器应用程序的日志，需要永久保存时，可以使用hostPath隐射宿主机上的高速文件存储</li>
@@ -1166,17 +1166,17 @@ PersistentVolumeClaim(PVC)是对PV的请求。PVC有点类似于Pod，pod消耗n
 <p>所谓静态，就是管理员手动创建一堆PV，组成一个PV池，供PVC来绑定。</p>
 
 <h6 id="动态">动态</h6>
-<p>经过API抽象，用户可以通过PVC使用存储资源，通常用户还会关心PV的很多属性，例如对不同的应用场景需要不同的性能，仅仅提供存储大小和访问模式不能满足要求。集群管理员一方面要提供不同PV的多种属性，一方面要隐藏底层的细节，还有一点是不再需要管理员手动去创建PV,这就引入了<code class="highlighter-rouge">StorageClass</code>资源。管理员用存储级别StorageClass描述存储的分类，不同的分类可以对应不同的质量服务Qos等级、备份策略和其他自定义的策略。kubernetes本身不参与存储级别的划分，StorageClass概念在有的存储系统里被称为”profiles”</p>
+<p>经过API抽象，用户可以通过PVC使用存储资源，通常用户还会关心PV的很多属性，例如对不同的应用场景需要不同的性能，仅仅提供存储大小和访问模式不能满足要求。集群管理员一方面要提供不同PV的多种属性，一方面要隐藏底层的细节，还有一点是不再需要管理员手动去创建PV,这就引入了<code class="language-plaintext highlighter-rouge">StorageClass</code>资源。管理员用存储级别StorageClass描述存储的分类，不同的分类可以对应不同的质量服务Qos等级、备份策略和其他自定义的策略。kubernetes本身不参与存储级别的划分，StorageClass概念在有的存储系统里被称为”profiles”</p>
 
-<p>所谓动态，就是当所有的静态PV都不匹配用户的PVC时，集群通过storageClass的对象由存储系统根据PVC的要求自动创建。这种基于<code class="highlighter-rouge">StorageClass</code>的PV，管理员必须事先创建和配置这样的storage class。请求等级配置为<code class="highlighter-rouge">" "</code>的PVC，有效地禁用了它自身的动态供给功能。</p>
+<p>所谓动态，就是当所有的静态PV都不匹配用户的PVC时，集群通过storageClass的对象由存储系统根据PVC的要求自动创建。这种基于<code class="language-plaintext highlighter-rouge">StorageClass</code>的PV，管理员必须事先创建和配置这样的storage class。请求等级配置为<code class="language-plaintext highlighter-rouge">" "</code>的PVC，有效地禁用了它自身的动态供给功能。</p>
 
 <h6 id="class">class</h6>
 
-<p>我们可以根据不同的需求创建不同类型的PV(这种PV是基于<code class="highlighter-rouge">StorageClass</code>，是自动创建的)，然后我们可以通过为PVC指定<code class="highlighter-rouge">storageClassName</code>来请求PV，如果集群中有这个class，那么当用户请求的时候，kubernetes会自动的创建PV，如果集群中有默认的storageclass，那么你只需要创建PVC即可，无需指定<code class="highlighter-rouge">storageClassName</code>,剩下的都有默认的动态配置来搞定。</p>
+<p>我们可以根据不同的需求创建不同类型的PV(这种PV是基于<code class="language-plaintext highlighter-rouge">StorageClass</code>，是自动创建的)，然后我们可以通过为PVC指定<code class="language-plaintext highlighter-rouge">storageClassName</code>来请求PV，如果集群中有这个class，那么当用户请求的时候，kubernetes会自动的创建PV，如果集群中有默认的storageclass，那么你只需要创建PVC即可，无需指定<code class="language-plaintext highlighter-rouge">storageClassName</code>,剩下的都有默认的动态配置来搞定。</p>
 
-<p>举个例子：比如我现在需要两种类型的存储，一种是SSD，一种是普通的硬盘，那么这时候，我就可以创建两种class的<code class="highlighter-rouge">StorageClass</code>,然后在创建PVC时，指定不同的<code class="highlighter-rouge">storageClassName</code>即可，如下：</p>
+<p>举个例子：比如我现在需要两种类型的存储，一种是SSD，一种是普通的硬盘，那么这时候，我就可以创建两种class的<code class="language-plaintext highlighter-rouge">StorageClass</code>,然后在创建PVC时，指定不同的<code class="language-plaintext highlighter-rouge">storageClassName</code>即可，如下：</p>
 
-<p>每个<code class="highlighter-rouge">StorageClass</code>都包含<code class="highlighter-rouge">provisioner</code>和<code class="highlighter-rouge">parameters</code>这个两个字段，具体怎么配置这些storageclass，有哪些存储支持storageclass,请参考<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">官网</a></p>
+<p>每个<code class="language-plaintext highlighter-rouge">StorageClass</code>都包含<code class="language-plaintext highlighter-rouge">provisioner</code>和<code class="language-plaintext highlighter-rouge">parameters</code>这个两个字段，具体怎么配置这些storageclass，有哪些存储支持storageclass,请参考<a href="https://kubernetes.io/docs/concepts/storage/persistent-volumes/">官网</a></p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">kind</span><span class="pi">:</span> <span class="s">StorageClass</span>
 <span class="na">apiVersion</span><span class="pi">:</span> <span class="s">storage.k8s.io/v1</span>
@@ -1221,13 +1221,13 @@ PersistentVolumeClaim(PVC)是对PV的请求。PVC有点类似于Pod，pod消耗n
 
 <h6 id="回收">回收</h6>
 
-<p>当用户不在需要PV时，我们可以删除PVC来回收PV，<code class="highlighter-rouge">PersistentVolume</code>中的回收策略会告诉kubernetes当PVC被释放后该怎么做，目前，支持的策略如下</p>
+<p>当用户不在需要PV时，我们可以删除PVC来回收PV，<code class="language-plaintext highlighter-rouge">PersistentVolume</code>中的回收策略会告诉kubernetes当PVC被释放后该怎么做，目前，支持的策略如下</p>
 
 <ul>
   <li>Retained(保留)</li>
 </ul>
 
-<p>当PVC被删除后，PV仍然被保留下来，并且会变成<code class="highlighter-rouge">released</code>。但是它还不能被其他PVC使用，因为现在PV上仍然有上一个PVC所请求的数据。</p>
+<p>当PVC被删除后，PV仍然被保留下来，并且会变成<code class="language-plaintext highlighter-rouge">released</code>。但是它还不能被其他PVC使用，因为现在PV上仍然有上一个PVC所请求的数据。</p>
 
 <ul>
   <li>Recycled(再利用)</li>
@@ -1235,7 +1235,7 @@ PersistentVolumeClaim(PVC)是对PV的请求。PVC有点类似于Pod，pod消耗n
 
 <p>当PVC被删除后，kubernetes会将PV里的数据删除，然后把PV变成Available，然后又可以被新的PVC绑定</p>
 
-<p>这个原理实际上是：在删除PVC之后，会运行一个POD来执行一个(<code class="highlighter-rouge">rm -rf /thevolume/*</code>)的操作，删除pv下的所有数据</p>
+<p>这个原理实际上是：在删除PVC之后，会运行一个POD来执行一个(<code class="language-plaintext highlighter-rouge">rm -rf /thevolume/*</code>)的操作，删除pv下的所有数据</p>
 
 <p><strong>默认回收运行的POD用的image是gcr上的busybox，而且image策略是always，因为这个原因，你可能始终无法回收PV，这时候，就需要去重新配置回收POD的模板了，模板内容如下</strong></p>
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">apiVersion</span><span class="pi">:</span> <span class="s">v1</span>
@@ -1260,7 +1260,7 @@ PersistentVolumeClaim(PVC)是对PV的请求。PVC有点类似于Pod，pod消耗n
       <span class="na">mountPath</span><span class="pi">:</span> <span class="s">/scrub</span>
 </code></pre></div></div>
 
-<p>写好模板了，还需要在<code class="highlighter-rouge">kube-controller-manager</code>中去配置模板，<a href="https://kubernetes.io/docs/admin/kube-controller-manager/">更多详细信息</a>可参考官网</p>
+<p>写好模板了，还需要在<code class="language-plaintext highlighter-rouge">kube-controller-manager</code>中去配置模板，<a href="https://kubernetes.io/docs/admin/kube-controller-manager/">更多详细信息</a>可参考官网</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># 指定nfs回收模板的位置</span>
 <span class="pi">-</span> <span class="s">--pv-recycler-pod-template-filepath-nfs=/etc/kubernetes/recycler-for-nfs.yaml</span>
@@ -1349,7 +1349,7 @@ nfs       Bound     nfs       5Gi        RWO                          8m
 <span class="nv">$ </span><span class="nb">touch </span>recycle-file
 </code></pre></div></div>
 
-<p>我们发现nfs的回收策略是<code class="highlighter-rouge">Recycle</code>，当前状态是<code class="highlighter-rouge">Bound</code>，那么假如我现在将PVC删除掉呢，下面我们来操作试试看</p>
+<p>我们发现nfs的回收策略是<code class="language-plaintext highlighter-rouge">Recycle</code>，当前状态是<code class="language-plaintext highlighter-rouge">Bound</code>，那么假如我现在将PVC删除掉呢，下面我们来操作试试看</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl delete <span class="nt">-f</span> nfs-nginx.yaml
 kubectl delete <span class="nt">-f</span> nfs-pvc.yaml
@@ -1372,7 +1372,7 @@ kubectl create <span class="nt">-f</span> nfs-nginx.yaml
 <span class="nv">$ </span>kubectl <span class="nb">exec</span> <span class="nt">-ti</span> test-pd <span class="nb">ls</span> /test-pd
 </code></pre></div></div>
 
-<p>我们发现当我们的回收策略是<code class="highlighter-rouge">Recycle</code>时，删除PVC之后，PV的状态先是<code class="highlighter-rouge">Released</code>，然后过一会儿之后，会变成<code class="highlighter-rouge">Available</code>状态，而且PV上的数据也已经被删除了，这时候就可以再次被其他的PVC使用了。</p>
+<p>我们发现当我们的回收策略是<code class="language-plaintext highlighter-rouge">Recycle</code>时，删除PVC之后，PV的状态先是<code class="language-plaintext highlighter-rouge">Released</code>，然后过一会儿之后，会变成<code class="language-plaintext highlighter-rouge">Available</code>状态，而且PV上的数据也已经被删除了，这时候就可以再次被其他的PVC使用了。</p>
 
 <p><strong>注意：当前只有NFS和HostPath支持回收利用操作</strong></p>
 

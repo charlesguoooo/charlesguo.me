@@ -122,7 +122,7 @@
 
 <!--more-->
 
-<p>你可以在启动docker之前设定你自己的bridge网络，并使用<code class="highlighter-rouge">-b BRIDGE</code> or <code class="highlighter-rouge">--bridge=BRIDGE</code> 来告诉docker使用它。如果已经有偶docker启动并运行，并且使用的是docker0的默认配置，你可以直接创建自定义的bridge网络，并重启docker，或者停止服务之后删除接口</p>
+<p>你可以在启动docker之前设定你自己的bridge网络，并使用<code class="language-plaintext highlighter-rouge">-b BRIDGE</code> or <code class="language-plaintext highlighter-rouge">--bridge=BRIDGE</code> 来告诉docker使用它。如果已经有偶docker启动并运行，并且使用的是docker0的默认配置，你可以直接创建自定义的bridge网络，并重启docker，或者停止服务之后删除接口</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 停止docker服务，并删除docker0接口</span>
 <span class="nv">$ </span><span class="nb">sudo </span>service docker stop
 <span class="nv">$ </span><span class="nb">sudo </span>ip <span class="nb">link set </span>dev docker0 down
@@ -167,7 +167,7 @@ MASQUERADE  all  <span class="nt">--</span>  192.168.5.0/24       0.0.0.0/0
 ...
 </code></pre></div></div>
 <p>我们发现，我们刚创建的bridge已经生效。
-我们可以使用<code class="highlighter-rouge">brctl</code>来对bridge进行查看，删除，添加等操作。</p>
+我们可以使用<code class="language-plaintext highlighter-rouge">brctl</code>来对bridge进行查看，删除，添加等操作。</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brctl show
 bridge name	bridge <span class="nb">id		</span>STP enabled	interfaces
 bridge0		8000.f600adbf94d5	no		veth79dcc4b

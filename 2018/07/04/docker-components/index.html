@@ -168,7 +168,7 @@ root      5484  5266  0 11:48 ?        00:00:00 docker-containerd-shim <span cla
 
 <p>从<a href="https://github.com/containerd/containerd/releases/download/v1.1.0/containerd-1.1.0.linux-amd64.tar.gz">官网</a>下载最新的稳定版本</p>
 
-<p>然后把下载的包解压到<code class="highlighter-rouge">/usr/local</code>下</p>
+<p>然后把下载的包解压到<code class="language-plaintext highlighter-rouge">/usr/local</code>下</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo tar</span> <span class="nt">-C</span> /usr/local <span class="nt">-xf</span> containerd-1.1.0.linux-amd64.tar.gz
 </code></pre></div></div>
@@ -221,7 +221,7 @@ mybusybox    docker.io/library/busybox:latest    io.containerd.runtime.v1.linux
 mybusybox    16359    RUNNING
 </code></pre></div></div>
 
-<p>删除容器之前先要kill掉容器进程，然后再用<code class="highlighter-rouge">ctr c rm mybusybox</code>的命令来删除</p>
+<p>删除容器之前先要kill掉容器进程，然后再用<code class="language-plaintext highlighter-rouge">ctr c rm mybusybox</code>的命令来删除</p>
 
 <h4 id="docker-containerd-shim">docker-containerd-shim</h4>
 
@@ -233,7 +233,7 @@ mybusybox    16359    RUNNING
 
 <p>RunC 是一个轻量级的工具，它是用来运行容器的，只用来做这一件事，并且这一件事要做好。我们可以认为它就是个命令行小工具，可以不用通过 docker 引擎，直接运行容器。事实上，runC 是标准化的产物，它根据 OCI 标准来创建和运行容器。而 OCI(Open Container Initiative)组织，旨在围绕容器格式和运行时制定一个开放的工业化标准。</p>
 
-<p>我们可以在运行dockerd的时候使用<code class="highlighter-rouge">--add-runtime</code>来指定其他的运行时</p>
+<p>我们可以在运行dockerd的时候使用<code class="language-plaintext highlighter-rouge">--add-runtime</code>来指定其他的运行时</p>
 
 <p>在容器启动的过程中，docker-runc 进程是作为 docker-containerd-shim 的子进程存在的。docker-runc 进程根据配置找到容器的 rootfs 并创建子进程 bash 作为容器中的第一个进程。当这一切都完成后 docker-runc 进程退出，然后容器进程 bash 由 docker-runc 的父进程 docker-containerd-shim 接管</p>
 

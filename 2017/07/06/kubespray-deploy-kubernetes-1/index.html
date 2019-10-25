@@ -120,7 +120,7 @@
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
     <blockquote>
-  <p>捣鼓kubernetes有一段时间了，先后用过<code class="highlighter-rouge">yum</code>,<code class="highlighter-rouge">kubeadm</code>,<code class="highlighter-rouge">custom</code>等方式，但都不尽如人意，不是缺胳膊就是短腿，后来有幸翻到<a href="https://mritd.me/">漠然</a>大神的<a href="https://mritd.me/2017/03/03/set-up-kubernetes-ha-cluster-by-kubespray/">快速部署kubernetes高可用集群</a>，并且请教了无数次才最终搭建成功，在此，再次膜拜漠然大神，同时该篇blog也参考了漠神的的博客，主要是为了记录下来，方便以后查看。</p>
+  <p>捣鼓kubernetes有一段时间了，先后用过<code class="language-plaintext highlighter-rouge">yum</code>,<code class="language-plaintext highlighter-rouge">kubeadm</code>,<code class="language-plaintext highlighter-rouge">custom</code>等方式，但都不尽如人意，不是缺胳膊就是短腿，后来有幸翻到<a href="https://mritd.me/">漠然</a>大神的<a href="https://mritd.me/2017/03/03/set-up-kubernetes-ha-cluster-by-kubespray/">快速部署kubernetes高可用集群</a>，并且请教了无数次才最终搭建成功，在此，再次膜拜漠然大神，同时该篇blog也参考了漠神的的博客，主要是为了记录下来，方便以后查看。</p>
 </blockquote>
 
 <!--more-->
@@ -455,7 +455,7 @@ helm_enabled: <span class="nb">false</span>
 
 </code></pre></div></div>
 
-<p>生成的配置如下，最好是在配置上加上<code class="highlighter-rouge">ansible_user=root</code>,我最开始在搭建的时候没有指定，报错了</p>
+<p>生成的配置如下，最好是在配置上加上<code class="language-plaintext highlighter-rouge">ansible_user=root</code>,我最开始在搭建的时候没有指定，报错了</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>node1    <span class="nv">ansible_user</span><span class="o">=</span>root <span class="nv">ansible_host</span><span class="o">=</span>172.30.33.90 <span class="nv">ip</span><span class="o">=</span>172.30.33.90
 node2    <span class="nv">ansible_user</span><span class="o">=</span>root <span class="nv">ansible_host</span><span class="o">=</span>172.30.33.91 <span class="nv">ip</span><span class="o">=</span>172.30.33.91
 node3    <span class="nv">ansible_user</span><span class="o">=</span>root <span class="nv">ansible_host</span><span class="o">=</span>172.30.33.92 <span class="nv">ip</span><span class="o">=</span>172.30.33.92
@@ -539,7 +539,7 @@ kube-master
 <span class="c">#  include: systemd.yml</span>
 </code></pre></div></div>
 
-<p>修改efk配置，注释掉<code class="highlighter-rouge">KIBANA_BASE_URL</code>这段，否则后面你搭建efk之后，无法访问kibana</p>
+<p>修改efk配置，注释掉<code class="language-plaintext highlighter-rouge">KIBANA_BASE_URL</code>这段，否则后面你搭建efk之后，无法访问kibana</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ~/kubespray/roles/kubernetes-apps/efk/kibana/templates/kibana-deployment.yml.j2
 
 <span class="c">#          - name: "KIBANA_BASE_URL"</span>
@@ -549,7 +549,7 @@ kube-master
 
 <p>修改download配置，更改etcd和kubedns版本</p>
 
-<p><strong>1.6.7版本中,为了使用更高版本的calico node,我自己多添加了一个变量<code class="highlighter-rouge">calico_node_version</code></strong></p>
+<p><strong>1.6.7版本中,为了使用更高版本的calico node,我自己多添加了一个变量<code class="language-plaintext highlighter-rouge">calico_node_version</code></strong></p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vim ~/kubespray/roles/download/defaults/main.yml
 etcd_version: v3.1.10

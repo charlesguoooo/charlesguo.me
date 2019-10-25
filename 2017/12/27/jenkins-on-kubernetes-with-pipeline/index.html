@@ -125,7 +125,7 @@
 
 <!--more-->
 
-<p>该流程包含了 <code class="highlighter-rouge">checkout scm</code> –&gt; <code class="highlighter-rouge">build artifacts</code> –&gt; <code class="highlighter-rouge">build image</code> –&gt; <code class="highlighter-rouge">deploy to k8s</code></p>
+<p>该流程包含了 <code class="language-plaintext highlighter-rouge">checkout scm</code> –&gt; <code class="language-plaintext highlighter-rouge">build artifacts</code> –&gt; <code class="language-plaintext highlighter-rouge">build image</code> –&gt; <code class="language-plaintext highlighter-rouge">deploy to k8s</code></p>
 
 <p>流程相对简单，而且并没有涉及到代码分支，集中测试，蓝绿部署等等</p>
 
@@ -143,22 +143,22 @@
   <p>jenkins 部署成功之后，我们需要安装对应的插件，配置和kubernetes的关联，这里除了必要的插件之外，我们额外需要安装一个kubernetes Plugin</p>
 </blockquote>
 
-<p>kubernetes cloud的配置相对简单，我们只需要指定<code class="highlighter-rouge">Kubernetes URL</code>以及<code class="highlighter-rouge">Jenkins URL</code>即可，因为jenkins在kubernetes中，所以<code class="highlighter-rouge">Kubernetes URL</code>和<code class="highlighter-rouge">Jenkins URL</code>均为内部service就行了，如下图</p>
+<p>kubernetes cloud的配置相对简单，我们只需要指定<code class="language-plaintext highlighter-rouge">Kubernetes URL</code>以及<code class="language-plaintext highlighter-rouge">Jenkins URL</code>即可，因为jenkins在kubernetes中，所以<code class="language-plaintext highlighter-rouge">Kubernetes URL</code>和<code class="language-plaintext highlighter-rouge">Jenkins URL</code>均为内部service就行了，如下图</p>
 
 <p><img src="/images/posts/kubernetes-cloud.png" alt="" /></p>
 
 <h3 id="四新建pipeline-job-测试">四、新建pipeline job 测试</h3>
 
 <blockquote>
-  <p>jenkins kubernetes cloud配置成功之后，我们就需要来新建一个pipeline job测试一下，这里我新建了一个<code class="highlighter-rouge">learn-groovy</code>的job</p>
+  <p>jenkins kubernetes cloud配置成功之后，我们就需要来新建一个pipeline job测试一下，这里我新建了一个<code class="language-plaintext highlighter-rouge">learn-groovy</code>的job</p>
 </blockquote>
 
-<p>新建job更加的简单，只需要指定你的<code class="highlighter-rouge">Jenkinsfile</code>的地址即可，如下图</p>
+<p>新建job更加的简单，只需要指定你的<code class="language-plaintext highlighter-rouge">Jenkinsfile</code>的地址即可，如下图</p>
 
 <p><img src="/images/posts/jenkins-pipeline.png" alt="" /></p>
 
 <blockquote>
-  <p>所有的工作都在<code class="highlighter-rouge">Jenkinsfile</code>中定义完成，这就是pipeline了</p>
+  <p>所有的工作都在<code class="language-plaintext highlighter-rouge">Jenkinsfile</code>中定义完成，这就是pipeline了</p>
 </blockquote>
 
 <p>关于当前这个example项目的对应配置文件有如下几个</p>

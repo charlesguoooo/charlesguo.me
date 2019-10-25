@@ -114,30 +114,30 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>本章节主要讲了如何自定义docker默认的bridge网络，这个<code class="highlighter-rouge">bridge</code>网络是在docker安装的时候，系统默认创建的。</p>
+    <p>本章节主要讲了如何自定义docker默认的bridge网络，这个<code class="language-plaintext highlighter-rouge">bridge</code>网络是在docker安装的时候，系统默认创建的。</p>
 <blockquote>
-  <p><strong>Note:</strong> docker允许创建除了默认<code class="highlighter-rouge">bridge</code>网络之外的bridge网络</p>
+  <p><strong>Note:</strong> docker允许创建除了默认<code class="language-plaintext highlighter-rouge">bridge</code>网络之外的bridge网络</p>
 </blockquote>
 
 <!--more-->
 
 <p>默认情况下，docker服务器会创建和配置宿主机的docker0接口作为linux内核中的以太网网桥，可以在其他物理或虚拟接口之间来回床底数据包，使其作为单个以太网网络运行。
-docker为 <code class="highlighter-rouge">docker0</code>配置IP地址，子网掩码和ip范围。主机可以为连接到<code class="highlighter-rouge">docker0</code>的容器发送和接受数据，并给他一个<code class="highlighter-rouge">MTU</code>(最大传输单元或最大包长-1500字节)，这些选项都是可以配置在docker的启动配置文件中：</p>
+docker为 <code class="language-plaintext highlighter-rouge">docker0</code>配置IP地址，子网掩码和ip范围。主机可以为连接到<code class="language-plaintext highlighter-rouge">docker0</code>的容器发送和接受数据，并给他一个<code class="language-plaintext highlighter-rouge">MTU</code>(最大传输单元或最大包长-1500字节)，这些选项都是可以配置在docker的启动配置文件中：</p>
 <ul>
-  <li><code class="highlighter-rouge">--bip=CIDR</code> 为docker0配置IP地址</li>
-  <li><code class="highlighter-rouge">--fixed-cidr=CIDR</code> 限制docker0的子网范围,如：172.16.1.0/24，这个范围必须是包含了docker0 ip地址的范围</li>
-  <li><code class="highlighter-rouge">--mtu=BYTES</code> 设置docker0的mtu值</li>
+  <li><code class="language-plaintext highlighter-rouge">--bip=CIDR</code> 为docker0配置IP地址</li>
+  <li><code class="language-plaintext highlighter-rouge">--fixed-cidr=CIDR</code> 限制docker0的子网范围,如：172.16.1.0/24，这个范围必须是包含了docker0 ip地址的范围</li>
+  <li><code class="language-plaintext highlighter-rouge">--mtu=BYTES</code> 设置docker0的mtu值</li>
 </ul>
 
-<p>一旦你运行了一个或多个容器后，你可以使用<code class="highlighter-rouge">brctl</code>命令发现这些容器的接口都连接到了docker0网桥</p>
+<p>一旦你运行了一个或多个容器后，你可以使用<code class="language-plaintext highlighter-rouge">brctl</code>命令发现这些容器的接口都连接到了docker0网桥</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>brctl show
 bridge name	bridge <span class="nb">id		</span>STP enabled	interfaces
 bridge0		8000.86de2e92d296	no		veth79dcc4b
 							vethc054462
 </code></pre></div></div>
-<p>如果你的机器上没有brctl这个命令， 你可以使用<code class="highlighter-rouge">yum install bridge-utils -y</code>(on centos)来进行安装。</p>
+<p>如果你的机器上没有brctl这个命令， 你可以使用<code class="language-plaintext highlighter-rouge">yum install bridge-utils -y</code>(on centos)来进行安装。</p>
 
-<p>最后，当你每次创建新容器的时候，都会使用<code class="highlighter-rouge">docker0</code>进行设置。docker会从docker0网桥的ip范围内，选择一个空闲的ip，分配给新容器，并且，会将docker0网络的IP地址，作为容器的网关：</p>
+<p>最后，当你每次创建新容器的时候，都会使用<code class="language-plaintext highlighter-rouge">docker0</code>进行设置。docker会从docker0网桥的ip范围内，选择一个空闲的ip，分配给新容器，并且，会将docker0网络的IP地址，作为容器的网关：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># The network, as seen from a container</span>
 
 <span class="nv">$ </span>docker run <span class="nt">-i</span> <span class="nt">-t</span> <span class="nt">--rm</span> base /bin/bash
@@ -160,7 +160,7 @@ root@f38c87f2a42d:/# <span class="nb">exit</span>
 </code></pre></div></div>
 
 <blockquote>
-  <p><strong>Note:</strong> 记住，默认情况下，docker主机不会将容器包转发到外网，除非你设置<code class="highlighter-rouge">ip_forward</code>，具体可参考<a href="https://docs.docker.com/engine/userguide/networking/default_network/container-communication/#communicating-to-the-outside-world">communication to the outside world</a></p>
+  <p><strong>Note:</strong> 记住，默认情况下，docker主机不会将容器包转发到外网，除非你设置<code class="language-plaintext highlighter-rouge">ip_forward</code>，具体可参考<a href="https://docs.docker.com/engine/userguide/networking/default_network/container-communication/#communicating-to-the-outside-world">communication to the outside world</a></p>
 </blockquote>
 
     </article>

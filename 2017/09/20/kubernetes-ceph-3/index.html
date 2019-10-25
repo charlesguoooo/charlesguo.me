@@ -171,7 +171,7 @@ mkfs.xfs /dev/rbd0
 
 <h4 id="pv--pvc方式">PV &amp; PVC方式</h4>
 
-<p>传统使用分布式存储的方式一般为 <code class="highlighter-rouge">PV &amp; PVC</code> 的方式，也就是说管理员必须预先创建好PV 和 PVC ，然后对应的deployment或者replication挂载PVC来使用</p>
+<p>传统使用分布式存储的方式一般为 <code class="language-plaintext highlighter-rouge">PV &amp; PVC</code> 的方式，也就是说管理员必须预先创建好PV 和 PVC ，然后对应的deployment或者replication挂载PVC来使用</p>
 
 <h5 id="创建secret">创建secret</h5>
 
@@ -277,7 +277,7 @@ kubectl create <span class="nt">-f</span> ceph-nginx.yml
 
 <h5 id="配置k8s-node">配置k8s node</h5>
 
-<p>我们创建好PV 和 PVC之后，进行查看时可能会出现<code class="highlighter-rouge">with: rbd: failed to modprobe rbd error:exit status 1</code>的报错，所以这时候我们需要对所有k8s-node进行如下配置</p>
+<p>我们创建好PV 和 PVC之后，进行查看时可能会出现<code class="language-plaintext highlighter-rouge">with: rbd: failed to modprobe rbd error:exit status 1</code>的报错，所以这时候我们需要对所有k8s-node进行如下配置</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 在所有k8s node上安装ceph-common</span>
 yum <span class="nb">install</span> <span class="nt">-y</span> ceph-common
@@ -384,7 +384,7 @@ kubectl create <span class="nt">-f</span> ceph-storageclass.yml
 
 <h5 id="创建statefulset">创建statefulset</h5>
 
-<p>我们在使用StorageClass的时候，可以自己手动创建PVC，然后所有pods共享一个pvc；也可以定义<code class="highlighter-rouge">volumeClaimTemplates</code>来为自动为每个pod创建一个单独的pvc，如下所示</p>
+<p>我们在使用StorageClass的时候，可以自己手动创建PVC，然后所有pods共享一个pvc；也可以定义<code class="language-plaintext highlighter-rouge">volumeClaimTemplates</code>来为自动为每个pod创建一个单独的pvc，如下所示</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 新建ceph-storageclass-nginx.yml</span>
 vim ceph-storageclass-nginx.yml

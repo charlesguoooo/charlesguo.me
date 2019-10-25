@@ -120,8 +120,8 @@
 <!--more-->
 
 <h1 id="为docker-daemon配置-默认的日志驱动">为docker daemon配置 默认的日志驱动</h1>
-<p>要将docker daemon配置为默认的日志驱动程序，请使用<code class="highlighter-rouge">--log-driver=&lt;VALUE&gt;</code>选项。如果驱动程序有可配置的选项，则可以使用一个或多个<code class="highlighter-rouge">--log-opt&lt;NAME&gt;=&lt;VALUE&gt;</code>来进行设置。
-如果你没有指定日志驱动，那么默认是<code class="highlighter-rouge">json-file</code>。因此诸如<code class="highlighter-rouge">docker inspect</code>等命令输出的内容都是json格式的。</p>
+<p>要将docker daemon配置为默认的日志驱动程序，请使用<code class="language-plaintext highlighter-rouge">--log-driver=&lt;VALUE&gt;</code>选项。如果驱动程序有可配置的选项，则可以使用一个或多个<code class="language-plaintext highlighter-rouge">--log-opt&lt;NAME&gt;=&lt;VALUE&gt;</code>来进行设置。
+如果你没有指定日志驱动，那么默认是<code class="language-plaintext highlighter-rouge">json-file</code>。因此诸如<code class="language-plaintext highlighter-rouge">docker inspect</code>等命令输出的内容都是json格式的。</p>
 
 <p>下面我们看看当前默认的日志驱动是啥</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker info |grep <span class="s1">'Logging Driver'</span>
@@ -130,7 +130,7 @@ Logging Driver: json-file
 </code></pre></div></div>
 
 <h1 id="为容器配置日志驱动">为容器配置日志驱动</h1>
-<p>当启动容器时，我们可以为容器配置和docker daemon不一样的日志驱动。如果驱动程序有可配置的选项，则可以使用一个或多个<code class="highlighter-rouge">--log-opt&lt;NAME&gt;=&lt;VALUE&gt;</code>来进行设置。即使容器使用默认的日志驱动，也可以使用不同的配置选项。</p>
+<p>当启动容器时，我们可以为容器配置和docker daemon不一样的日志驱动。如果驱动程序有可配置的选项，则可以使用一个或多个<code class="language-plaintext highlighter-rouge">--log-opt&lt;NAME&gt;=&lt;VALUE&gt;</code>来进行设置。即使容器使用默认的日志驱动，也可以使用不同的配置选项。</p>
 
 <p>看看当前容器的日志驱动是啥</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker inspect <span class="nt">-f</span> <span class="o">{</span> <span class="o">{</span> .HostConfig.LogConfig.Type <span class="o">}</span> <span class="o">}</span> webtest1
@@ -197,7 +197,7 @@ json-file
 <h1 id="日志驱动的限制">日志驱动的限制</h1>
 
 <ul>
-  <li><code class="highlighter-rouge">docker logs</code>命令不能用于<code class="highlighter-rouge">json-file</code>和<code class="highlighter-rouge">journald</code>之外的日志驱动</li>
+  <li><code class="language-plaintext highlighter-rouge">docker logs</code>命令不能用于<code class="language-plaintext highlighter-rouge">json-file</code>和<code class="language-plaintext highlighter-rouge">journald</code>之外的日志驱动</li>
 </ul>
 
 <h1 id="examples">Examples</h1>

@@ -114,13 +114,13 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>这篇只是上一篇主要介绍了，如何使用<code class="highlighter-rouge">vagrant</code>来创建虚拟机，进行外部<code class="highlighter-rouge">key-value</code>存储overlay网络的测试。</p>
+    <p>这篇只是上一篇主要介绍了，如何使用<code class="language-plaintext highlighter-rouge">vagrant</code>来创建虚拟机，进行外部<code class="language-plaintext highlighter-rouge">key-value</code>存储overlay网络的测试。</p>
 
 <!--more-->
 <h1 id="使用vagrant创建实验环境">使用vagrant创建实验环境</h1>
-<p>什么是<code class="highlighter-rouge">vagrant</code>?请参考<a href="https://www.vagrantup.com/">vagrant官网</a></p>
+<p>什么是<code class="language-plaintext highlighter-rouge">vagrant</code>?请参考<a href="https://www.vagrantup.com/">vagrant官网</a></p>
 <h2 id="创建实验环境">创建实验环境</h2>
-<p>安装<code class="highlighter-rouge">virtualbox</code>,<code class="highlighter-rouge">vagrant</code>,<code class="highlighter-rouge">git-bash</code>
+<p>安装<code class="language-plaintext highlighter-rouge">virtualbox</code>,<code class="language-plaintext highlighter-rouge">vagrant</code>,<code class="language-plaintext highlighter-rouge">git-bash</code>
 1.打开git-bash,新建一个vagrant工作的目录</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">mkdir </span>docker-multi-host
 </code></pre></div></div>
@@ -132,7 +132,7 @@ ready to <span class="sb">`</span>vagrant up<span class="sb">`</span> your first
 </span>the comments <span class="k">in </span>the Vagrantfile as well as documentation on
 <span class="sb">`</span>vagrantup.com<span class="sb">`</span> <span class="k">for </span>more information on using Vagrant
 </code></pre></div></div>
-<p>3.你会发现目录下多了个<code class="highlighter-rouge">Vagrantfile</code>文件，编辑这个文件，替换成如下内容：</p>
+<p>3.你会发现目录下多了个<code class="language-plaintext highlighter-rouge">Vagrantfile</code>文件，编辑这个文件，替换成如下内容：</p>
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## files: Vagrantfile</span>
 <span class="c1"># -*- mode: ruby -*-</span>
 <span class="c1"># vi: set ft=ruby :</span>
@@ -174,7 +174,7 @@ ready to <span class="sb">`</span>vagrant up<span class="sb">`</span> your first
   <p><strong>NOTE:</strong> 该配置文件是ruby语法，具体可参考<a href="https://www.vagrantup.com">vagrant官网</a></p>
 </blockquote>
 
-<p>4.使用<code class="highlighter-rouge">vagrant up</code>启动</p>
+<p>4.使用<code class="language-plaintext highlighter-rouge">vagrant up</code>启动</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>vagrant up
 Bringing machine <span class="s1">'my-keystore'</span> up with <span class="s1">'virtualbox'</span> provider...
 </code></pre></div></div>
@@ -194,7 +194,7 @@ node05                    running <span class="o">(</span>virtualbox<span class=
 <ul>
   <li>
     <p>方法一：
-使用<code class="highlighter-rouge">vagrant ssh &lt;vm-name&gt;</code>直接在git-bash里登录
+使用<code class="language-plaintext highlighter-rouge">vagrant ssh &lt;vm-name&gt;</code>直接在git-bash里登录
 $ vagrant ssh my-keystore
 Last login: Wed Jan  4 06:26:23 2017 from 10.0.2.2
 [vagrant@my-keystore ~]$</p>
@@ -210,7 +210,7 @@ Last login: Wed Jan  4 06:26:23 2017 from 10.0.2.2
 
 <h2 id="配置key-value-store">配置key-value store</h2>
 <p>overlay网络依赖key-value存储.key-value存储保存着一些关于网络的状态信息，包括，发现，网络，终端，IP地址等等.Docker 支持Consul,Etcd,ZooKepper等key-value存储，这里使用的是Consul.
-1.进入<code class="highlighter-rouge">my-keystore</code>虚拟机，配置安装</p>
+1.进入<code class="language-plaintext highlighter-rouge">my-keystore</code>虚拟机，配置安装</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 系统更新</span>
 <span class="nv">$ </span>yum update <span class="nt">-y</span>
 <span class="c">#安装时间同步</span>
@@ -235,7 +235,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 </span><span class="c"># 安装docker</span>
 <span class="nv">$ </span>yum <span class="nb">install </span>docker-engine <span class="nt">-y</span>
 </code></pre></div></div>
-<p>2.在<code class="highlighter-rouge">my-keystore</code>虚拟机中运行一个consul容器</p>
+<p>2.在<code class="language-plaintext highlighter-rouge">my-keystore</code>虚拟机中运行一个consul容器</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker run <span class="nt">-d</span> <span class="se">\</span>
      <span class="nt">-p</span> <span class="s2">"8500:8500"</span> <span class="se">\</span>
      <span class="nt">-h</span> <span class="s2">"consul"</span> <span class="se">\</span>
@@ -277,7 +277,7 @@ gpgkey=https://yum.dockerproject.org/gpg
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vi /usr/lib/systemed/system/docker.service
 <span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd <span class="nt">-H</span> tcp://0.0.0.0:2375 <span class="nt">-H</span> unix:///var/run/docker.sock <span class="nt">--cluster-store</span> consul://my-keystore:8500 <span class="nt">--cluster-advertise</span> enp0s8:2375
 </code></pre></div></div>
-<p>3.配置完成后，使用<code class="highlighter-rouge">docker info</code>查看</p>
+<p>3.配置完成后，使用<code class="language-plaintext highlighter-rouge">docker info</code>查看</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">[</span>root@node01 ~]# docker info
 Containers: 0
  Running: 0
@@ -292,10 +292,10 @@ Cluster Advertise: 192.168.1.1:2375
 Insecure Registries:
  127.0.0.0/8
 </code></pre></div></div>
-<p>4.创建一个<code class="highlighter-rouge">overlay</code>网络</p>
+<p>4.创建一个<code class="language-plaintext highlighter-rouge">overlay</code>网络</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span> docker network create <span class="nt">--driver</span> overlay <span class="nt">--subnet</span><span class="o">=</span>10.0.9.0/24 my-net
 </code></pre></div></div>
-<p>5.去所有节点上看看，是否已经有了这个<code class="highlighter-rouge">my-net</code>网络</p>
+<p>5.去所有节点上看看，是否已经有了这个<code class="language-plaintext highlighter-rouge">my-net</code>网络</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#进入node01</span>
 <span class="o">[</span>root@node01 ~]# docker network <span class="nb">ls
 </span>NETWORK ID          NAME                DRIVER              SCOPE
@@ -312,16 +312,16 @@ e3ed743a143c        bridge              bridge              <span class="nb">loc
 </span>3fc32842e291        my-net              overlay             global              
 03724cede8c1        none                null                <span class="nb">local</span>
 </code></pre></div></div>
-<p>可以看到<code class="highlighter-rouge">my-net</code>网络在两个节点上都生效了
+<p>可以看到<code class="language-plaintext highlighter-rouge">my-net</code>网络在两个节点上都生效了
 6.这时候也可以直接去consul上查看
 <img src="/images/posts/consul-key-value.png" alt="consul-key-value" />
 可以看到我们已经在consul上存储了两个网络(其中有一个网络是我以前创建的)</p>
 
-<h2 id="测试在my-net网络上运行应用试试">测试.在<code class="highlighter-rouge">my-net</code>网络上运行应用试试</h2>
-<p>1.在<code class="highlighter-rouge">node01</code>上运行一个nginx web应用</p>
+<h2 id="测试在my-net网络上运行应用试试">测试.在<code class="language-plaintext highlighter-rouge">my-net</code>网络上运行应用试试</h2>
+<p>1.在<code class="language-plaintext highlighter-rouge">node01</code>上运行一个nginx web应用</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-itd</span> <span class="nt">--name</span><span class="o">=</span>web <span class="nt">--network</span><span class="o">=</span>my-net <span class="nt">--env</span><span class="o">=</span><span class="s2">"constraint:node==node01"</span> nginx
 </code></pre></div></div>
-<p>2.在<code class="highlighter-rouge">node02</code>上运行一个busybox容器，来获取Nginx服务器主页上的内容</p>
+<p>2.在<code class="language-plaintext highlighter-rouge">node02</code>上运行一个busybox容器，来获取Nginx服务器主页上的内容</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker run <span class="nt">-it</span> <span class="nt">--rm</span> <span class="nt">--network</span><span class="o">=</span>my-net <span class="nt">--env</span><span class="o">=</span><span class="s2">"constraint:node==node02"</span> busybox wget <span class="nt">-O-</span> http://web
 Connecting to web <span class="o">(</span>10.0.9.2:80<span class="o">)</span>
 &lt;<span class="o">!</span>DOCTYPE html&gt;
@@ -355,7 +355,7 @@ Commercial support is available at
 <p>可以看到是通过my-net网络进行访问的</p>
 
 <blockquote>
-  <p><strong>PS</strong> 这里我们可以对比上一篇<a href="http://www.oo3p.com/2016/12/30/multi-host-networking/">Get started with multi-host networking</a>，我们发现，在使用<code class="highlighter-rouge">key-value</code>存储的时候，只要<code class="highlighter-rouge">docker engine</code>指定了<code class="highlighter-rouge">key-value</code>存储，就能获取到网络，而使用<code class="highlighter-rouge">swarm mode</code>的时候，则必须是在<code class="highlighter-rouge">swarm manager</code>管理下的节点才能获取网络。</p>
+  <p><strong>PS</strong> 这里我们可以对比上一篇<a href="http://www.oo3p.com/2016/12/30/multi-host-networking/">Get started with multi-host networking</a>，我们发现，在使用<code class="language-plaintext highlighter-rouge">key-value</code>存储的时候，只要<code class="language-plaintext highlighter-rouge">docker engine</code>指定了<code class="language-plaintext highlighter-rouge">key-value</code>存储，就能获取到网络，而使用<code class="language-plaintext highlighter-rouge">swarm mode</code>的时候，则必须是在<code class="language-plaintext highlighter-rouge">swarm manager</code>管理下的节点才能获取网络。</p>
 </blockquote>
 
     </article>

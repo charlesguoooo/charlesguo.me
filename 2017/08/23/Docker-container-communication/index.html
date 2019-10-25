@@ -114,7 +114,7 @@
 <div class="columns">
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
-    <p>本节主要是讲解docker容器是如何在默认的<code class="highlighter-rouge">bridge</code>网络上进行通信的。</p>
+    <p>本节主要是讲解docker容器是如何在默认的<code class="language-plaintext highlighter-rouge">bridge</code>网络上进行通信的。</p>
 
 <!--more-->
 
@@ -123,13 +123,13 @@
 <p>容器能否和外网进行通信，取决两个因素。</p>
 
 <ul>
-  <li>主机上的<code class="highlighter-rouge">ip_forward</code>是否打开，默认为true</li>
-  <li><code class="highlighter-rouge">iptables</code>规则是否允许被修改，默认为true</li>
+  <li>主机上的<code class="language-plaintext highlighter-rouge">ip_forward</code>是否打开，默认为true</li>
+  <li><code class="language-plaintext highlighter-rouge">iptables</code>规则是否允许被修改，默认为true</li>
 </ul>
 
-<p>如果在启动 Docker 服务的时候设定 –ip-forward=true, Docker 就会自动设定系统的 ip_forward 参数为 1。如果你的系统上打开了<code class="highlighter-rouge">ip_froward</code>，而你在docker中设定<code class="highlighter-rouge">--ip-forward=flase</code>，这不会起作用。</p>
+<p>如果在启动 Docker 服务的时候设定 –ip-forward=true, Docker 就会自动设定系统的 ip_forward 参数为 1。如果你的系统上打开了<code class="language-plaintext highlighter-rouge">ip_froward</code>，而你在docker中设定<code class="language-plaintext highlighter-rouge">--ip-forward=flase</code>，这不会起作用。</p>
 
-<p>关于<code class="highlighter-rouge">ip_froward</code>的实验</p>
+<p>关于<code class="language-plaintext highlighter-rouge">ip_froward</code>的实验</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run <span class="nt">-d</span> <span class="nt">--name</span>  db  training/postgres
 
@@ -144,9 +144,9 @@ PING www.a.shifen.com <span class="o">(</span>103.235.46.39<span class="o">)</sp
 
 </code></pre></div></div>
 
-<p>默认情况下，docker会在启动容器的时候，在iptables中添加规则，如果你设定<code class="highlighter-rouge">--iptables=false</code>，docker将不会修改你的防火墙规则。</p>
+<p>默认情况下，docker会在启动容器的时候，在iptables中添加规则，如果你设定<code class="language-plaintext highlighter-rouge">--iptables=false</code>，docker将不会修改你的防火墙规则。</p>
 
-<p>关于<code class="highlighter-rouge">--iptables</code>的实验</p>
+<p>关于<code class="language-plaintext highlighter-rouge">--iptables</code>的实验</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 首先，确认下有没有关于docker0的防火墙规则，有就删除掉</span>
 iptables <span class="nt">-S</span> |grep docker0
@@ -179,13 +179,13 @@ PING www.a.shifen.com <span class="o">(</span>103.235.46.39<span class="o">)</sp
 <p>容器之间是否能进行通信，取决于系统层面的两个因素。</p>
 
 <ul>
-  <li>容器网络是否连接到<code class="highlighter-rouge">docker0</code>网络，默认是连接到docker0</li>
-  <li>你的<code class="highlighter-rouge">iptables</code>是否允许被修改，默认为true,你的<code class="highlighter-rouge">--icc</code>状态，默认为true</li>
+  <li>容器网络是否连接到<code class="language-plaintext highlighter-rouge">docker0</code>网络，默认是连接到docker0</li>
+  <li>你的<code class="language-plaintext highlighter-rouge">iptables</code>是否允许被修改，默认为true,你的<code class="language-plaintext highlighter-rouge">--icc</code>状态，默认为true</li>
 </ul>
 
-<p><strong>注意：如果你使用默认的<code class="highlighter-rouge">iptables=true</code>，则当<code class="highlighter-rouge">--icc=true</code>时会添加 ACCEPT 规则，当<code class="highlighter-rouge">--icc=false</code>时会添加 DROP 规则; 当然如果你的<code class="highlighter-rouge">iptables=false</code>则无所谓了，反正不会修改你的防火墙规则</strong></p>
+<p><strong>注意：如果你使用默认的<code class="language-plaintext highlighter-rouge">iptables=true</code>，则当<code class="language-plaintext highlighter-rouge">--icc=true</code>时会添加 ACCEPT 规则，当<code class="language-plaintext highlighter-rouge">--icc=false</code>时会添加 DROP 规则; 当然如果你的<code class="language-plaintext highlighter-rouge">iptables=false</code>则无所谓了，反正不会修改你的防火墙规则</strong></p>
 
-<p>关于<code class="highlighter-rouge">--icc</code>的实验</p>
+<p>关于<code class="language-plaintext highlighter-rouge">--icc</code>的实验</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># 设置--icc=false发现容器之间无法ping通,如果你发现你依然能ping通，那可能是前面的防火墙配置，执行iptables -F 清空下再试</span>
 docker <span class="nb">exec</span> <span class="nt">-ti</span> db ping 172.17.0.3

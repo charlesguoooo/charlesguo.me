@@ -115,11 +115,11 @@
   <div class="column three-fourths" >
     <article class="article-content markdown-body">
     <h1 id="docker-swarm-mode-overlay-network-security-model">Docker swarm mode overlay network security model</h1>
-<p>overlay 网络在docker swarm下的安全模式也是开箱即用的。swarm 节点之间通过<code class="highlighter-rouge">gossip</code>协议来交换overlay 网络信息。节点使用GCM模式下的<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES algorithm</a>对通过<code class="highlighter-rouge">gossip</code>协议来交换的信息进行加密和认证.管理节点每12小时轮询加密key一次</p>
+<p>overlay 网络在docker swarm下的安全模式也是开箱即用的。swarm 节点之间通过<code class="language-plaintext highlighter-rouge">gossip</code>协议来交换overlay 网络信息。节点使用GCM模式下的<a href="https://en.wikipedia.org/wiki/Galois/Counter_Mode">AES algorithm</a>对通过<code class="language-plaintext highlighter-rouge">gossip</code>协议来交换的信息进行加密和认证.管理节点每12小时轮询加密key一次</p>
 
 <!--more-->
 
-<p>你还可以加密在overlay网路上运行的容器之间的交换数据，你可以通过使用<code class="highlighter-rouge">--opt</code>来开启加密：</p>
+<p>你还可以加密在overlay网路上运行的容器之间的交换数据，你可以通过使用<code class="language-plaintext highlighter-rouge">--opt</code>来开启加密：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker network create <span class="nt">--opt</span> encrypted <span class="nt">--driver</span> overlay my-multi-host-network
 </code></pre></div></div>
 

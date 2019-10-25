@@ -121,7 +121,7 @@ docker compose和docker swarm旨在实现完全集成，这意味着你可以将
 </blockquote>
 
 <p>实际的集成程度取决于你使用的<a href="https://docs.docker.com/compose/compose-file/#versioning">compose file</a>版本:
-1.如果你使用版本1以及<code class="highlighter-rouge">links</code>，你的app可以工作，但是swarm将调度一个主机上的所有容器，因为容器之间的links不能在具有旧网络系统的主机上工作。
+1.如果你使用版本1以及<code class="language-plaintext highlighter-rouge">links</code>，你的app可以工作，但是swarm将调度一个主机上的所有容器，因为容器之间的links不能在具有旧网络系统的主机上工作。
 2.如果你使用版本2，你的app可以工作，并且不需要任何修改：</p>
 <blockquote>
   <p>受下面描述的<a href="https://docs.docker.com/compose/swarm/#limitations">限制</a>
@@ -137,7 +137,7 @@ docker compose和docker swarm旨在实现完全集成，这意味着你可以将
 
 <h2 id="构建images">构建images</h2>
 <p>swarm 可以像单台docker主机实例一样从Dockerfile构建image，但是生成的image只会保存在单个的节点上，不会分发到其他节点。
-如果你想将服务扩展到多个节点，你需要自己来构建，然后push到registry[例如 docker hub]，然后在<code class="highlighter-rouge">docker-compose.yml</code>中引用它：</p>
+如果你想将服务扩展到多个节点，你需要自己来构建，然后push到registry[例如 docker hub]，然后在<code class="language-plaintext highlighter-rouge">docker-compose.yml</code>中引用它：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>docker build <span class="nt">-t</span> myusername/web <span class="nb">.</span>
 <span class="nv">$ </span>docker push myusername/web
 
@@ -151,7 +151,7 @@ web:
 
 <h2 id="多依赖">多依赖</h2>
 
-<p>如果service有需要同时调度的依赖，那么很有可能swarm调度的依赖在不同的节点上，是依赖服务无法调度，例如，下面的<code class="highlighter-rouge">foo</code>同时调度<code class="highlighter-rouge">bar</code>和<code class="highlighter-rouge">baz</code>：</p>
+<p>如果service有需要同时调度的依赖，那么很有可能swarm调度的依赖在不同的节点上，是依赖服务无法调度，例如，下面的<code class="language-plaintext highlighter-rouge">foo</code>同时调度<code class="language-plaintext highlighter-rouge">bar</code>和<code class="language-plaintext highlighter-rouge">baz</code>：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: <span class="s2">"2"</span>
 services:
   foo:
@@ -163,7 +163,7 @@ services:
   baz:
     image: baz
 </code></pre></div></div>
-<p>那么问题来了，swarm很有可能先在不同的节点上调度<code class="highlighter-rouge">bar</code>和<code class="highlighter-rouge">baz</code>（因为它们不依赖其他节点），使得不可能为<code class="highlighter-rouge">foo</code>选择一个合适的节点，那么应该怎么解决这个问题呢？
+<p>那么问题来了，swarm很有可能先在不同的节点上调度<code class="language-plaintext highlighter-rouge">bar</code>和<code class="language-plaintext highlighter-rouge">baz</code>（因为它们不依赖其他节点），使得不可能为<code class="language-plaintext highlighter-rouge">foo</code>选择一个合适的节点，那么应该怎么解决这个问题呢？
 要解决上面的问题，我们可以使用手动调度来确保三个service都在同一个节点上，如下：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>version: <span class="s2">"2"</span>
 services:
@@ -184,7 +184,7 @@ services:
 </code></pre></div></div>
 
 <h2 id="主机端口和重建容器">主机端口和重建容器</h2>
-<p>如果service映射host主机上的端口，如：80:8080，那么在第一次运行<code class="highlighter-rouge">docker-compose up</code>的时候，可能会报错：</p>
+<p>如果service映射host主机上的端口，如：80:8080，那么在第一次运行<code class="language-plaintext highlighter-rouge">docker-compose up</code>的时候，可能会报错：</p>
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker: Error response from daemon: unable to find a node that satisfies
 <span class="nv">container</span><span class="o">==</span>6ab2dfe36615ae786ef3fc35d641a260e3ea9663d6e69c5b70ce0ca6cb373c02.
 </code></pre></div></div>
@@ -209,7 +209,7 @@ version: “2”</p>
 <p>volumes:
   web-logs:
     driver: custom-volume-driver</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; 在新建容器之前，删除旧的容器，但是你会丢失卷组里面的数据
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; 在新建容器之前，删除旧的容器，但是你会丢失卷组里面的数据
 
 ```bash
 $ docker-compose stop web
@@ -223,9 +223,9 @@ $ docker-compose up web
 
 <p>某些配置选项将导致在同一swarm节点上自动调度容器，以确保它们正常工作，这些是：</p>
 <blockquote>
-  <p>版本1中的<code class="highlighter-rouge">network_mode: "service:..." and network_mode: "container:..." (and net: "container:..."</code>
-<code class="highlighter-rouge">volumes_from</code>
-<code class="highlighter-rouge">links</code></p>
+  <p>版本1中的<code class="language-plaintext highlighter-rouge">network_mode: "service:..." and network_mode: "container:..." (and net: "container:..."</code>
+<code class="language-plaintext highlighter-rouge">volumes_from</code>
+<code class="language-plaintext highlighter-rouge">links</code></p>
 </blockquote>
 
 <h2 id="手动调度">手动调度</h2>
