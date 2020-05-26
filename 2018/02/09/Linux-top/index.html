@@ -273,11 +273,11 @@ CPU总时间1<span class="o">=</span>user1+system1+nice1+idle1+iowait1+irq1+soft
 </code></pre></div></div>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">while</span> <span class="bp">True</span><span class="p">:</span>
-    <span class="n">cs1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">())</span>
-    <span class="n">cu1</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">()</span><span class="o">.</span><span class="n">user</span>
-    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">cs2</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">())</span>
-    <span class="n">cu2</span> <span class="o">=</span> <span class="n">psutil</span><span class="o">.</span><span class="n">cpu_times</span><span class="p">()</span><span class="o">.</span><span class="n">user</span>
+    <span class="n">cs1</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psutil</span><span class="p">.</span><span class="n">cpu_times</span><span class="p">())</span>
+    <span class="n">cu1</span> <span class="o">=</span> <span class="n">psutil</span><span class="p">.</span><span class="n">cpu_times</span><span class="p">().</span><span class="n">user</span>
+    <span class="n">time</span><span class="p">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="n">cs2</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">psutil</span><span class="p">.</span><span class="n">cpu_times</span><span class="p">())</span>
+    <span class="n">cu2</span> <span class="o">=</span> <span class="n">psutil</span><span class="p">.</span><span class="n">cpu_times</span><span class="p">().</span><span class="n">user</span>
     <span class="n">ss</span> <span class="o">=</span> <span class="n">cs2</span> <span class="o">-</span> <span class="n">cs1</span>
     <span class="k">print</span><span class="p">(((</span><span class="n">cu2</span> <span class="o">-</span> <span class="n">cu1</span><span class="p">)</span> <span class="o">/</span> <span class="n">ss</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span>
 </code></pre></div></div>
